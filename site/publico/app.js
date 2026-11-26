@@ -301,7 +301,7 @@ function secaoEmendas(f) {
     const total = lista.reduce((a, e) => a + e.valor, 0);
     const itens = lista.map((e) => `<li><b>${reais(e.valor)}</b> <span class="tag">${e.cota === "saúde" ? "cota saúde" : e.cota === "geral" ? "cota geral" : "cota não informada"}</span>
       <div>${$(e.destino)}</div><div class="meta">Emenda nº ${e.numero} · ${$(e.secretaria)}</div></li>`).join("");
-    return `<p>Todo ano cada vereador indica para onde vai uma parte do orçamento da Prefeitura. Em regra, a Prefeitura é obrigada a executar essas indicações (salvo impedimento técnico), por isso se chamam emendas <b>impositivas</b>.</p>
+    return `<div class="aviso info">Todo ano cada vereador indica para onde vai uma parte do orçamento da Prefeitura. Em regra, a Prefeitura é obrigada a executar essas indicações (salvo impedimento técnico), por isso se chamam emendas <b>impositivas</b>.</div>
       <div class="numeros um"><div class="numero"><b>${reais(total)}</b><span>indicados por ${$(f.apelido)} no orçamento de ${i.ano} (${lista.length} ${lista.length === 1 ? "emenda" : "emendas"})</span><small>${ext(i.documento, "Conferir na lei aprovada (" + $(i.lei) + ")")}</small></div></div>
       <ul class="itens">${itens || "<li>Nenhuma emenda encontrada.</li>"}</ul>
       <p class="suave">É o valor previsto na lei do orçamento. O site ainda não acompanha se a Prefeitura já gastou esse dinheiro. Todos os vereadores têm a mesma cota.</p>`;

@@ -103,3 +103,4 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .fonte-oficial { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .fonte-oficial .rotulo { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
 .fonte-oficial img { width: 180px; height: auto; display: block; background: #fff; border-radius: 6px; padding: 4px; }
+.aviso.info { background: #e8f1fb; border-left-color: #1f6fc5; }
