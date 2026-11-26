@@ -376,7 +376,7 @@ async function telaBusca(q) {
   setTimeout(() => ligarBusca(ped, q), 0);
   return `
     <h1>O que pediram para o meu bairro</h1>
-    <p>Digite o nome do bairro ou da rua. Aparece tudo o que os vereadores pediram para lá desde ${data(R.inicio_mandato)}, e quem pediu.</p>
+    <p>Digite parte do nome do bairro ou da rua, para realizar a busca.</p>
     <form class="busca" id="fbusca"><input id="q" type="search" placeholder="Ex.: Jardim Brasil ou Rua Capivari" aria-label="Bairro ou rua" value="${$(q && q !== "*" ? q : "")}" autocomplete="off"><button>Buscar</button><button type="button" class="botao claro" id="todos">Todos</button></form>
     <div id="sugestoes"></div>
     <div id="resultado"></div>
