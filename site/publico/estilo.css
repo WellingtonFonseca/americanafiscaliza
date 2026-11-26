@@ -77,3 +77,10 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .painel > h2:first-child { margin-top: 18px; }
 .seletor { display: flex; align-items: center; gap: 10px; font-weight: 600; margin: 4px 0 8px; }
 .seletor select { font: inherit; font-size: 17px; padding: 8px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: inherit; flex: 1; max-width: 260px; }
+.filtros { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 8px 0; }
+.filtros input { grid-column: 1 / -1; }
+.filtros input, .filtros select { font: inherit; font-size: 16px; padding: 9px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: inherit; min-width: 0; }
+.destaque { border: 1px solid var(--linha); border-radius: 12px; padding: 14px 16px; margin: 14px 0; }
+.destaque b { display: block; font-size: 30px; color: var(--azul); line-height: 1.15; }
+.destaque span { display: block; margin-top: 4px; }
+.destaque small { display: block; color: var(--suave); font-size: 13px; margin-top: 6px; }

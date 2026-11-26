@@ -47,22 +47,80 @@ function avisoSessoes() {
 }
 
 // ------------------------------------------------------------------ telas
-function telaInicio() {
-  const lista = R.vereadores.map((v) => `
-    <li><a href="#/v/${v.slug}">
+const ORDENS = [
+  ["nome", "Nome (A a Z)", null],
+  ["faltas", "Quem mais faltou", (v) => v.ausente],
+  ["lei", "Mais propostas de lei", (v) => v.grupos.lei],
+  ["homenagem", "Mais homenagens", (v) => v.grupos.homenagem],
+  ["bairro", "Mais pedidos para os bairros", (v) => v.grupos.bairro],
+  ["cobranca", "Mais cobranças à Prefeitura", (v) => v.grupos.cobranca],
+  ["contra", "Quem mais votou contra", (v) => v.votos_contra],
+  ["gabinete", "Maior custo de gabinete (último mês)", (v) => (v.dinheiro || {}).equipe_total],
+];
+
+function itemLista(v, ordem) {
+  const destaque = {
+    faltas: `${num(v.ausente)} ausências em ${num(v.chamadas)} chamadas`,
+    lei: `${num(v.grupos.lei)} propostas de lei`, homenagem: `${num(v.grupos.homenagem)} homenagens`,
+    bairro: `${num(v.grupos.bairro)} pedidos de bairro`, cobranca: `${num(v.grupos.cobranca)} cobranças`,
+    contra: `${num(v.votos_contra)} votos contra em ${num(v.votacoes)} votações`,
+    gabinete: `equipe do gabinete: ${reais((v.dinheiro || {}).equipe_total || 0)}`,
+  }[ordem];
+  const padrao = v.propostas_baixadas ? `${num(v.grupos.bairro)} pedidos de bairro · presente em ${v.presente} de ${v.chamadas} chamadas` : "propostas ainda não baixadas";
+  const parcial = v.propostas_parcial && ["nome", "lei", "homenagem", "bairro", "cobranca"].includes(ordem) ? " · propostas parciais" : "";
+  return `<li><a href="#/v/${v.slug}">
       <img src="${$(fotoLocal(v))}" alt="" loading="lazy" width="56" height="56" onerror="this.style.visibility='hidden'">
       <span><span class="nome">${$(v.apelido)}</span>
-      <span class="info">${$(v.partido)}${v.propostas_baixadas ? ` · ${num(v.grupos.bairro)} pedidos de bairro · presente em ${v.presente} de ${v.chamadas} chamadas${v.propostas_parcial ? " · propostas parciais" : ""}` : " · propostas ainda não baixadas"}</span></span>
-    </a></li>`).join("");
+      <span class="info">${$(v.partido)} · ${destaque ? `<b>${destaque}</b>` : padrao}${parcial}</span></span>
+    </a></li>`;
+}
+
+function desenharLista() {
+  const q = chave((document.getElementById("f-nome") || {}).value || "");
+  const partido = (document.getElementById("f-partido") || {}).value || "";
+  const ordem = (document.getElementById("f-ordem") || {}).value || "nome";
+  const o = ORDENS.find((x) => x[0] === ordem);
+  let vs = R.vereadores.filter((v) => (!partido || v.partido === partido) && (!q || chave(v.apelido + " " + v.nome).includes(q)));
+  vs = vs.slice().sort((a, b) => (o[2] ? (o[2](b) || 0) - (o[2](a) || 0) : 0) || a.apelido.localeCompare(b.apelido, "pt-BR"));
+  const el = document.getElementById("lista-ver");
+  if (el) el.innerHTML = vs.length ? vs.map((v) => itemLista(v, ordem)).join("") : `<li class="suave" style="padding:12px 0">Nenhum vereador encontrado.</li>`;
+  const nota = document.getElementById("nota-ordem");
+  if (nota) nota.innerHTML = {
+    faltas: "Ausência registrada não quer dizer falta sem motivo: pode haver licença, atestado ou missão oficial. Vale só para as sessões já coletadas.",
+    contra: "Vale só para as sessões já coletadas. Votar contra não é bom nem ruim por si só.",
+    lei: "Quantidade não mede qualidade: uma lei pode valer mais que muitas.", homenagem: "Homenagens incluem moções de aplauso, de pesar, títulos e nomes de ruas.",
+    bairro: "Pedido não é obra feita: o sistema da Câmara não diz se a Prefeitura atendeu.", cobranca: "Requerimentos, pedidos de informação e moções de apelo.",
+    gabinete: "Soma dos salários brutos da equipe no último mês fechado da folha.",
+  }[ordem] || "";
+}
+
+const chave = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+function telaInicio() {
+  const partidos = [...new Set(R.vereadores.map((v) => v.partido))].sort();
+  const pt = R.pago_total;
+  const milhoes = (x) => (x / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " milhões";
+  const contador = pt && pt.de ? `<div class="destaque">
+      <b>R$ ${milhoes(pt.vereadores + pt.equipes)}</b>
+      <span>pagos aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
+      <small>Vereadores: ${reais(pt.vereadores)} · Equipes: ${reais(pt.equipes)}. Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
+    </div>` : "";
   return `
     <h1>O que cada vereador de Americana faz</h1>
-    <p>Presença nas sessões, propostas e votos dos ${R.vereadores.length} vereadores, só com dados oficiais da Câmara Municipal. Cada número tem link para a fonte. Os vereadores estão em ordem alfabética.</p>
+    <p>Presença nas sessões, propostas, votos e gastos dos ${R.vereadores.length} vereadores, só com dados oficiais da Câmara Municipal. Cada número tem link para a fonte.</p>
+    ${contador}
     <p><a class="botao" href="#/busca">Ver o que pediram para o meu bairro</a></p>
     ${avisoSessoes()}
     ${R.vereadores.some((v) => v.propostas_parcial || !v.propostas_baixadas) ? `<div class="aviso">Para ${R.vereadores.filter((v) => v.propostas_parcial || !v.propostas_baixadas).length} vereadores as propostas ainda estão parciais (o sistema da Câmara não abriu a página completa deles). Isso está marcado na ficha de cada um.</div>` : ""}
     <h2>Vereadores</h2>
-    <ul class="lista-ver">${lista}</ul>
-    <p class="suave">Propostas contadas desde ${data(R.inicio_mandato)}, início do mandato atual, para todos da mesma forma.</p>`;
+    <div class="filtros">
+      <input id="f-nome" type="search" placeholder="Procurar pelo nome" aria-label="Procurar vereador pelo nome">
+      <select id="f-partido" aria-label="Partido"><option value="">Todos os partidos</option>${partidos.map((p) => `<option>${$(p)}</option>`).join("")}</select>
+      <select id="f-ordem" aria-label="Ordenar por">${ORDENS.map(([k, t]) => `<option value="${k}">${t}</option>`).join("")}</select>
+    </div>
+    <p class="suave" id="nota-ordem"></p>
+    <ul class="lista-ver" id="lista-ver"></ul>
+    <p class="suave">Ordenar a lista não é dar nota. Os números mostram quantidade, não qualidade. Propostas contadas desde ${data(R.inicio_mandato)}, início do mandato atual, para todos da mesma forma.</p>`;
 }
 
 function fotoLocal(v) { return `fotos/${v.slug}.jpg`; }
@@ -441,6 +499,10 @@ async function rota() {
       document.querySelectorAll(".painel").forEach((p) => { p.hidden = p.dataset.painel !== t.dataset.aba; });
       history.replaceState(null, "", `#/v/${partes[1]}?aba=${t.dataset.aba}`);
     });
+    if (document.getElementById("lista-ver")) {
+      ["f-nome", "f-partido", "f-ordem"].forEach((id) => document.getElementById(id).addEventListener("input", desenharLista));
+      desenharLista();
+    }
     const sel = document.getElementById("mes-gasto");
     if (sel) sel.onchange = async () => {
       const f = await carregar(`vereador-${partes[1]}.json`);
