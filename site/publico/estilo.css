@@ -96,7 +96,6 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .comparar tr:first-child th { font-size: 13px; text-align: right; }
 .comparar tr:first-child th:first-child { text-align: left; }
 .comparar th a { font-weight: 600; }
-.topo-linha { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-#mandato { font: inherit; font-size: 13px; font-weight: 600; padding: 5px 4px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: var(--azul); max-width: 52%; }
-.topo-linha .marca { white-space: nowrap; font-size: 17px; }
-#mandato { flex-shrink: 1; min-width: 0; }
+.topo-linha { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.topo-linha .marca { white-space: nowrap; font-size: 17px; align-self: flex-start; }
+#mandato { font: inherit; font-size: 22px; font-weight: 800; text-align: center; text-align-last: center; padding: 8px 14px; border: 2px solid var(--azul); border-radius: 10px; background: var(--fundo); color: var(--azul); width: 100%; max-width: 360px; }
