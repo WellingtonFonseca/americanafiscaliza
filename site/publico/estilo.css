@@ -17,7 +17,7 @@ body {
 }
 a { color: var(--azul); }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
-.topo { border-bottom: 1px solid var(--linha); padding: 12px 16px 0; position: sticky; top: 0; background: var(--fundo); z-index: 2; }
+.topo { border-bottom: 1px solid var(--linha); padding: 12px 16px 0; position: static; background: var(--fundo); z-index: 2; }
 .marca { font-weight: 800; font-size: 20px; color: var(--texto); text-decoration: none; }
 .topo nav { display: flex; gap: 0; overflow-x: auto; margin: 8px -16px 0; padding: 0 12px; scrollbar-width: none; }
 .topo nav a { white-space: nowrap; padding: 10px 7px; font-size: 15px; text-decoration: none; color: var(--suave); font-weight: 600; border-bottom: 3px solid transparent; }
@@ -97,7 +97,8 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .comparar tr:first-child th:first-child { text-align: left; }
 .comparar th a { font-weight: 600; }
 .topo-linha { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.topo-linha .marca { white-space: nowrap; font-size: 17px; align-self: flex-start; }
+.topo-linha .marca { align-self: center; line-height: 0; }
+.topo-linha .marca img { width: 220px; height: auto; display: block; }
 #mandato { font: inherit; font-size: 22px; font-weight: 800; text-align: center; text-align-last: center; padding: 8px 14px; border: 2px solid var(--azul); border-radius: 10px; background: var(--fundo); color: var(--azul); width: 100%; max-width: 360px; }
 .fonte-oficial { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .fonte-oficial .rotulo { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }

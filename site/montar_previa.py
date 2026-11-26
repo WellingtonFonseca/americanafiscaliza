@@ -11,6 +11,10 @@ js = open(os.path.join(P, "app.js"), encoding="utf-8").read()
 dados = {os.path.basename(f): json.load(open(f, encoding="utf-8")) for f in glob.glob(os.path.join(P, "dados", "*.json"))}
 fotos = {}
 _logo = os.path.join(P, "img", "brasao-camara.png")
+for _n in ("logo.png",):
+    _f = os.path.join(P, "img", _n)
+    if os.path.exists(_f):
+        idx = idx.replace(f'src="img/{_n}"', 'src="data:image/png;base64,' + base64.b64encode(open(_f, "rb").read()).decode() + '"')
 if os.path.exists(_logo):
     idx = idx.replace('src="img/brasao-camara.png"', 'src="data:image/png;base64,' + base64.b64encode(open(_logo, "rb").read()).decode() + '"')
 for f in glob.glob(os.path.join(P, "fotos", "*.jpg")):
