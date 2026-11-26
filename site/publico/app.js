@@ -3,6 +3,8 @@
 
 const CONTATO_CORRECAO = { texto: "uma issue no GitHub do projeto", url: "https://github.com/WellingtonFonseca/americanafiscaliza/issues/new" };
 
+// Trocado pelo robô a cada publicação, para o navegador não usar dados velhos guardados.
+const VERSAO = "dev";
 const app = document.getElementById("app");
 const cache = {};
 let R = null; // resumo.json
@@ -24,7 +26,7 @@ const ext = (url, txt) => `<a href="${$(url)}" rel="noopener" target="_blank">${
 
 async function carregar(nome) {
   if (window.DADOS_EMBUTIDOS && window.DADOS_EMBUTIDOS[nome]) return window.DADOS_EMBUTIDOS[nome];
-  if (!cache[nome]) cache[nome] = fetch("dados/" + nome).then((r) => { if (!r.ok) throw new Error(nome); return r.json(); });
+  if (!cache[nome]) cache[nome] = fetch("dados/" + nome + "?v=" + VERSAO).then((r) => { if (!r.ok) throw new Error(nome); return r.json(); });
   return cache[nome];
 }
 

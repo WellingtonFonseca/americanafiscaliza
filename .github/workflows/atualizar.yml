@@ -62,6 +62,13 @@ jobs:
           git commit -m "Atualiza dados $(date -u +%F)" || echo "nada novo"
           git push
 
+      - name: Marcar a versão (evita que o navegador mostre a versão antiga guardada)
+        run: |
+          V=$(date -u +%Y%m%d%H%M)
+          sed -i "s|href=\"estilo.css\"|href=\"estilo.css?v=$V\"|; s|src=\"app.js\"|src=\"app.js?v=$V\"|" site/publico/index.html
+          sed -i "s|const VERSAO = \"dev\";|const VERSAO = \"$V\";|" site/publico/app.js
+          grep -q "app.js?v=$V" site/publico/index.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/publico
