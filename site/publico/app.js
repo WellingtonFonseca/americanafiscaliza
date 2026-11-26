@@ -134,7 +134,20 @@ async function telaVereador(slug) {
     <p>${num(votos.length)} votações nas sessões já coletadas. ${resumoVotos}</p>
     <p class="suave">“Não vota” costuma aparecer para quem preside a sessão, que pelo regimento só vota em alguns casos. “Ausente” aqui é ausente no momento daquela votação.</p>
     <ul class="itens" id="votos">${votos.slice(0, 20).map(itemVoto).join("")}</ul>
-    ${votos.length > 20 ? `<p class="mais"><button class="botao claro" id="mais-votos">Mostrar todas as ${num(votos.length)} votações</button></p>` : ""}`;
+    ${votos.length > 20 ? `<p class="mais"><button class="botao claro" id="mais-votos">Mostrar todas as ${num(votos.length)} votações</button></p>` : ""}
+
+    <h2>Gastos do gabinete</h2>
+    ${secaoGabinete(f)}`;
+}
+
+function secaoGabinete(f) {
+  const g = f.gabinete;
+  if (!g) return `<p class="suave">O relatório de gastos de gabinete deste vereador não foi encontrado no site da Câmara.</p>`;
+  const fmt = (x) => Number(x).toLocaleString("pt-BR", { maximumFractionDigits: 2 });
+  const linhas = g.itens.map((i) => `<tr><th>${$(i.item)}</th><td>${i.total ? fmt(i.total) + " " + $(i.unidade) : "nada registrado"}</td><td class="suave">${i.limite_mensal ? "até " + fmt(i.limite_mensal) + " por mês" : ""}</td></tr>`).join("");
+  return `<p>O que o gabinete usou em ${$(g.ano)}, segundo o relatório oficial da Câmara. ${ext(g.pdf, "Ver o relatório (PDF)")}</p>
+    <table><tr><th>Item</th><th>Total no ano</th><th>Limite</th></tr>${linhas}</table>
+    <p class="suave">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. O total é o que está impresso no relatório, que vai até o último mês que a Câmara publicou. Lista de todos os relatórios: ${ext(g.fonte, "Gastos com Gabinete")}.</p>`;
 }
 
 function itemVoto(x) {
@@ -272,6 +285,7 @@ async function telaSobre() {
     <ul>
       <li><b>Vereadores, partido e contato do gabinete:</b> ${ext("https://www.camara-americana.sp.gov.br/Vereador", "site da Câmara")}.</li>
       <li><b>Propostas:</b> a página de proposituras de cada vereador no ${ext("https://americana.siscam.com.br/", "SISCAM")}, o sistema oficial da Câmara. Quando essa página é grande demais e não abre, usamos a exportação em planilha da pesquisa oficial do próprio SISCAM, que traz só os tipos principais; a ficha do vereador avisa quando isso acontece.</li>
+      <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>
     <p>Um robô identificado como “AmericanaFiscaliza” baixa poucas páginas por vez, com pausa entre elas, para não pesar no sistema da Câmara. Se a Câmara pedir, ele para.</p>

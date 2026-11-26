@@ -166,6 +166,44 @@ def ler_csv_exportado(caminho):
     return docs
 
 
+# ---------------------------------------------------------------- gabinete
+ITENS_GABINETE = [  # (rótulo no PDF, nome no site, unidade, chave do limite)
+    (r"Corresp\w*ncias\s*\(unidade\)", "Correspondências", "unidades", "corresp"),
+    (r"Impress\w*es/Fotoc\w*pias", "Impressões e cópias", "unidades", "impress"),
+    (r"Tele\w*fonia Fixa", "Telefone fixo", "minutos", "fixa"),
+    (r"Tele\w*fonia M\w*vel", "Telefone celular", "minutos", "m[oó]vel"),
+    (r"Combust\w*vel", "Combustível", "litros", "combust"),
+]
+
+
+def numero_br(t):
+    t = t.strip()
+    if t in ("", "-"):
+        return 0.0
+    if "," in t:
+        return float(t.replace(".", "").replace(",", "."))
+    return float(t.replace(".", "")) if re.fullmatch(r"\d{1,3}(\.\d{3})+", t) else float(t)
+
+
+def ler_gabinete(txt):
+    """Totais do ano como impressos no PDF (coluna Total). Não somamos mês a mês:
+    as colunas dos meses vazios somem na extração e confundiriam os meses."""
+    titulo = re.search(r"RELAT\S* DESPESAS GABINETE\s*-\s*(\d{4})", txt)
+    nome = re.search(r"VEREADORA?\s+(.+)", txt)
+    linhas = txt.splitlines()
+    itens = []
+    lim_txt = txt.split("LIMITE MENSAL", 1)[1] if "LIMITE MENSAL" in txt else ""
+    for rx, rot, uni, chave_lim in ITENS_GABINETE:
+        linha = next((l for l in linhas if re.match(r"\s*" + rx, l, re.I) and "=" not in l), None)
+        if linha is None:
+            continue
+        total = linha.split()[-1]
+        lim = re.search(r"(?im)^.*" + chave_lim + r".*=\s*([\d.]+)", lim_txt)
+        itens.append({"item": rot, "unidade": uni, "total": numero_br(total) if re.fullmatch(r"[\d.,-]+", total) else 0.0,
+                      "limite_mensal": numero_br(lim.group(1)) if lim else None})
+    return {"ano": titulo.group(1) if titulo else "", "nome_pdf": nome.group(1).strip() if nome else "", "itens": itens}
+
+
 # ---------------------------------------------------------------- sessões
 def ler_sessao(sid, s):
     s = html.unescape(s)
@@ -272,6 +310,24 @@ def main():
         por_slug[v["slug"]] = {"docs": mand, "total_todos_anos": None if parcial else len(docs), "parcial": parcial,
                                "primeiro": min((d["data"] for d in docs), default="")}
 
+    # ---------------- gabinete (consumo em unidades, PDFs do site da Câmara)
+    gab_por_slug = {}
+    pasta_g = os.path.join(DADOS, "gabinete")
+    if os.path.exists(os.path.join(pasta_g, "indice.json")):
+        ind = json.load(open(os.path.join(pasta_g, "indice.json"), encoding="utf-8"))
+        for a in ind["arquivos"]:
+            g = ler_gabinete(open(os.path.join(pasta_g, a["texto"]), encoding="utf-8").read())
+            palavras = set(chave_nome(a["nome_na_lista"] + " " + g["nome_pdf"].replace(".", " ")).split()) - {"da", "de", "do", "dos", "pr", "prof", "dr", "vereador", "vereadora"}
+            cands = [v for v in vereadores if palavras & (set(chave_nome(v["apelido"] + " " + v["nome"]).split()) - {"da", "de", "do", "dos", "dr"})]
+            if len(cands) != 1:
+                cands = [v for v in cands if palavras <= set(chave_nome(v["apelido"] + " " + v["nome"]).split())] or cands
+            if len(cands) == 1 and cands[0]["slug"] not in gab_por_slug:
+                gab_por_slug[cands[0]["slug"]] = {**g, "pdf": a["pdf"], "fonte": ind["fonte"], "criado_em": a["criado_em"]}
+            else:
+                verif["avisos"].append(f"Relatório de gabinete “{a['nome_na_lista']}” não foi ligado a um único vereador.")
+        checar(len(gab_por_slug) == len(vereadores), f"Relatórios de gastos de gabinete ligados a {len(gab_por_slug)} de {len(vereadores)} vereadores")
+        checar(all(len(g["itens"]) == len(ITENS_GABINETE) for g in gab_por_slug.values()), "Todos os relatórios de gabinete têm as 5 linhas esperadas (correspondências, cópias, telefone fixo, celular, combustível)")
+
     # ---------------- presença e votos
     resumo_v = []
     sessoes_pub = []
@@ -311,7 +367,7 @@ def main():
                 grupos[d["grupo"]].append([d["id"], d["data"], d["tipo"], d["ident"], d["assunto"]])
         ficha = {**v, "propostas_baixadas": p is not None, "propostas_parcial": bool(p and p["parcial"]),
                  "total_todos_anos": p["total_todos_anos"] if p else None,
-                 "grupos": grupos, "presenca": pres, "votos": votos,
+                 "grupos": grupos, "presenca": pres, "votos": votos, "gabinete": gab_por_slug.get(slug),
                  "fonte_propostas": f"{SISCAM}/Vereadores/Proposituras/{v['siscam_id']}"}
         json.dump(ficha, open(os.path.join(SAIDA, f"vereador-{slug}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         resumo_v.append({k: v[k] for k in ("slug", "apelido", "nome", "partido", "foto", "perfil_url", "telefone_gabinete", "email_gabinete", "siscam_id")} | {
