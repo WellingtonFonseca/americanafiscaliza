@@ -24,10 +24,18 @@ function SISCAM_DOC(id) {
 }
 const ext = (url, txt) => `<a href="${$(url)}" rel="noopener" target="_blank">${txt}</a>`;
 
+// Mandato escolhido no topo. O atual fica em dados/; um mandato antigo ficaria em dados/<id>/.
+let MANDATO = null;
+let MANDATOS = null;
+function lerEscolha() { try { return localStorage.getItem("mandato"); } catch (e) { return null; } }
+function guardarEscolha(id) { try { localStorage.setItem("mandato", id); } catch (e) { /* sem armazenamento: vale só nesta visita */ } }
+const pastaDados = () => (!MANDATOS || !MANDATO || MANDATO === MANDATOS[0].id ? "dados/" : `dados/${MANDATO}/`);
+
 async function carregar(nome) {
   if (window.DADOS_EMBUTIDOS && window.DADOS_EMBUTIDOS[nome]) return window.DADOS_EMBUTIDOS[nome];
-  if (!cache[nome]) cache[nome] = fetch("dados/" + nome + "?v=" + VERSAO).then((r) => { if (!r.ok) throw new Error(nome); return r.json(); });
-  return cache[nome];
+  const chave = pastaDados() + nome;
+  if (!cache[chave]) cache[chave] = fetch(chave + "?v=" + VERSAO).then((r) => { if (!r.ok) throw new Error(nome); return r.json(); });
+  return cache[chave];
 }
 
 const EXPLICA = {
@@ -107,6 +115,7 @@ function telaInicio() {
     </div>` : "";
   return `
     <h1>O que cada vereador de Americana faz</h1>
+    ${R.mandato ? `<p class="suave">${$(R.mandato.nome)}: de ${data(R.mandato.inicio)} a ${data(R.mandato.fim)}. Troque o mandato no alto da página.</p>` : ""}
     <p>Presença nas sessões, propostas, votos e gastos dos ${R.vereadores.length} vereadores, só com dados oficiais da Câmara Municipal. Cada número tem link para a fonte.</p>
     ${contador}
     <div class="entradas">
@@ -124,7 +133,7 @@ function telaInicio() {
     </div>
     <p class="suave" id="nota-ordem"></p>
     <ul class="lista-ver" id="lista-ver"></ul>
-    <p class="suave">Ordenar a lista não é dar nota. Os números mostram quantidade, não qualidade. Propostas contadas desde ${data(R.inicio_mandato)}, início do mandato atual, para todos da mesma forma.</p>
+    <p class="suave">Ordenar a lista não é dar nota. Os números mostram quantidade, não qualidade. Propostas contadas de ${data(R.inicio_mandato)} em diante (${$(R.mandato ? R.mandato.nome : "mandato atual")}), para todos da mesma forma.</p>
     ${deOndeVem()}`;
 }
 
@@ -481,7 +490,7 @@ async function telaSobre() {
     <h2 id="grupos">Como as propostas são separadas</h2>
     <p>A mesma regra vale para todos os vereadores. Ela olha o tipo do documento no sistema da Câmara e, em alguns casos, palavras do assunto:</p>
     <table>${R.regras.map(([g, r]) => `<tr><th>${$(g)}</th><td>${$(r)}</td></tr>`).join("")}</table>
-    <p class="suave">Contamos só documentos com data a partir de ${data(R.inicio_mandato)}, início do mandato atual. Documento com vários autores conta para cada um.</p>
+    <p class="suave">Contamos só documentos com data dentro do mandato escolhido no topo da página (${$(R.mandato ? R.mandato.nome : "mandato atual")}: de ${data(R.inicio_mandato)} a ${data(R.fim_mandato)}). Documento com vários autores conta para cada um.</p>
 
     <h2>O que é conta nossa ou leitura automática</h2>
     <ul>
@@ -516,7 +525,18 @@ async function rota() {
     a.classList.toggle("ativo", alvo === (partes[0] || "") || (alvo === "" && partes[0] === "v"));
   });
   try {
-    if (!R) R = await carregar("resumo.json");
+    if (!R) {
+      R = await carregar("resumo.json");
+      if (!MANDATOS) {
+        MANDATOS = R.mandatos || [{ id: "atual", nome: "Mandato atual" }];
+        const escolhido = lerEscolha();
+        MANDATO = MANDATOS.some((m) => m.id === escolhido) ? escolhido : MANDATOS[0].id;
+        const sel = document.getElementById("mandato");
+        sel.innerHTML = MANDATOS.map((m) => `<option value="${$(m.id)}"${m.id === MANDATO ? " selected" : ""}>${$(m.nome)}</option>`).join("");
+        sel.onchange = () => { MANDATO = sel.value; guardarEscolha(MANDATO); R = null; rota(); };
+        if (MANDATO !== MANDATOS[0].id) R = await carregar("resumo.json");
+      }
+    }
     let html;
     if (partes[0] === "v" && partes[2]) html = await telaGrupo(partes[1], partes[2]);
     else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"), new URLSearchParams(qs || "").get("mes"));

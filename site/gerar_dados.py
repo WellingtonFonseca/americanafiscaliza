@@ -23,7 +23,12 @@ DADOS = os.path.join(COLETOR, "dados")
 SAIDA = os.path.join(AQUI, "publico", "dados")
 os.makedirs(SAIDA, exist_ok=True)
 SISCAM = "https://americana.siscam.com.br"
-INICIO_MANDATO = "2025-01-01"  # mesma janela para todos: mandato atual (2025-2028)
+# Mandatos que o site conhece. O primeiro é o atual e vai em dados/; um mandato antigo,
+# quando for coletado, iria em dados/<id>/ com a mesma estrutura.
+MANDATOS = [{"id": "2025-2028", "nome": "Mandato 2025–2028", "inicio": "2025-01-01", "fim": "2028-12-31"}]
+MANDATO = MANDATOS[0]
+INICIO_MANDATO = MANDATO["inicio"]  # mesma janela para todos
+FIM_MANDATO = MANDATO["fim"]
 
 
 def limpar(x):
@@ -304,7 +309,7 @@ def main():
     pasta_s = os.path.join(DADOS, "html")
     sessoes = [ler_sessao(int(f.split(".")[0]), open(os.path.join(pasta_s, f), encoding="utf-8").read())
                for f in sorted(os.listdir(pasta_s), key=lambda x: int(x.split(".")[0]))]
-    sessoes.sort(key=lambda x: (x["data"], str(x["id"])))
+    sessoes = sorted((x for x in sessoes if INICIO_MANDATO <= x["data"] <= FIM_MANDATO), key=lambda x: (x["data"], str(x["id"])))
     verif = {"gerado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "checagens": [], "avisos": []}
 
     def checar(ok, texto):
@@ -352,7 +357,7 @@ def main():
             por_slug[v["slug"]] = None
             verif["avisos"].append(f"Propostas de {v['apelido']} ainda não foram baixadas.")
             continue
-        mand = [d for d in docs if d["data"] >= INICIO_MANDATO]
+        mand = [d for d in docs if INICIO_MANDATO <= d["data"] <= FIM_MANDATO]
         for d in mand:
             d["grupo"] = classificar(d["tipo"], d["assunto"])
             if d["grupo"] == "bairro":
@@ -442,6 +447,7 @@ def main():
 
     pasta_p = os.path.join(DADOS, "portal")
     arqs_f = sorted(f for f in os.listdir(pasta_p) if re.fullmatch(r"folha-\d{4}-\d{2}\.json", f)) if os.path.isdir(pasta_p) else []
+    arqs_f = [a for a in arqs_f if INICIO_MANDATO[:7] <= a[6:13] <= FIM_MANDATO[:7]]
     for i, nome_arq in enumerate(arqs_f):
         F = json.load(open(os.path.join(pasta_p, nome_arq), encoding="utf-8"))
         chave = nome_arq[6:13]
@@ -571,7 +577,8 @@ def main():
 
     sessoes_lista = [s["id"] for s in sessoes]
     resumo = {
-        "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO,
+        "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO, "fim_mandato": FIM_MANDATO,
+        "mandato": MANDATO, "mandatos": MANDATOS,
         "grupos": GRUPOS, "regras": CLASSIFICACAO_REGRAS, "assuntos_pedido": [a for a, _ in ASSUNTOS_PEDIDO] + ["Outros pedidos"],
         "vereadores": sorted(resumo_v, key=lambda x: sem_acento(x["apelido"])),
         "slugs": slugs, "sessoes": sessoes_pub, "folha_info": folha_info, "meses_folha": meses_folha,
