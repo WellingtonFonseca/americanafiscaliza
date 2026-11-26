@@ -10,6 +10,9 @@ css = open(os.path.join(P, "estilo.css"), encoding="utf-8").read()
 js = open(os.path.join(P, "app.js"), encoding="utf-8").read()
 dados = {os.path.basename(f): json.load(open(f, encoding="utf-8")) for f in glob.glob(os.path.join(P, "dados", "*.json"))}
 fotos = {}
+_logo = os.path.join(P, "img", "brasao-camara.png")
+if os.path.exists(_logo):
+    idx = idx.replace('src="img/brasao-camara.png"', 'src="data:image/png;base64,' + base64.b64encode(open(_logo, "rb").read()).decode() + '"')
 for f in glob.glob(os.path.join(P, "fotos", "*.jpg")):
     fotos["fotos/" + os.path.basename(f)] = "data:image/jpeg;base64," + base64.b64encode(open(f, "rb").read()).decode()
 js = js.replace("function fotoLocal(v) { return `fotos/${v.slug}.jpg`; }",
