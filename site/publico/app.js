@@ -484,9 +484,10 @@ function telaGastos() {
     equipe: (v) => (v.dinheiro || {}).equipe_total || 0,
     emendas: (v) => (e && ((v.dinheiro || {}).emendas || {})[e.ano]) || 0,
     copias: (v) => (v.dinheiro || {}).copias || 0,
+    combustivel: (v) => (v.dinheiro || {}).combustivel || 0,
   };
   const max = Object.fromEntries(Object.entries(val).map(([k, f]) => [k, Math.max(1, ...R.vereadores.map(f))]));
-  const barra = (k, v, cor) => `<i class="barra" style="background:${cor};width:${Math.max(2, Math.round((val[k](v) / max[k]) * 100))}%"></i>`;
+  const barra = (k, v, cor) => `<i class="barra" style="background:${cor};width:${val[k](v) ? Math.max(2, Math.round((val[k](v) / max[k]) * 100)) : 0}%"></i>`;
   const vs = R.vereadores.slice().sort((a, b) => a.apelido.localeCompare(b.apelido, "pt-BR"));
   const cartoes = vs.map((v) => {
     const d = v.dinheiro || {};
@@ -497,7 +498,8 @@ function telaGastos() {
         <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${d.salario ? reais(d.salario) : "—"}</b><span>${d.salario ? `Salário bruto em ${mes}` : `Salário não encontrado em ${mes}`}</span>${barra("salario", v, "#1d55b8")}</a>
         <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${reais(d.equipe_total || 0)}</b><span>Equipe do gabinete em ${mes} (${d.equipe_pessoas || 0} ${d.equipe_pessoas === 1 ? "pessoa" : "pessoas"})</span>${barra("equipe", v, "#6a3fb5")}</a>
         <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${e && d.emendas ? reais(d.emendas[e.ano] || 0) : "—"}</b><span>Emendas no orçamento de ${e ? e.ano : ""}</span>${barra("emendas", v, "#1e7a46")}</a>
-        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${fmt(d.copias)}</b><span>Cópias em ${$(R.gabinete_ano)} · ${fmt(d.combustivel)} litros de combustível</span>${barra("copias", v, "#c4410f")}</a>
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${fmt(d.copias)}</b><span>Cópias e impressões em ${$(R.gabinete_ano)}</span>${barra("copias", v, "#c4410f")}</a>
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${fmt(d.combustivel)} litros</b><span>Combustível em ${$(R.gabinete_ano)}</span>${barra("combustivel", v, "#8a5a00")}</a>
       </div>
       <p class="comp-mais"><a href="#/v/${v.slug}?aba=gastos">Ver nomes da equipe, destino das emendas e outros meses</a></p>
     </div>`;
