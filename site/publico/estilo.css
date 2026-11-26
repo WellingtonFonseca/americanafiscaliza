@@ -213,3 +213,4 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .busca input { flex: 1 1 100%; }
 .busca button, .busca .botao { flex: 1 1 0; }
 @media (min-width: 640px) { .busca input { flex: 1 1 auto; } .busca button, .busca .botao { flex: 0 0 auto; } }
+#todos { background: var(--fundo); color: var(--marinho); border: 2px solid var(--marinho); }
