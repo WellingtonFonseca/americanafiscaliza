@@ -105,3 +105,9 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .fonte-oficial img { width: 180px; height: auto; display: block; background: #fff; border-radius: 6px; padding: 4px; }
 .aviso.info { background: #e8f1fb; border-left-color: #1f6fc5; }
 .so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Menu principal no mesmo estilo das abas do vereador, centralizado */
+.topo nav { justify-content: space-between; gap: 0; margin: 12px auto 0; padding: 0; max-width: 560px; overflow-x: visible; }
+.topo nav a { flex: 1 1 auto; text-align: center; padding: 12px 2px; font-size: 14.5px; margin-bottom: -1px; }
+.topo nav a.ativo { font-weight: 700; }
+@media (max-width: 380px) { .topo nav a { font-size: 13px; padding: 12px 1px; } }
