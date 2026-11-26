@@ -319,10 +319,10 @@ function secaoGabineteMes(f, k) {
   const fmt = (x) => Number(x).toLocaleString("pt-BR", { maximumFractionDigits: 2 });
   const linhas = g.itens.map((i) => {
     const v = i.meses ? i.meses[m] : null;
-    return `<tr><th>${$(i.item)}</th><td>${v == null ? "não foi possível ler" : v ? fmt(v) + " " + $(i.unidade) : "nada registrado"}</td><td class="suave">${i.limite_mensal ? "até " + fmt(i.limite_mensal) : ""}</td><td class="suave">${fmt(i.total)}${i.soma_difere ? "*" : ""}</td></tr>`;
+    return `<tr><th>${$(i.item)}${i.limite_mensal ? `<div class="suave" style="font-weight:400">limite: ${fmt(i.limite_mensal)} por mês</div>` : ""}</th><td>${v == null ? "não foi possível ler" : v ? fmt(v) + " " + $(i.unidade) : "nenhum"}</td><td>${fmt(i.total)}${i.soma_difere ? "*" : ""}</td></tr>`;
   }).join("");
   const difere = g.itens.some((i) => i.soma_difere);
-  return `<table><tr><th>Item</th><th>Em ${nomeMes(k)}</th><th>Limite por mês</th><th>No ano</th></tr>${linhas}</table>
+  return `<table><tr><th>Item</th><th>No mês</th><th>No ano</th></tr>${linhas}</table>
     ${difere ? `<p class="suave">* Neste item, o total do ano impresso no relatório da Câmara não é igual à soma dos meses do próprio relatório. Mostramos os números como a Câmara publicou. Confira no PDF.</p>` : ""}
     <p class="suave">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. Um mês sem número pode ainda não ter sido lançado. ${ext(g.pdf, "Ver o relatório (PDF)")}</p>`;
 }

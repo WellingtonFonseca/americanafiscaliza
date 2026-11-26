@@ -20,32 +20,32 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 .topo { border-bottom: 1px solid var(--linha); padding: 12px 16px 0; position: static; background: var(--fundo); z-index: 2; }
 .marca { font-weight: 800; font-size: 20px; color: var(--texto); text-decoration: none; }
 .topo nav { display: flex; gap: 0; overflow-x: auto; margin: 8px -16px 0; padding: 0 12px; scrollbar-width: none; }
-.topo nav a { white-space: nowrap; padding: 10px 7px; font-size: 15px; text-decoration: none; color: var(--suave); font-weight: 600; border-bottom: 3px solid transparent; }
+.topo nav a { white-space: nowrap; padding: 10px 7px; font-size: 17px; text-decoration: none; color: var(--suave); font-weight: 600; border-bottom: 3px solid transparent; }
 .topo nav a.ativo { color: var(--azul); border-bottom-color: var(--azul); }
 main { max-width: 760px; margin: 0 auto; padding: 16px; outline: none; }
 h1 { font-size: 26px; line-height: 1.2; margin: 8px 0 8px; }
 h2 { font-size: 21px; margin: 28px 0 8px; }
 h3 { font-size: 18px; margin: 20px 0 6px; }
 p { margin: 8px 0; }
-.suave { color: var(--suave); font-size: 15px; }
-.aviso { background: var(--aviso); border-left: 4px solid var(--aviso-borda); padding: 10px 12px; border-radius: 6px; font-size: 15px; margin: 12px 0; }
+.suave { color: var(--suave); font-size: 17px; }
+.aviso { background: var(--aviso); border-left: 4px solid var(--aviso-borda); padding: 10px 12px; border-radius: 6px; font-size: 17px; margin: 12px 0; }
 .caixa { background: var(--fundo-2); border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
 .lista-ver { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 8px; }
 .lista-ver a { display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--linha); border-radius: 10px; text-decoration: none; color: var(--texto); }
 .lista-ver img, .foto { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--fundo-2); flex: none; }
 .lista-ver .nome { font-weight: 700; display: block; }
-.lista-ver .info { font-size: 14px; color: var(--suave); }
+.lista-ver .info { font-size: 17px; color: var(--suave); }
 .cabeca-ver { display: flex; gap: 14px; align-items: center; margin-top: 8px; }
 .cabeca-ver .foto { width: 84px; height: 84px; }
 .numeros { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 12px 0; }
 .numero { border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; text-decoration: none; color: var(--texto); display: block; }
 .numero b { display: block; font-size: 28px; line-height: 1.1; color: var(--azul); }
-.numero span { font-size: 15px; }
-.numero small { display: block; color: var(--suave); font-size: 13px; margin-top: 4px; }
+.numero span { font-size: 17px; }
+.numero small { display: block; color: var(--suave); font-size: 17px; margin-top: 4px; }
 .itens { list-style: none; padding: 0; margin: 8px 0; }
 .itens li { border-bottom: 1px solid var(--linha); padding: 10px 0; }
-.itens .meta { font-size: 14px; color: var(--suave); }
-.tag { display: inline-block; font-size: 13px; padding: 1px 8px; border-radius: 99px; background: var(--fundo-2); color: var(--suave); margin-right: 4px; }
+.itens .meta { font-size: 17px; color: var(--suave); }
+.tag { display: inline-block; font-size: 17px; padding: 1px 8px; border-radius: 99px; background: var(--fundo-2); color: var(--suave); margin-right: 4px; }
 .tag.sim { background: #e6f4ea; color: #1e6b34; }
 .tag.nao { background: #fdecea; color: #a1261b; }
 .tag.neutro { background: var(--azul-claro); color: var(--azul); }
@@ -54,14 +54,14 @@ p { margin: 8px 0; }
 .busca button, .botao { font: inherit; font-weight: 700; padding: 12px 16px; border: 0; border-radius: 10px; background: var(--azul); color: #fff; cursor: pointer; text-decoration: none; display: inline-block; }
 .botao.claro { background: var(--azul-claro); color: var(--azul); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-.chips button { font: inherit; font-size: 15px; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--linha); background: var(--fundo); cursor: pointer; }
+.chips button { font: inherit; font-size: 17px; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--linha); background: var(--fundo); cursor: pointer; }
 .chips button.ativo { background: var(--azul); color: #fff; border-color: var(--azul); }
 .repetido { border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
 .repetido summary { cursor: pointer; font-weight: 600; }
 .voltar { display: inline-block; margin: 4px 0 8px; text-decoration: none; }
-table { border-collapse: collapse; width: 100%; font-size: 15px; }
+table { border-collapse: collapse; width: 100%; font-size: 17px; }
 th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linha); vertical-align: top; }
-.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding: 16px; font-size: 14px; color: var(--suave); max-width: 760px; margin-left: auto; margin-right: auto; }
+.rodape { border-top: 1px solid var(--linha); margin-top: 40px; padding: 16px; font-size: 17px; color: var(--suave); max-width: 760px; margin-left: auto; margin-right: auto; }
 .carregando { color: var(--suave); }
 .mais { margin: 12px 0; }
 @media (min-width: 640px) {
@@ -72,28 +72,28 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 
 /* Abas da página do vereador */
 .abas { display: flex; gap: 4px; margin: 20px 0 0; border-bottom: 2px solid var(--linha); }
-.abas button { flex: 1; font: inherit; font-size: 16px; padding: 12px 4px; border: 0; background: none; color: var(--suave); border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; }
+.abas button { flex: 1; font: inherit; font-size: 17px; padding: 12px 4px; border: 0; background: none; color: var(--suave); border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; }
 .abas button[aria-selected="true"] { color: var(--azul); font-weight: 700; border-bottom-color: var(--azul); }
 .painel > h2:first-child { margin-top: 18px; }
 .seletor { display: flex; align-items: center; gap: 10px; font-weight: 600; margin: 4px 0 8px; }
 .seletor select { font: inherit; font-size: 17px; padding: 8px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: inherit; flex: 1; max-width: 260px; }
 .filtros { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 8px 0; }
 .filtros input { grid-column: 1 / -1; }
-.filtros input, .filtros select { font: inherit; font-size: 16px; padding: 9px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: inherit; min-width: 0; }
+.filtros input, .filtros select { font: inherit; font-size: 17px; padding: 9px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--fundo); color: inherit; min-width: 0; }
 .destaque { border: 1px solid var(--linha); border-radius: 12px; padding: 14px 16px; margin: 14px 0; }
 .destaque b { display: block; font-size: 30px; color: var(--azul); line-height: 1.15; }
 .destaque span { display: block; margin-top: 4px; }
-.destaque small { display: block; color: var(--suave); font-size: 13px; margin-top: 6px; }
+.destaque small { display: block; color: var(--suave); font-size: 17px; margin-top: 6px; }
 .entradas { display: grid; gap: 10px; margin: 16px 0; }
 .entradas a { display: block; border: 1px solid var(--linha); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: inherit; }
 .entradas a b { display: block; color: var(--azul); font-size: 18px; }
-.entradas a span { display: block; color: var(--suave); font-size: 15px; margin-top: 2px; }
+.entradas a span { display: block; color: var(--suave); font-size: 17px; margin-top: 2px; }
 .origem dt { font-weight: 700; margin-top: 12px; }
 .origem dd { margin: 2px 0 0; color: var(--suave); }
 .rolagem { overflow-x: auto; }
 .comparar td { text-align: right; }
-.comparar th, .comparar td { padding: 8px 4px; font-size: 15px; }
-.comparar tr:first-child th { font-size: 13px; text-align: right; }
+.comparar th, .comparar td { padding: 8px 4px; font-size: 17px; }
+.comparar tr:first-child th { font-size: 17px; text-align: right; }
 .comparar tr:first-child th:first-child { text-align: left; }
 .comparar th a { font-weight: 600; }
 .topo-linha { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -101,21 +101,21 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .topo-linha .marca img { width: 220px; height: auto; display: block; }
 #mandato { font: inherit; font-size: 22px; font-weight: 800; text-align: center; text-align-last: center; padding: 8px 14px; border: 2px solid var(--azul); border-radius: 10px; background: var(--fundo); color: var(--azul); width: 100%; max-width: 360px; }
 .fonte-oficial { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.fonte-oficial .rotulo { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.fonte-oficial .rotulo { font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
 .fonte-oficial img { width: 180px; height: auto; display: block; background: #fff; border-radius: 6px; padding: 4px; }
 .aviso.info { background: #e8f1fb; border-left-color: #1f6fc5; }
 .so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Menu principal no mesmo estilo das abas do vereador, centralizado */
 .topo nav { justify-content: space-between; gap: 0; margin: 12px auto 0; padding: 0; max-width: 560px; overflow-x: visible; }
-.topo nav a { flex: 1 1 auto; text-align: center; padding: 12px 2px; font-size: 14.5px; margin-bottom: -1px; }
+.topo nav a { flex: 1 1 auto; text-align: center; padding: 12px 2px; font-size: 17px; margin-bottom: -1px; }
 .topo nav a.ativo { font-weight: 700; }
-@media (max-width: 380px) { .topo nav a { font-size: 13px; padding: 12px 1px; } }
+@media (max-width: 380px) { .topo nav a { font-size: 17px; padding: 12px 1px; } }
 
 /* ===== Visual amigável (sem animações): cores do banner, cartões brancos sobre fundo suave ===== */
 :root {
   --texto: #18213a;
-  --suave: #5a6274;
+  --suave: #434b5c;
   --linha: #e2e6ee;
   --fundo: #ffffff;
   --fundo-pagina: #f3f5f9;
@@ -151,7 +151,7 @@ th, td { padding: 9px 10px; }
 .destaque span { color: #dfe5f3; }
 .destaque small { color: #b9c3dc; }
 .destaque a { color: #ffd2bd; }
-.destaque .etiqueta { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--marinho); background: #ffd2bd; border-radius: 99px; padding: 2px 10px; margin-bottom: 8px; }
+.destaque .etiqueta { display: inline-block; font-size: 17px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--marinho); background: #ffd2bd; border-radius: 99px; padding: 2px 10px; margin-bottom: 8px; }
 
 /* Blocos de entrada com ícone */
 .entradas a { display: flex; gap: 12px; align-items: flex-start; border-radius: 16px; padding: 14px; }
@@ -159,7 +159,7 @@ th, td { padding: 9px 10px; }
 .entradas .icone svg { width: 24px; height: 24px; }
 .entradas a b { color: var(--marinho); }
 .entradas a > span:last-child { margin: 0; }
-.entradas a span span { display: block; color: var(--suave); font-size: 15px; margin-top: 2px; }
+.entradas a span span { display: block; color: var(--suave); font-size: 17px; margin-top: 2px; }
 @media (min-width: 720px) { .entradas { grid-template-columns: repeat(3, 1fr); } .entradas a { flex-direction: column; } }
 
 /* Avisos e caixas informativas */
@@ -182,5 +182,20 @@ th, td { padding: 9px 10px; }
 .arvore li { position: relative; padding: 6px 0; }
 .arvore li::before { content: ""; position: absolute; left: -14px; top: 18px; width: 10px; border-top: 2px solid rgba(255, 210, 189, .6); }
 .arvore li:last-child::after { content: ""; position: absolute; left: -17px; top: 20px; bottom: -6px; width: 4px; background: var(--marinho); }
-.destaque .arvore span { display: block; margin: 0; color: #dfe5f3; font-size: 15px; line-height: 1.3; }
+.destaque .arvore span { display: block; margin: 0; color: #dfe5f3; font-size: 17px; line-height: 1.3; }
 .destaque .arvore strong { display: block; color: #fff; font-size: 22px; line-height: 1.25; white-space: nowrap; }
+
+/* Leitura confortável: tamanho padrão em todo o texto (pedido do Wellington, pensando em quem tem vista cansada) */
+body { font-size: 18px; line-height: 1.55; }
+.topo nav { flex-wrap: wrap; justify-content: center; max-width: 620px; }
+.topo nav a { font-size: 17px; padding: 12px 8px; flex: 0 1 auto; }
+@media (max-width: 380px) { .topo nav a { font-size: 17px; padding: 10px 6px; } }
+.comparar tr:first-child th { font-size: 16px; }
+.comparar th, .comparar td { font-size: 17px; }
+.destaque .etiqueta, .fonte-oficial .rotulo { font-size: 15px; }
+.lista-ver .info, .itens .meta, .numero small, .destaque small, .suave, .rodape, .tag { font-size: 17px; }
+.tag { padding: 2px 10px; }
+.comparar th, .comparar td { font-size: 16px; padding: 9px 3px; }
+.comparar tr:first-child th { font-size: 15px; }
+table { border-collapse: separate; border-spacing: 0; }
+th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
