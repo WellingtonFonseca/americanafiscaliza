@@ -55,3 +55,13 @@
 2026-11-26T15:04:08+00:00 [proposituras] exportação CSV Pastor Miguel Pires (3693): HTTP 200, 751 KB
 2026-11-26T15:04:34+00:00 [proposituras] exportação CSV Juninho Dias (3350): HTTP 200, 1127 KB
 2026-11-26T15:04:56+00:00 [proposituras] exportação CSV Thiago Brochi (27): HTTP 200, 110 KB
+2026-11-26T15:26:06+00:00 lista de sessões: HTTP 200, 10 IDs ([1715, 1714, 1713]...)
+2026-11-26T15:26:17+00:00 sessão nova 1712: HTTP 200
+2026-11-26T15:26:29+00:00 sessão antiga 1711: HTTP 200
+2026-11-26T15:26:29+00:00 fim: 3 pedidos; total 5 sessões, 95 linhas de presença, 2470 linhas de voto
+2026-11-26T15:26:31+00:00 [proposituras] lista de vereadores: HTTP 200
+2026-11-26T15:27:03+00:00 [proposituras] lista de autores do SISCAM: HTTP 200
+2026-11-26T15:27:03+00:00 [proposituras] 19 vereadores; 19 com ID no SISCAM
+2026-11-26T15:27:36+00:00 [proposituras] exportação CSV Léo da Padaria (3032): HTTP 200, 415 KB
+2026-11-26T15:28:07+00:00 [proposituras] exportação CSV Thiago Brochi (27): HTTP 200, 110 KB
+2026-11-26T15:28:07+00:00 [proposituras] fim

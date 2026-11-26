@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-26T15:16:37+00:00",
+ "gerado_em": "2026-11-26T15:28:07+00:00",
  "checagens": [
   {
    "ok": true,
@@ -60,6 +60,14 @@
   {
    "ok": true,
    "texto": "Dr. Wagner Rovina: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (4195 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "4ª Sessão Extraordinária de 2026, Chamada Regimental - 13:52: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "40ª Sessão Ordinária de 2026, Chamada Regimental - 14:13: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
   },
   {
    "ok": true,

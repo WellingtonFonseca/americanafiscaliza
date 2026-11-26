@@ -1,9 +1,11 @@
 {
  "coletadas": [
+  1711,
+  1712,
   1713,
   1714
  ],
  "inexistentes": [],
- "proxima_antiga": 1712,
- "ultima_execucao": "2026-11-26T14:28:53+00:00"
+ "proxima_antiga": 1710,
+ "ultima_execucao": "2026-11-26T15:26:29+00:00"
 }
