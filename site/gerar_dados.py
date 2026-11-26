@@ -204,6 +204,33 @@ def ler_gabinete(txt):
     return {"ano": titulo.group(1) if titulo else "", "nome_pdf": nome.group(1).strip() if nome else "", "itens": itens}
 
 
+# ---------------------------------------------------------------- emendas impositivas
+RUIDO_PDF = re.compile(r"DOCUMENTO ASSINADO POR|consulta\.siscam|Página \d+ de \d+|Avenida Monsenhor Bruno Nardini|www\.camara-americana|"
+                       r"Câmara Municipal de Americana|Estado de São Paulo|Autógrafo nº|Projeto de Lei nº|ANEXO ESPECIAL|Lei Orçamentária Anual|conforme Art\.", re.I)
+
+
+def ler_emendas(txt):
+    """Cada bloco 'EMENDA nº N' do Anexo Especial de Emendas Individuais Impositivas."""
+    ini = txt.find("ANEXO ESPECIAL DE EMENDAS INDIVIDUAIS IMPOSITIVAS")
+    if ini < 0:
+        return []
+    corpo = "\n".join(l for l in txt[ini:].splitlines() if not RUIDO_PDF.search(l))
+    out = []
+    for blk in re.split(r"\n\s*EMENDA n[ºo°]\s*", corpo)[1:]:
+        num = re.match(r"(\d+)", blk)
+        ver = re.search(r"Vereadora?:\s*(.+)", blk)
+        sec = re.search(r"Secretaria Executora:\s*(.+)", blk)
+        val = re.search(r"Valor:\s*R\$\s*([\d.]+,\d{2})", blk)
+        cota = "saúde" if re.search(r"Cota Sa[úu]de:\s*\[\s*_*X_*\s*\]", blk, re.I) else ("geral" if re.search(r"Cota geral:\s*\[\s*_*X_*\s*\]", blk, re.I) else "")
+        dest = re.search(r"Emenda:\s*(.*)", blk, re.S)
+        destino = re.sub(r"\s+", " ", dest.group(1)).strip().strip("“”\" ") if dest else ""
+        destino = re.split(r"\s+(?:Plenário|Sala das Sessões|[A-ZÁÉÍÓÚÂÊÔÃÕÇ ]{12,}\s+(?:Presidente|Secretário))", destino)[0].strip().strip("“”\" ")
+        if num and ver and val:
+            out.append({"numero": int(num.group(1)), "vereador": ver.group(1).strip(), "secretaria": sec.group(1).strip() if sec else "",
+                        "cota": cota, "valor": numero_br(val.group(1)), "destino": destino})
+    return out
+
+
 # ---------------------------------------------------------------- sessões
 def ler_sessao(sid, s):
     s = html.unescape(s)
@@ -383,6 +410,30 @@ def main():
         checar(len([1 for d in folha_por_slug.values() if d["equipe"]]) == len(vereadores),
                f"Folha de {F['mes'].lower()}/{F['ano']}: equipe de gabinete encontrada para {len([1 for d in folha_por_slug.values() if d['equipe']])} de {len(vereadores)} vereadores")
 
+    # ---------------- emendas impositivas (Anexo Especial da LOA aprovada)
+    emendas_por_slug, emendas_info = {}, []
+    arq_e = os.path.join(DADOS, "emendas", "fontes.json")
+    if os.path.exists(arq_e):
+        for ano, info in sorted(json.load(open(arq_e, encoding="utf-8")).items()):
+            txt = os.path.join(DADOS, "emendas", f"loa{ano}.txt")
+            if not os.path.exists(txt):
+                continue
+            lista = ler_emendas(open(txt, encoding="utf-8").read())
+            emendas_info.append({"ano": ano, **info, "quantidade": len(lista)})
+            soltas = []
+            for e in lista:
+                t = set(chave_nome(e["vereador"]).split()) - {"da", "de", "do", "dr"}
+                cands = [v for v in vereadores if t and t <= set(chave_nome(v["apelido"] + " " + v["nome"]).split())]
+                if len(cands) != 1:
+                    soltas.append(e["vereador"]); continue
+                emendas_por_slug.setdefault(cands[0]["slug"], {}).setdefault(ano, []).append({**e, "vereador": cands[0]["apelido"]})
+            if soltas:
+                verif["avisos"].append(f"Emendas da LOA {ano} sem vereador identificado: {', '.join(soltas)}.")
+            totais = {round(sum(x["valor"] for x in d.get(ano, [])), 2) for d in emendas_por_slug.values()}
+            com = sum(1 for d in emendas_por_slug.values() if d.get(ano))
+            checar(not soltas and com == len(vereadores), f"LOA {ano}: {len(lista)} emendas impositivas lidas, todas ligadas a um vereador ({com} de {len(vereadores)} vereadores)")
+            checar(len(totais) == 1, f"LOA {ano}: a soma das emendas é a mesma para todos os vereadores ({', '.join('R$ ' + f'{x:,.2f}'.replace(',', '_').replace('.', ',').replace('_', '.') for x in sorted(totais))})")
+
     # ---------------- presença e votos
     resumo_v = []
     sessoes_pub = []
@@ -424,6 +475,7 @@ def main():
                  "total_todos_anos": p["total_todos_anos"] if p else None,
                  "grupos": grupos, "presenca": pres, "votos": votos, "gabinete": gab_por_slug.get(slug),
                  "folha": folha_por_slug.get(slug), "folha_info": folha_info,
+                 "emendas": emendas_por_slug.get(slug, {}), "emendas_info": emendas_info,
                  "fonte_propostas": f"{SISCAM}/Vereadores/Proposituras/{v['siscam_id']}"}
         json.dump(ficha, open(os.path.join(SAIDA, f"vereador-{slug}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         resumo_v.append({k: v[k] for k in ("slug", "apelido", "nome", "partido", "foto", "perfil_url", "telefone_gabinete", "email_gabinete", "siscam_id")} | {

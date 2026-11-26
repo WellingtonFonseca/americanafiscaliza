@@ -136,6 +136,9 @@ async function telaVereador(slug) {
     <ul class="itens" id="votos">${votos.slice(0, 20).map(itemVoto).join("")}</ul>
     ${votos.length > 20 ? `<p class="mais"><button class="botao claro" id="mais-votos">Mostrar todas as ${num(votos.length)} votações</button></p>` : ""}
 
+    <h2>Emendas impositivas</h2>
+    ${secaoEmendas(f)}
+
     <h2>Salário e equipe do gabinete</h2>
     ${secaoFolha(f)}
 
@@ -159,6 +162,21 @@ function secaoFolha(f) {
   return `<div class="numeros um">${ver}${eq}</div>
     ${d.equipe.length ? `<h3>Quem trabalha no gabinete</h3><table><tr><th>Nome</th><th>Cargo</th><th>Bruto em ${mes}</th></tr>${linhas}</table>` : ""}
     <p class="suave">Dados da folha de pagamento publicada pela Câmara no Portal da Transparência (${mes}, último mês fechado). O valor bruto é o do portal e pode incluir férias ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</p>`;
+}
+
+function secaoEmendas(f) {
+  const infos = f.emendas_info || [];
+  if (!infos.length) return `<p class="suave">As emendas impositivas ainda não foram baixadas.</p>`;
+  return infos.slice().reverse().map((i) => {
+    const lista = (f.emendas || {})[i.ano] || [];
+    const total = lista.reduce((a, e) => a + e.valor, 0);
+    const itens = lista.map((e) => `<li><b>${reais(e.valor)}</b> <span class="tag">${e.cota === "saúde" ? "cota saúde" : e.cota === "geral" ? "cota geral" : "cota não informada"}</span>
+      <div>${$(e.destino)}</div><div class="meta">Emenda nº ${e.numero} · ${$(e.secretaria)}</div></li>`).join("");
+    return `<p>Todo ano cada vereador indica para onde vai uma parte do orçamento da Prefeitura. Em regra, a Prefeitura é obrigada a executar essas indicações (salvo impedimento técnico), por isso se chamam emendas <b>impositivas</b>.</p>
+      <div class="numeros um"><div class="numero"><b>${reais(total)}</b><span>indicados por ${$(f.apelido)} no orçamento de ${i.ano} (${lista.length} ${lista.length === 1 ? "emenda" : "emendas"})</span><small>${ext(i.documento, "Conferir na lei aprovada (" + $(i.lei) + ")")}</small></div></div>
+      <ul class="itens">${itens || "<li>Nenhuma emenda encontrada.</li>"}</ul>
+      <p class="suave">É o valor previsto na lei do orçamento. O site ainda não acompanha se a Prefeitura já gastou esse dinheiro. Todos os vereadores têm a mesma cota.</p>`;
+  }).join("");
 }
 
 function secaoGabinete(f) {
@@ -306,6 +324,7 @@ async function telaSobre() {
     <ul>
       <li><b>Vereadores, partido e contato do gabinete:</b> ${ext("https://www.camara-americana.sp.gov.br/Vereador", "site da Câmara")}.</li>
       <li><b>Propostas:</b> a página de proposituras de cada vereador no ${ext("https://americana.siscam.com.br/", "SISCAM")}, o sistema oficial da Câmara. Quando essa página é grande demais e não abre, usamos a exportação em planilha da pesquisa oficial do próprio SISCAM, que traz só os tipos principais; a ficha do vereador avisa quando isso acontece.</li>
+      <li><b>Emendas impositivas:</b> o “Anexo Especial de Emendas Individuais Impositivas” da lei do orçamento aprovada (para 2026, o Autógrafo nº 125/2025), no SISCAM. Mostramos o valor previsto, não o que já foi gasto.</li>
       <li><b>Salário e equipe do gabinete:</b> a folha de pagamento do ${ext("https://transparencia-cmamericana.smarapd.com.br/#/dinamico/restoapagar/pagamentosaservidores", "Portal da Transparência da Câmara")} (último mês fechado). Usamos só as linhas de vereadores e de quem está lotado em gabinete de vereador. O “Gabinete da Presidência” é da Mesa Diretora e não entra na conta de nenhum vereador.</li>
       <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
