@@ -600,6 +600,17 @@ def main():
     }
     json.dump(resumo, open(os.path.join(SAIDA, "resumo.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(pedidos, open(os.path.join(SAIDA, "pedidos.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    # "O problema que não some": mesmo assunto pedido várias vezes para a mesma rua (mesma chave da busca do site)
+    grupos_rep = {}
+    for x in pedidos:
+        if x[4]:
+            grupos_rep.setdefault((re.sub(r"\s+", " ", sem_acento(x[4])).strip(), x[6]), []).append(x)
+    reps = sorted((g for g in grupos_rep.values() if len(g) >= 2), key=lambda g: (-len(g), g[0][4]))
+    json.dump({"total_casos": len(reps), "casos_5_ou_mais": sum(1 for g in reps if len(g) >= 5),
+               "casos": [{"rua": g[0][4], "bairro": next((x[5] for x in g if x[5]), ""), "assunto": g[0][6],
+                          "vereadores": len({i for x in g for i in x[7]}), "primeiro": min(x[1] for x in g), "ultimo": max(x[1] for x in g),
+                          "pedidos": sorted(g, key=lambda x: x[1], reverse=True)} for g in reps[:50]]},
+              open(os.path.join(SAIDA, "repetidos.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump(verif, open(os.path.join(SAIDA, "verificacao.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     ok = sum(c["ok"] for c in verif["checagens"])
     print(f"{len(vereadores)} vereadores, {len(sessoes)} sessões, {len(pedidos)} pedidos de bairro; checagens {ok}/{len(verif['checagens'])} ok")

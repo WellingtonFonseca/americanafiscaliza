@@ -131,6 +131,7 @@ function telaInicio() {
     ${contador}
     <div class="entradas">
       <a href="#/busca"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></span></a>
+      <a href="#/repetidos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg></span><span><b>O problema que não some</b><span>Ruas onde o mesmo pedido voltou várias vezes desde 2025.</span></span></a>
       <a href="#/comparar"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></span></a>
       <a href="#/gastos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8m0 8v1.5"/></svg></span><span><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></span></a>
     </div>
@@ -160,6 +161,24 @@ function deOndeVem() {
       <dt>Emendas impositivas</dt><dd>Da lei do orçamento aprovada. É o valor previsto, não o que a Prefeitura já gastou.</dd>
       <dt>Achou um erro?</dt><dd>Compare com o link oficial ao lado de cada número e <a href="#/sobre#correcao">avise aqui</a>. Se a Câmara corrigir o registro dela, o número muda aqui na atualização seguinte.</dd>
     </dl>`;
+}
+
+async function telaRepetidos() {
+  const d = await carregar("repetidos.json");
+  const casos = d.casos.map((c) => `<details class="repetido caso">
+      <summary><span class="caso-vezes"><b>${num(c.pedidos.length)}</b> pedidos</span>
+        <span class="caso-rua">${$(c.rua)}${c.bairro ? `<span class="caso-bairro">${$(c.bairro)}</span>` : ""}</span>
+        <span class="tag">${$(c.assunto)}</span>
+        <span class="caso-meta">De ${num(c.vereadores)} ${c.vereadores === 1 ? "vereador" : "vereadores"} · primeiro em ${data(c.primeiro)} · último em ${data(c.ultimo)}</span>
+        <span class="caso-abrir">Ver os pedidos</span></summary>
+      <ul class="itens">${c.pedidos.map(itemPedido).join("")}</ul></details>`).join("");
+  return `<a class="voltar" href="#/">← Início</a>
+    <h1>O problema que não some</h1>
+    <div class="aviso info">Quando o mesmo pedido volta várias vezes para a mesma rua, <b>pode ser</b> sinal de que o problema continua. O site da Câmara não mostra isso: nós cruzamos os pedidos um por um, pela rua e pelo assunto.</div>
+    <p>Desde ${data(R.inicio_mandato)}, encontramos <b>${num(d.total_casos)}</b> casos de pedido repetido para a mesma rua. Em <b>${num(d.casos_5_ou_mais)}</b> deles o pedido apareceu 5 vezes ou mais. Abaixo estão os ${d.casos.length} que mais se repetem.</p>
+    <div class="aviso">Repetição <b>não prova</b> que a Prefeitura ignorou o problema. Rua comprida ou avenida tem vários trechos, vereadores diferentes podem pedir a mesma coisa na mesma semana, e o serviço pode ter sido feito e o problema ter voltado. A rua e o assunto foram lidos do texto do pedido por um programa e podem ter erros. Abra e leia os pedidos para tirar a sua conclusão.</div>
+    ${casos}
+    <p><a class="botao" href="#/busca">Procurar a minha rua ou bairro</a></p>`;
 }
 
 function telaComparar() {
@@ -558,6 +577,7 @@ async function rota() {
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
     else if (partes[0] === "comparar") html = telaComparar();
+    else if (partes[0] === "repetidos") html = await telaRepetidos();
     else if (partes[0] === "sobre") html = await telaSobre();
     else html = telaInicio();
     app.innerHTML = html;
