@@ -1,0 +1,57 @@
+2026-11-26T14:28:28+00:00 lista de sessões: HTTP 200, 10 IDs ([1715, 1714, 1713]...)
+2026-11-26T14:28:40+00:00 sessão nova 1714: HTTP 200
+2026-11-26T14:28:53+00:00 sessão antiga 1713: HTTP 200
+2026-11-26T14:28:53+00:00 fim: 3 pedidos; total 3 sessões, 57 linhas de presença, 2090 linhas de voto
+2026-11-26T14:34:56+00:00 [proposituras] lista de vereadores: HTTP 200
+2026-11-26T14:35:03+00:00 [proposituras] perfil antonio-augusto-da-silva-martins-bueno-agir: HTTP 200
+2026-11-26T14:35:09+00:00 [proposituras] perfil carlos-alexandre-vianna-soares-podemos: HTTP 200
+2026-11-26T14:35:15+00:00 [proposituras] perfil clemente-alves-dos-santos-neto-pl: HTTP 200
+2026-11-26T14:35:21+00:00 [proposituras] perfil fernando-moreno-rugani-psd: HTTP 200
+2026-11-26T14:35:28+00:00 [proposituras] perfil gualter-de-almeida-amado-pdt: HTTP 200
+2026-11-26T14:35:34+00:00 [proposituras] perfil jacira-chavare-republicanos: HTTP 200
+2026-11-26T14:35:40+00:00 [proposituras] perfil jean-carlos-mizzoni-agir: HTTP 200
+2026-11-26T14:35:46+00:00 [proposituras] perfil jose-marcos-caetano-pinto-pl: HTTP 200
+2026-11-26T14:35:52+00:00 [proposituras] perfil juliana-soares-do-nascimento-pt: HTTP 200
+2026-11-26T14:35:58+00:00 [proposituras] perfil leonora-da-silva-perico-pl: HTTP 200
+2026-11-26T14:36:04+00:00 [proposituras] perfil levi-cristiano-rossi-prd: HTTP 200
+2026-11-26T14:36:11+00:00 [proposituras] perfil lucas-leoncine-psd: HTTP 200
+2026-11-26T14:36:17+00:00 [proposituras] perfil miguel-carlos-pires-prd: HTTP 200
+2026-11-26T14:36:23+00:00 [proposituras] perfil paulo-eduardo-dias-junior-psd: HTTP 200
+2026-11-26T14:36:30+00:00 [proposituras] perfil renan-de-angelo-podemos: HTTP 200
+2026-11-26T14:36:36+00:00 [proposituras] perfil roberta-dias-lima-prd: HTTP 200
+2026-11-26T14:36:42+00:00 [proposituras] perfil talitha-de-nadai-pdt: HTTP 200
+2026-11-26T14:36:48+00:00 [proposituras] perfil thiago-luis-de-oliveira-brochi-pl: HTTP 200
+2026-11-26T14:36:48+00:00 [proposituras] 19 vereadores; 12 com ID no SISCAM
+2026-11-26T14:37:34+00:00 [proposituras] proposituras Leco Soares (3209): HTTP 200, 937 KB
+2026-11-26T14:38:55+00:00 [proposituras] proposituras Léo da Padaria (3032): HTTP 504, 0 KB
+2026-11-26T14:39:49+00:00 [proposituras] proposituras Fernando da Farmácia (3689): HTTP 200, 1579 KB
+2026-11-26T14:41:10+00:00 [proposituras] proposituras Gualter Amado (3033): HTTP 504, 0 KB
+2026-11-26T14:42:02+00:00 [proposituras] proposituras Marcos Caetano (3694): HTTP 200, 1422 KB
+2026-11-26T14:42:51+00:00 [proposituras] proposituras Professora Juliana (3493): HTTP 200, 1110 KB
+2026-11-26T14:43:41+00:00 [proposituras] proposituras Leonora Périco (17): HTTP 200, 1367 KB
+2026-11-26T14:44:55+00:00 [proposituras] proposituras Lucas Leoncine (3691): HTTP 200, 2856 KB
+2026-11-26T14:46:15+00:00 [proposituras] proposituras Pastor Miguel Pires (3693): HTTP 504, 0 KB
+2026-11-26T14:47:36+00:00 [proposituras] proposituras Juninho Dias (3350): HTTP 504, 0 KB
+2026-11-26T14:48:57+00:00 [proposituras] proposituras Thiago Brochi (27): HTTP 504, 0 KB
+2026-11-26T14:48:57+00:00 [proposituras] fim
+2026-11-26T14:49:19+00:00 [proposituras] lista de vereadores: HTTP 200
+2026-11-26T14:49:51+00:00 [proposituras] lista de autores do SISCAM: HTTP 200
+2026-11-26T14:49:51+00:00 [proposituras] 19 vereadores; 19 com ID no SISCAM
+2026-11-26T14:50:37+00:00 [proposituras] proposituras Gutão do Lanche (3163): HTTP 200, 909 KB
+2026-11-26T14:51:58+00:00 [proposituras] proposituras Léo da Padaria (3032): HTTP 504, 0 KB
+2026-11-26T14:53:19+00:00 [proposituras] proposituras Gualter Amado (3033): HTTP 504, 0 KB
+2026-11-26T14:54:13+00:00 [proposituras] proposituras Jacira Chávare (5175): HTTP 200, 1449 KB
+2026-11-26T14:54:54+00:00 [proposituras] proposituras Jean Mizzoni (5173): HTTP 200, 630 KB
+2026-11-26T14:55:34+00:00 [proposituras] proposituras Levi Rossi (5203): HTTP 200, 545 KB
+2026-11-26T14:56:55+00:00 [proposituras] proposituras Pastor Miguel Pires (3693): HTTP 504, 0 KB
+2026-11-26T14:58:16+00:00 [proposituras] proposituras Juninho Dias (3350): HTTP 504, 0 KB
+2026-11-26T14:58:57+00:00 [proposituras] proposituras Renan de Angelo (3164): HTTP 200, 637 KB
+2026-11-26T14:59:36+00:00 [proposituras] proposituras Roberta Lima (5172): HTTP 200, 447 KB
+2026-11-26T15:00:23+00:00 [proposituras] proposituras Talitha de Nadai (5174): HTTP 200, 782 KB
+2026-11-26T15:01:44+00:00 [proposituras] proposituras Thiago Brochi (27): HTTP 504, 0 KB
+2026-11-26T15:01:44+00:00 [proposituras] fim
+2026-11-26T15:03:19+00:00 [proposituras] exportação CSV Léo da Padaria (3032): HTTP 200, 415 KB
+2026-11-26T15:03:42+00:00 [proposituras] exportação CSV Gualter Amado (3033): HTTP 200, 485 KB
+2026-11-26T15:04:08+00:00 [proposituras] exportação CSV Pastor Miguel Pires (3693): HTTP 200, 751 KB
+2026-11-26T15:04:34+00:00 [proposituras] exportação CSV Juninho Dias (3350): HTTP 200, 1127 KB
+2026-11-26T15:04:56+00:00 [proposituras] exportação CSV Thiago Brochi (27): HTTP 200, 110 KB

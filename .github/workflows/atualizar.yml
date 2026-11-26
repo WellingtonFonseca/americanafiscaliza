@@ -1,0 +1,66 @@
+# Robô do Americana Fiscaliza.
+# Quartas e sábados ~8h47 (Brasília = 11h47 UTC): coleta pouco no sistema da Câmara,
+# gera os dados, confere e só publica se todas as conferências passarem.
+# Se algo falhar, o site fica com a última versão boa.
+# Num push para main (mudança no site), só republica, sem coletar nada.
+name: Atualizar dados e publicar
+
+on:
+  schedule:
+    - cron: "47 11 * * 3,6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: atualizar
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Coletar sessões (até 3 páginas)
+        if: github.event_name != 'push'
+        run: python3 -I coletor/coletar_sessoes.py coletor/dados
+
+      - name: Coletar propostas (quem falta + 2 vereadores em rodízio)
+        if: github.event_name != 'push'
+        run: python3 -I coletor/coletar_proposituras.py coletor/dados --renovar 2
+
+      - name: Gerar dados do site e conferir
+        run: python3 -I site/gerar_dados.py coletor
+
+      - name: Guardar o que foi coletado
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "AmericanaFiscaliza robô"
+          git config user.email "actions@users.noreply.github.com"
+          git add coletor/dados site/publico/dados
+          git commit -m "Atualiza dados $(date -u +%F)" || echo "nada novo"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/publico
+
+  publicar:
+    needs: atualizar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

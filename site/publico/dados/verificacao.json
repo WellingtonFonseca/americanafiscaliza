@@ -1,0 +1,85 @@
+{
+ "gerado_em": "2026-11-26T15:16:37+00:00",
+ "checagens": [
+  {
+   "ok": true,
+   "texto": "Todos os 19 nomes que aparecem nas sessões foram ligados a um vereador da lista oficial"
+  },
+  {
+   "ok": true,
+   "texto": "Gutão do Lanche: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (2352 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Leco Soares: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (2150 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Fernando da Farmácia: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (3907 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Jacira Chávare: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (3723 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Jean Mizzoni: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (1582 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Marcos Caetano: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (3577 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Professora Juliana: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (2518 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Leonora Périco: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (3513 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Levi Rossi: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (1310 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Lucas Leoncine: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (7128 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Renan de Angelo: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (1570 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Roberta Lima: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (1098 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Talitha de Nadai: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (1909 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "Dr. Wagner Rovina: a quantidade de documentos lida em cada tipo bate com o total que a própria página da Câmara mostra (4195 no total, todos os anos)"
+  },
+  {
+   "ok": true,
+   "texto": "41ª Sessão Ordinária de 2026, Chamada Regimental - 14:13: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "42ª Sessão Ordinária de 2026, Chamada Regimental - 14:07: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "43ª Sessão Ordinária de 2026, Chamada Regimental - 14:18: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  }
+ ],
+ "avisos": [
+  "Léo da Padaria: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Gualter Amado: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Pastor Miguel Pires: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Juninho Dias: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Thiago Brochi: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Em 1793 de 31483 pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra."
+ ]
+}
