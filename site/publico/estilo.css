@@ -244,3 +244,4 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .caso-abrir { color: var(--azul); text-decoration: underline; font-weight: 600; }
 .caso[open] .caso-abrir { display: none; }
 .caso .itens { margin: 0 12px 12px; box-shadow: none; }
+.aviso.alerta { background: #fdecea; border-left-color: #c62828; color: #5f1410; }

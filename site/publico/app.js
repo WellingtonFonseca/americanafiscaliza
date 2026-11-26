@@ -174,8 +174,8 @@ async function telaRepetidos() {
       <ul class="itens">${c.pedidos.map(itemPedido).join("")}</ul></details>`).join("");
   return `<a class="voltar" href="#/">← Início</a>
     <h1>O problema que não some</h1>
+    <div class="aviso alerta">Desde ${data(R.inicio_mandato)}, encontramos <b>${num(d.total_casos)}</b> casos de pedido repetido para a mesma rua. Em <b>${num(d.casos_5_ou_mais)}</b> deles o pedido apareceu 5 vezes ou mais. Abaixo estão os ${d.casos.length} que mais se repetem.</div>
     <div class="aviso info">Quando o mesmo pedido volta várias vezes para a mesma rua, <b>pode ser</b> sinal de que o problema continua. O site da Câmara não mostra isso: nós cruzamos os pedidos um por um, pela rua e pelo assunto.</div>
-    <p>Desde ${data(R.inicio_mandato)}, encontramos <b>${num(d.total_casos)}</b> casos de pedido repetido para a mesma rua. Em <b>${num(d.casos_5_ou_mais)}</b> deles o pedido apareceu 5 vezes ou mais. Abaixo estão os ${d.casos.length} que mais se repetem.</p>
     <div class="aviso">Repetição <b>não prova</b> que a Prefeitura ignorou o problema. Rua comprida ou avenida tem vários trechos, vereadores diferentes podem pedir a mesma coisa na mesma semana, e o serviço pode ter sido feito e o problema ter voltado. A rua e o assunto foram lidos do texto do pedido por um programa e podem ter erros. Abra e leia os pedidos para tirar a sua conclusão.</div>
     ${casos}
     <p><a class="botao" href="#/busca">Procurar a minha rua ou bairro</a></p>`;
