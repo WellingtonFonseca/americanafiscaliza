@@ -83,7 +83,10 @@ function cartao(slugV, g, itens, fonte, parcial) {
     <small>${ext(fonte, "Conferir na Câmara")}</small></div>`;
 }
 
-async function telaVereador(slug) {
+const ABAS = [["gastos", "Gastos"], ["propostas", "Propostas"], ["presenca", "Presença"], ["votos", "Votos"]];
+
+async function telaVereador(slug, aba) {
+  if (!ABAS.some(([k]) => k === aba)) aba = "gastos";
   const v = vereador(slug);
   if (!v) return `<p>Vereador não encontrado. <a href="#/">Voltar</a></p>`;
   const f = await carregar(`vereador-${slug}.json`);
@@ -120,9 +123,28 @@ async function telaVereador(slug) {
       <div><h1>${$(f.apelido)}</h1><p class="suave">${$(f.nome)} · ${$(f.partido)}</p></div></div>
     <div class="caixa suave">${contato}<br>${ext(f.perfil_url, "Perfil oficial no site da Câmara")}</div>
 
+    <div class="abas" role="tablist">
+      ${ABAS.map(([k, t]) => `<button role="tab" data-aba="${k}" aria-selected="${k === aba}">${t}</button>`).join("")}
+    </div>
+
+    <section class="painel" data-painel="gastos"${aba === "gastos" ? "" : " hidden"}>
+    <h2>Salário e equipe do gabinete</h2>
+    ${secaoFolha(f)}
+
+    <h2>Emendas impositivas</h2>
+    ${secaoEmendas(f)}
+
+    <h2>Gastos do gabinete</h2>
+    ${secaoGabinete(f)}
+    </section>
+
+    <section class="painel" data-painel="propostas"${aba === "propostas" ? "" : " hidden"}>
     <h2>Propostas</h2>
     ${propostas}
 
+    </section>
+
+    <section class="painel" data-painel="presenca"${aba === "presenca" ? "" : " hidden"}>
     <h2>Presença nas sessões</h2>
     ${avisoSessoes()}
     <div class="numeros">
@@ -132,20 +154,15 @@ async function telaVereador(slug) {
     <p class="suave">“Chamada” é a lista de presença feita no começo da sessão. Ausência registrada não quer dizer falta sem motivo: pode haver licença, atestado ou missão oficial.</p>
     <ul class="itens">${linhasP}</ul>
 
+    </section>
+
+    <section class="painel" data-painel="votos"${aba === "votos" ? "" : " hidden"}>
     <h2>Votos</h2>
     <p>${num(votos.length)} votações nas sessões já coletadas. ${resumoVotos}</p>
     <p class="suave">“Não vota” costuma aparecer para quem preside a sessão, que pelo regimento só vota em alguns casos. “Ausente” aqui é ausente no momento daquela votação.</p>
     <ul class="itens" id="votos">${votos.slice(0, 20).map(itemVoto).join("")}</ul>
     ${votos.length > 20 ? `<p class="mais"><button class="botao claro" id="mais-votos">Mostrar todas as ${num(votos.length)} votações</button></p>` : ""}
-
-    <h2>Emendas impositivas</h2>
-    ${secaoEmendas(f)}
-
-    <h2>Salário e equipe do gabinete</h2>
-    ${secaoFolha(f)}
-
-    <h2>Gastos do gabinete</h2>
-    ${secaoGabinete(f)}`;
+    </section>`;
 }
 
 const MESES_PT = { JANEIRO: "janeiro", FEVEREIRO: "fevereiro", MARCO: "março", ABRIL: "abril", MAIO: "maio", JUNHO: "junho", JULHO: "julho", AGOSTO: "agosto", SETEMBRO: "setembro", OUTUBRO: "outubro", NOVEMBRO: "novembro", DEZEMBRO: "dezembro" };
@@ -205,7 +222,7 @@ async function telaGrupo(slug, g) {
   itens.forEach((d) => { tipos[d[2]] = (tipos[d[2]] || 0) + 1; });
   setTimeout(() => ligarFiltro(itens), 0);
   return `
-    <a class="voltar" href="#/v/${slug}">← ${$(f.apelido)}</a>
+    <a class="voltar" href="#/v/${slug}?aba=propostas">← ${$(f.apelido)}</a>
     <h1>${$(R.grupos[g])}</h1>
     <p>${$(f.apelido)} · ${num(itens.length)} documentos desde ${data(R.inicio_mandato)}. ${$(EXPLICA[g])}</p>
     <p class="suave">Tipos no sistema da Câmara: ${Object.entries(tipos).map(([k, n]) => `${$(k)} (${num(n)})`).join(", ") || "nenhum"}. Fonte: ${ext(f.fonte_propostas, "página de proposituras do vereador")}.</p>
@@ -395,13 +412,18 @@ async function rota() {
     if (!R) R = await carregar("resumo.json");
     let html;
     if (partes[0] === "v" && partes[2]) html = await telaGrupo(partes[1], partes[2]);
-    else if (partes[0] === "v") html = await telaVereador(partes[1]);
+    else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"));
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
     else if (partes[0] === "sobre") html = await telaSobre();
     else html = telaInicio();
     app.innerHTML = html;
+    document.querySelectorAll(".abas button").forEach((t) => t.onclick = () => {
+      document.querySelectorAll(".abas button").forEach((x) => x.setAttribute("aria-selected", x === t));
+      document.querySelectorAll(".painel").forEach((p) => { p.hidden = p.dataset.painel !== t.dataset.aba; });
+      history.replaceState(null, "", `#/v/${partes[1]}?aba=${t.dataset.aba}`);
+    });
     const b = document.getElementById("mais-votos");
     if (b) b.onclick = async () => { const f = await carregar(`vereador-${partes[1]}.json`); document.getElementById("votos").innerHTML = f.votos.slice().reverse().map(itemVoto).join(""); b.remove(); };
     document.getElementById("atualizado").textContent = `Dados atualizados em ${new Date(R.gerado_em).toLocaleDateString("pt-BR")}.`;

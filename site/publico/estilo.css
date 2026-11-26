@@ -69,3 +69,9 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 }
 .numeros.um { grid-template-columns: 1fr; }
 .numero b { overflow-wrap: anywhere; }
+
+/* Abas da página do vereador */
+.abas { display: flex; gap: 4px; margin: 20px 0 0; border-bottom: 2px solid var(--linha); }
+.abas button { flex: 1; font: inherit; font-size: 16px; padding: 12px 4px; border: 0; background: none; color: var(--suave); border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer; }
+.abas button[aria-selected="true"] { color: var(--azul); font-weight: 700; border-bottom-color: var(--azul); }
+.painel > h2:first-child { margin-top: 18px; }
