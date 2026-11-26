@@ -377,7 +377,7 @@ async function telaBusca(q) {
   return `
     <h1>O que pediram para o meu bairro</h1>
     <p>Digite o nome do bairro ou da rua. Aparece tudo o que os vereadores pediram para lá desde ${data(R.inicio_mandato)}, e quem pediu.</p>
-    <form class="busca" id="fbusca"><input id="q" type="search" placeholder="Ex.: Jardim Brasil ou Rua Capivari" aria-label="Bairro ou rua" value="${$(q || "")}" autocomplete="off"><button>Buscar</button></form>
+    <form class="busca" id="fbusca"><input id="q" type="search" placeholder="Ex.: Jardim Brasil ou Rua Capivari" aria-label="Bairro ou rua" value="${$(q && q !== "*" ? q : "")}" autocomplete="off"><button>Buscar</button><button type="button" class="botao claro" id="todos">Todos</button></form>
     <div id="sugestoes"></div>
     <div id="resultado"></div>
     ${R.propostas_completas ? "" : `<div class="aviso">Atenção: os pedidos de alguns vereadores ainda não foram baixados, então a busca ainda não está completa.</div>`}`;
@@ -395,13 +395,14 @@ function ligarBusca(ped, q0) {
   sug.innerHTML = `<p class="suave">Bairros com mais pedidos:</p><div class="chips">${top.map(([b]) => `<button type="button" data-b="${$(b)}">${$(b)}</button>`).join("")}</div>`;
   sug.addEventListener("click", (e) => { const b = e.target.dataset.b; if (b) { inp.value = b; buscar(); } });
   f.addEventListener("submit", (e) => { e.preventDefault(); buscar(); });
+  document.getElementById("todos").onclick = () => { inp.value = ""; buscar(true); };
 
-  function buscar() {
+  function buscar(todos) {
     const q = norm(inp.value);
-    history.replaceState(null, "", "#/busca?q=" + encodeURIComponent(inp.value));
-    sug.hidden = q.length >= 3;
-    if (q.length < 3) { out.innerHTML = `<p class="suave">Digite pelo menos 3 letras.</p>`; return; }
-    const achados = ped.filter((p) => norm(p[5]).includes(q) || norm(p[4]).includes(q) || norm(p[3]).includes(q));
+    history.replaceState(null, "", "#/busca?q=" + (todos ? "*" : encodeURIComponent(inp.value)));
+    sug.hidden = todos || q.length >= 3;
+    if (!todos && q.length < 3) { out.innerHTML = `<p class="suave">Digite pelo menos 3 letras, ou toque em “Todos” para ver a cidade inteira.</p>`; return; }
+    const achados = todos ? ped : ped.filter((p) => norm(p[5]).includes(q) || norm(p[4]).includes(q) || norm(p[3]).includes(q));
     if (!achados.length) { out.innerHTML = `<p>Nenhum pedido encontrado com “${$(inp.value)}”. Tente só uma parte do nome, sem “Jardim” ou “Vila”.</p>`; return; }
     // repetidos: mesma rua + mesmo assunto
     const grupos = {};
@@ -410,20 +411,21 @@ function ligarBusca(ped, q0) {
     const porVer = {};
     achados.forEach((p) => p[7].forEach((i) => { porVer[i] = (porVer[i] || 0) + 1; }));
     out.innerHTML = `
-      <h2>${num(achados.length)} pedidos encontrados</h2>
+      <h2>${todos ? `Todos os pedidos da cidade: ${num(achados.length)}` : `${num(achados.length)} pedidos encontrados`}</h2>
       <h3>Quem pediu</h3>
       <ul class="quem-pediu">${Object.entries(porVer).sort((a, b) => b[1] - a[1]).map(([i, n]) => `<li><a href="#/v/${R.slugs[i]}">${$(nomeVer(i))}</a><span>${num(n)} ${n === 1 ? "pedido" : "pedidos"}</span></li>`).join("")}</ul>
       ${rep.length ? `<h2>Pedidos que se repetem</h2>
       <div class="aviso">Pedido repetido <b>não prova</b> que a Prefeitura ignorou o problema. O serviço pode ter sido feito e o problema ter voltado, o pedido pode ser para outro trecho da mesma rua, ou vereadores diferentes podem ter pedido a mesma coisa. Rua e assunto foram lidos do texto do pedido por um programa, e podem ter erros.</div>
       ${rep.slice(0, 30).map(itemRepetido).join("")}
       ${rep.length > 30 ? `<p class="suave">E mais ${num(rep.length - 30)} casos de repetição. Refine a busca para ver.</p>` : ""}` : ""}
-      <h2>Todos os pedidos</h2>
+      <h2>${todos ? "Pedidos mais recentes" : "Pedidos encontrados"}</h2>
       <ul class="itens">${achados.slice().reverse().slice(0, 200).map(itemPedido).join("")}</ul>
-      ${achados.length > 200 ? `<p class="suave">Mostrando os 200 mais recentes. Refine a busca para ver os outros.</p>` : ""}
+      ${achados.length > 200 ? `<p class="suave">Mostrando os 200 mais recentes. ${todos ? "Pesquise um bairro ou rua" : "Refine a busca"} para ver os outros.</p>` : ""}
       <p><button type="button" class="botao claro" id="outra">Buscar outro bairro</button></p>`;
     document.getElementById("outra").onclick = () => { inp.value = ""; sug.hidden = false; out.innerHTML = ""; window.scrollTo(0, 0); inp.focus(); };
   }
-  if (q0) buscar();
+  if (q0 === "*") buscar(true);
+  else if (q0) buscar();
 }
 
 function itemRepetido(g) {

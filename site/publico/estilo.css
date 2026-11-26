@@ -208,3 +208,8 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .quem-pediu li:last-child { border-bottom: 0; }
 .quem-pediu a { font-weight: 600; }
 .quem-pediu span { color: var(--suave); white-space: nowrap; }
+.busca .botao.claro { padding: 12px 14px; }
+.busca { flex-wrap: wrap; }
+.busca input { flex: 1 1 100%; }
+.busca button, .busca .botao { flex: 1 1 0; }
+@media (min-width: 640px) { .busca input { flex: 1 1 auto; } .busca button, .busca .botao { flex: 0 0 auto; } }
