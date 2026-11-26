@@ -109,6 +109,7 @@ function telaInicio() {
   const pt = R.pago_total;
   const milhoes = (x) => (x / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " milhões";
   const contador = pt && pt.de ? `<div class="destaque">
+      <span class="etiqueta">Folha oficial</span>
       <b>R$ ${milhoes(pt.vereadores + pt.equipes)}</b>
       <span>pagos aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
       <small>Vereadores: ${reais(pt.vereadores)} · Equipes: ${reais(pt.equipes)}. Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
@@ -117,9 +118,9 @@ function telaInicio() {
     <h1 class="so-leitor">O que cada vereador de Americana faz</h1>
     ${contador}
     <div class="entradas">
-      <a href="#/busca"><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></a>
-      <a href="#/comparar"><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></a>
-      <a href="#/gastos"><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></a>
+      <a href="#/busca"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></span></a>
+      <a href="#/comparar"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></span></a>
+      <a href="#/gastos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8m0 8v1.5"/></svg></span><span><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></span></a>
     </div>
     ${avisoSessoes()}
     ${R.vereadores.some((v) => v.propostas_parcial || !v.propostas_baixadas) ? `<div class="aviso">Para ${R.vereadores.filter((v) => v.propostas_parcial || !v.propostas_baixadas).length} vereadores as propostas ainda estão parciais (o sistema da Câmara não abriu a página completa deles). Isso está marcado na ficha de cada um.</div>` : ""}
