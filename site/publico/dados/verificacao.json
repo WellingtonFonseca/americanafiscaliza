@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-26T16:09:49+00:00",
+ "gerado_em": "2026-11-26T16:27:57+00:00",
  "checagens": [
   {
    "ok": true,
@@ -67,11 +67,19 @@
   },
   {
    "ok": true,
+   "texto": "Gastos de gabinete mês a mês: todas as linhas dos relatórios foram lidas"
+  },
+  {
+   "ok": true,
    "texto": "Todos os relatórios de gabinete têm as 5 linhas esperadas (correspondências, cópias, telefone fixo, celular, combustível)"
   },
   {
    "ok": true,
    "texto": "Folha de outubro/2026: equipe de gabinete encontrada para 19 de 19 vereadores"
+  },
+  {
+   "ok": true,
+   "texto": "Folha mês a mês sem buracos de 2025-01 a 2026-10 (22 meses)"
   },
   {
    "ok": true,
@@ -108,9 +116,12 @@
   "Pastor Miguel Pires: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
   "Juninho Dias: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
   "Thiago Brochi: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Gabinete gualter-de-almeida-amado-pdt: em Combustível, a soma dos meses (141.20) não bate com o Total impresso no PDF (131.90). O site mostra os dois.",
+  "Gabinete jose-marcos-caetano-pinto-pl: em Combustível, a soma dos meses (18.80) não bate com o Total impresso no PDF (17.10). O site mostra os dois.",
+  "Gabinete talitha-de-nadai-pdt: em Combustível, a soma dos meses (43.50) não bate com o Total impresso no PDF (41.00). O site mostra os dois.",
   "Folha: “JACIRA MANEO” (cargo vereador) foi ligado a Jacira Chávare só por uma parte do nome. Conferir.",
-  "Folha de outubro/2026: não encontramos o pagamento de Levi Rossi como vereador. O site mostra “não encontrado”, sem adivinhar.",
-  "Folha: linhas de gabinete que não ligamos a nenhum vereador: GABINETE DA PRESIDÊNCIA (Secretario gabin presidencia).",
+  "Folha de outubro/2026: linhas de gabinete que não ligamos a nenhum vereador: GABINETE DA PRESIDÊNCIA (Secretario gabin presidencia).",
+  "Folha: não encontramos o pagamento de Levi Rossi como vereador em 21 de 22 meses (2025-02 a 2026-10). O site mostra “não encontrado”, sem adivinhar.",
   "Em 1793 de 31483 pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra."
  ]
 }

@@ -1,0 +1,745 @@
+{
+ "fonte": "https://transparencia-cmamericana.smarapd.com.br/#/dinamico/restoapagar/pagamentosaservidores",
+ "ano": 2026,
+ "mes": "ABRIL",
+ "total_registros_no_portal": 170,
+ "coletado_em": "2026-11-26T16:25:39+00:00",
+ "linhas": [
+  {
+   "NomeServidor": "RAFAEL POSSOBON",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA ROBERTA LIMA",
+   "DataAdmissao": "08/07/2025",
+   "ValorBruto": "10.103,61",
+   "ValorLiquido": "7.473,56"
+  },
+  {
+   "NomeServidor": "MELISSA CARLA BAPTISTA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUALTER AMADO",
+   "DataAdmissao": "02/01/2017",
+   "ValorBruto": "10.376,68",
+   "ValorLiquido": "6.603,93"
+  },
+  {
+   "NomeServidor": "DIEGO DE SOUZA OLIVEIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR JEAN MIZZONI",
+   "DataAdmissao": "17/05/2021",
+   "ValorBruto": "8.278,40",
+   "ValorLiquido": "6.198,39"
+  },
+  {
+   "NomeServidor": "ANTONIO AUGUSTO DA SILVA MARTINS BUENO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.872,52"
+  },
+  {
+   "NomeServidor": "JAIR DE CAMPOS CAMARGO SOBRINHO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LECO",
+   "DataAdmissao": "19/11/2018",
+   "ValorBruto": "8.738,31",
+   "ValorLiquido": "6.497,18"
+  },
+  {
+   "NomeServidor": "PEDRO GUSTAVO SALVADOR CAMARA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUALTER AMADO",
+   "DataAdmissao": "02/01/2017",
+   "ValorBruto": "8.754,01",
+   "ValorLiquido": "6.611,06"
+  },
+  {
+   "NomeServidor": "CARLOS EDUARDO REA SISDELLI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA TALITHA DE NADAI",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "9.375,42",
+   "ValorLiquido": "5.370,06"
+  },
+  {
+   "NomeServidor": "CLEMENTE ALVES DOS SANTOS NETO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2017",
+   "ValorBruto": "11.283,75",
+   "ValorLiquido": "8.425,24"
+  },
+  {
+   "NomeServidor": "PEDRO ANTONIO DONIZETE SILVA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR THIAGO BROCHI",
+   "DataAdmissao": "11/08/2017",
+   "ValorBruto": "13.077,05",
+   "ValorLiquido": "6.803,36"
+  },
+  {
+   "NomeServidor": "CARLOS ALEXANDRE VIANNA SOARES",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.663,97"
+  },
+  {
+   "NomeServidor": "CLAUDECI DA SILVA JUNIOR",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LUCAS LEONCINE",
+   "DataAdmissao": "18/04/2024",
+   "ValorBruto": "7.971,80",
+   "ValorLiquido": "5.996,79"
+  },
+  {
+   "NomeServidor": "SIMONE MACETI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA PROFESSORA JULIANA",
+   "DataAdmissao": "18/09/2020",
+   "ValorBruto": "9.557,47",
+   "ValorLiquido": "7.062,11"
+  },
+  {
+   "NomeServidor": "GABRIELLY ANTUNES DO NASCIMENTO PELEGRINO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR DR WAGNER ROVINA",
+   "DataAdmissao": "14/10/2021",
+   "ValorBruto": "9.466,45",
+   "ValorLiquido": "5.783,84"
+  },
+  {
+   "NomeServidor": "WLADEMIR APARECIDO DE CASTRO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR FERNANDO DA FARMACIA",
+   "DataAdmissao": "12/01/2021",
+   "ValorBruto": "9.557,47",
+   "ValorLiquido": "7.062,46"
+  },
+  {
+   "NomeServidor": "DANIELA DOS SANTOS CARDOSO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR PASTOR MIGUEL PIRES",
+   "DataAdmissao": "14/01/2021",
+   "ValorBruto": "9.557,47",
+   "ValorLiquido": "6.362,90"
+  },
+  {
+   "NomeServidor": "JORCELINO PINHEIRO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR MARCOS CAETANO",
+   "DataAdmissao": "14/01/2021",
+   "ValorBruto": "8.048,45",
+   "ValorLiquido": "6.012,47"
+  },
+  {
+   "NomeServidor": "JOSE MARCOS CAETANO PINTO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "3.982,40"
+  },
+  {
+   "NomeServidor": "LUCAS LEONCINE",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "5.747,71"
+  },
+  {
+   "NomeServidor": "CICERO BALEEIRO DE SOUZA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA LEONORA PERICO",
+   "DataAdmissao": "25/07/2025",
+   "ValorBruto": "7.971,80",
+   "ValorLiquido": "6.015,29"
+  },
+  {
+   "NomeServidor": "NILTON CARLOS THOMAZ DE LIMA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR FERNANDO DA FARMACIA",
+   "DataAdmissao": "21/01/2021",
+   "ValorBruto": "8.048,45",
+   "ValorLiquido": "5.995,50"
+  },
+  {
+   "NomeServidor": "FLAVIANE FELTRIM",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR PASTOR MIGUEL PIRES",
+   "DataAdmissao": "22/03/2022",
+   "ValorBruto": "7.971,81",
+   "ValorLiquido": "6.723,60"
+  },
+  {
+   "NomeServidor": "CLAUDIO GOMES DA SILVA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR DR WAGNER ROVINA",
+   "DataAdmissao": "23/09/2022",
+   "ValorBruto": "7.895,14",
+   "ValorLiquido": "5.895,89"
+  },
+  {
+   "NomeServidor": "ABNER RICARDO ASSIS DA SILVA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LECO",
+   "DataAdmissao": "02/06/2023",
+   "ValorBruto": "7.818,48",
+   "ValorLiquido": "4.018,80"
+  },
+  {
+   "NomeServidor": "DEBORA PESSOA COELHO FERREIRA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADORA LEONORA PERICO",
+   "DataAdmissao": "02/04/2026",
+   "ValorBruto": "2.262,45",
+   "ValorLiquido": "2.262,45"
+  },
+  {
+   "NomeServidor": "GABRIEL LIMA DA SILVA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR LEO DA PADARIA",
+   "DataAdmissao": "09/08/2023",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  },
+  {
+   "NomeServidor": "FLAVIO ANTONIO VICENTIN",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR THIAGO BROCHI",
+   "DataAdmissao": "11/10/2024",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "5.814,46"
+  },
+  {
+   "NomeServidor": "ANANDA DHARA LUCARELLI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA PROFESSORA JULIANA",
+   "DataAdmissao": "12/03/2024",
+   "ValorBruto": "7.818,48",
+   "ValorLiquido": "5.911,62"
+  },
+  {
+   "NomeServidor": "MARIANA PEROTO PENAQUIONE",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR LECO",
+   "DataAdmissao": "22/04/2024",
+   "ValorBruto": "3.432,81",
+   "ValorLiquido": "3.422,41"
+  },
+  {
+   "NomeServidor": "FELIPE THADEU CORREGIO",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR THIAGO BROCHI",
+   "DataAdmissao": "01/10/2024",
+   "ValorBruto": "2.534,15",
+   "ValorLiquido": "2.534,15"
+  },
+  {
+   "NomeServidor": "DEUZENI RIBEIRO DE OLIVEIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA TALITHA DE NADAI",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "5.792,87"
+  },
+  {
+   "NomeServidor": "JESSICA DOS SANTOS MENDES",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR RENAN DE ANGELO",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "7.741,84",
+   "ValorLiquido": "4.519,84"
+  },
+  {
+   "NomeServidor": "REGINALDO FAUSTINO ROSA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR JEAN MIZZONI",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "9.193,37",
+   "ValorLiquido": "4.681,62"
+  },
+  {
+   "NomeServidor": "PAULA LEME DE CAMARGO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUTÃO DO LANCHE",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "9.193,37",
+   "ValorLiquido": "6.741,53"
+  },
+  {
+   "NomeServidor": "JEAN CARLOS MIZZONI",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.932,77"
+  },
+  {
+   "NomeServidor": "SARAH MILLER DOS SANTOS",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEVI ROSSI",
+   "DataAdmissao": "27/02/2025",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "5.875,88"
+  },
+  {
+   "NomeServidor": "MURILO BARREIRA FERREIRA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR DR WAGNER ROVINA",
+   "DataAdmissao": "27/02/2025",
+   "ValorBruto": "2.509,45",
+   "ValorLiquido": "2.509,45"
+  },
+  {
+   "NomeServidor": "RONALDO DE OLIVEIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEO DA PADARIA",
+   "DataAdmissao": "25/04/2025",
+   "ValorBruto": "7.736,34",
+   "ValorLiquido": "5.913,71"
+  },
+  {
+   "NomeServidor": "HELOISE STEFANI DE ANDRADE",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR LUCAS LEONCINE",
+   "DataAdmissao": "02/04/2025",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  },
+  {
+   "NomeServidor": "GIOVANI ORTIZ ROSSI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA PROFESSORA JULIANA",
+   "DataAdmissao": "02/09/2025",
+   "ValorBruto": "7.665,18",
+   "ValorLiquido": "5.049,11"
+  },
+  {
+   "NomeServidor": "ARTHUR JORGE TREVISONI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA JACIRA CHÁVARE",
+   "DataAdmissao": "03/06/2025",
+   "ValorBruto": "9.102,35",
+   "ValorLiquido": "6.824,38"
+  },
+  {
+   "NomeServidor": "KAROLINE CELESTINO DA SILVA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR JUNINHO DIAS",
+   "DataAdmissao": "25/07/2025",
+   "ValorBruto": "7.665,18",
+   "ValorLiquido": "4.617,24"
+  },
+  {
+   "NomeServidor": "GUSTAVO HENRIQUE RIBEIRO",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR RENAN DE ANGELO",
+   "DataAdmissao": "15/08/2025",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  },
+  {
+   "NomeServidor": "MITSURI KOBANAWA ASSUMPÇÃO",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADORA LEONORA PERICO",
+   "DataAdmissao": "21/10/2025",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  },
+  {
+   "NomeServidor": "GABRIEL ANTONIO MALAGUTTI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR DR WAGNER ROVINA",
+   "DataAdmissao": "06/02/2026",
+   "ValorBruto": "7.665,18",
+   "ValorLiquido": "5.818,86"
+  },
+  {
+   "NomeServidor": "NATALIA MENDES DA SILVA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADORA ROBERTA LIMA",
+   "DataAdmissao": "01/11/2025",
+   "ValorBruto": "1.533,36",
+   "ValorLiquido": "1.458,57"
+  },
+  {
+   "NomeServidor": "ANA KELLY MIRANDA ROCHA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA ROBERTA LIMA",
+   "DataAdmissao": "02/12/2025",
+   "ValorBruto": "7.665,18",
+   "ValorLiquido": "5.816,05"
+  },
+  {
+   "NomeServidor": "EDUARDO PEDRO DA SILVA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUTÃO DO LANCHE",
+   "DataAdmissao": "23/01/2026",
+   "ValorBruto": "7.665,18",
+   "ValorLiquido": "5.792,77"
+  },
+  {
+   "NomeServidor": "LORRAINE CAMARGO DE BARROS",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA ROBERTA LIMA",
+   "DataAdmissao": "20/03/2026",
+   "ValorBruto": "7.328,69",
+   "ValorLiquido": "5.631,75"
+  },
+  {
+   "NomeServidor": "CEZAR POLIDORO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUTÃO DO LANCHE",
+   "DataAdmissao": "23/01/2026",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "4.281,15"
+  },
+  {
+   "NomeServidor": "DAVI EVANGELISTA DE OLIVEIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEVI ROSSI",
+   "DataAdmissao": "21/01/2015",
+   "ValorBruto": "11.625,53",
+   "ValorLiquido": "9.943,22"
+  },
+  {
+   "NomeServidor": "OSVALDO GOMES SOBREIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR MARCOS CAETANO",
+   "DataAdmissao": "18/01/2021",
+   "ValorBruto": "8.732,82",
+   "ValorLiquido": "6.462,88"
+  },
+  {
+   "NomeServidor": "LEONORA DA SILVA PERICO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.306,97"
+  },
+  {
+   "NomeServidor": "THIAGO LUIS DE OLIVEIRA BROCHI",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2017",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.716,11"
+  },
+  {
+   "NomeServidor": "PATRICIA VERGINIA RIBEIRO BORTOLOTO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA LEONORA PERICO",
+   "DataAdmissao": "14/01/2025",
+   "ValorBruto": "8.048,45",
+   "ValorLiquido": "6.095,91"
+  },
+  {
+   "NomeServidor": "MARCIO ROGERIO JOAQUIM DE SOUZA",
+   "Cargo": "SECRETARIO GABIN PRESIDENCIA",
+   "DescrLotacao": "GABINETE DA PRESIDÊNCIA",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "21.196,72",
+   "ValorLiquido": "15.579,83"
+  },
+  {
+   "NomeServidor": "NATALIA PAULA MENDES",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR PASTOR MIGUEL PIRES",
+   "DataAdmissao": "10/10/2014",
+   "ValorBruto": "8.508,36",
+   "ValorLiquido": "5.862,04"
+  },
+  {
+   "NomeServidor": "FRANCIELI ZAMBONINI CONTRIGIANI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR JEAN MIZZONI",
+   "DataAdmissao": "21/01/2026",
+   "ValorBruto": "8.278,40",
+   "ValorLiquido": "6.179,92"
+  },
+  {
+   "NomeServidor": "ENEDIR VIEIRA DE OLIVEIRA PEREIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA TALITHA DE NADAI",
+   "DataAdmissao": "06/06/2025",
+   "ValorBruto": "8.125,10",
+   "ValorLiquido": "6.031,83"
+  },
+  {
+   "NomeServidor": "ARLETE ANTONIA CAETANO SCARAMAL",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA LEONORA PERICO",
+   "DataAdmissao": "15/01/2021",
+   "ValorBruto": "9.557,47",
+   "ValorLiquido": "6.992,42"
+  },
+  {
+   "NomeServidor": "BRUNO HENRIQUE DOS SANTOS",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LUCAS LEONCINE",
+   "DataAdmissao": "14/02/2025",
+   "ValorBruto": "8.278,40",
+   "ValorLiquido": "6.198,39"
+  },
+  {
+   "NomeServidor": "GILSON POLIZELLI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEO DA PADARIA",
+   "DataAdmissao": "02/01/2017",
+   "ValorBruto": "9.921,57",
+   "ValorLiquido": "7.339,70"
+  },
+  {
+   "NomeServidor": "MIKE WILLIAN UCHOA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LECO",
+   "DataAdmissao": "11/06/2019",
+   "ValorBruto": "9.830,54",
+   "ValorLiquido": "7.403,71"
+  },
+  {
+   "NomeServidor": "PAULO EDUARDO DIAS JUNIOR",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2017",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.065,78"
+  },
+  {
+   "NomeServidor": "GUALTER DE ALMEIDA AMADO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2017",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.716,11"
+  },
+  {
+   "NomeServidor": "RAFAEL CAMILLO PAES DIAS",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR JUNINHO DIAS",
+   "DataAdmissao": "04/07/2025",
+   "ValorBruto": "9.375,42",
+   "ValorLiquido": "5.868,77"
+  },
+  {
+   "NomeServidor": "ARIEL THIAGO FERREIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA JACIRA CHÁVARE",
+   "DataAdmissao": "21/01/2026",
+   "ValorBruto": "8.355,06",
+   "ValorLiquido": "6.282,26"
+  },
+  {
+   "NomeServidor": "RENAN DE ANGELO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.663,97"
+  },
+  {
+   "NomeServidor": "MIKAEL LIMA DOS SANTOS",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR GUALTER AMADO",
+   "DataAdmissao": "16/01/2023",
+   "ValorBruto": "7.895,14",
+   "ValorLiquido": "5.964,94"
+  },
+  {
+   "NomeServidor": "LUAN ALVES LIMA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEO DA PADARIA",
+   "DataAdmissao": "02/03/2021",
+   "ValorBruto": "8.048,45",
+   "ValorLiquido": "6.323,58"
+  },
+  {
+   "NomeServidor": "JULIANA SOARES DO NASCIMENTO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.642,80"
+  },
+  {
+   "NomeServidor": "GABRIEL GERMANO BENENCASE",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LUCAS LEONCINE",
+   "DataAdmissao": "12/01/2021",
+   "ValorBruto": "9.557,47",
+   "ValorLiquido": "5.105,05"
+  },
+  {
+   "NomeServidor": "FERNANDO MORENO RUGANI",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.828,50"
+  },
+  {
+   "NomeServidor": "MIGUEL CARLOS PIRES",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "5.001,13"
+  },
+  {
+   "NomeServidor": "WAGNER WILIAN ROVINA",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2021",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.663,97"
+  },
+  {
+   "NomeServidor": "VITORIA LETICIA DO CARMO DA COSTA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR THIAGO BROCHI",
+   "DataAdmissao": "17/01/2023",
+   "ValorBruto": "7.895,14",
+   "ValorLiquido": "4.692,58"
+  },
+  {
+   "NomeServidor": "RENATA FRESNEDA RIESTERER",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR MARCOS CAETANO",
+   "DataAdmissao": "18/02/2021",
+   "ValorBruto": "10.013,83",
+   "ValorLiquido": "8.498,37"
+  },
+  {
+   "NomeServidor": "WESLEY MAGRI",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADORA JACIRA CHÁVARE",
+   "DataAdmissao": "21/01/2026",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "5.843,77"
+  },
+  {
+   "NomeServidor": "GABRIEL IZIDIO LIBANORI",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR PASTOR MIGUEL PIRES",
+   "DataAdmissao": "13/05/2024",
+   "ValorBruto": "2.374,25",
+   "ValorLiquido": "2.374,25"
+  },
+  {
+   "NomeServidor": "HEBER CAPARROS PEQUENO",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR RENAN DE ANGELO",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "9.193,37",
+   "ValorLiquido": "6.757,64"
+  },
+  {
+   "NomeServidor": "JAMIL CARLOS DE SOUSA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR RENAN DE ANGELO",
+   "DataAdmissao": "10/01/2025",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "6.290,54"
+  },
+  {
+   "NomeServidor": "JACIRA MANEO",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.663,97"
+  },
+  {
+   "NomeServidor": "ROBERTA DIAS LIMA",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.663,97"
+  },
+  {
+   "NomeServidor": "TALITHA DE NADAI",
+   "Cargo": "VEREADOR",
+   "DescrLotacao": "GESTÃO DE PESSOAS",
+   "DataAdmissao": "01/01/2025",
+   "ValorBruto": "10.305,64",
+   "ValorLiquido": "7.716,11"
+  },
+  {
+   "NomeServidor": "THAIS FERNANDES DE AGUIAR",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR FERNANDO DA FARMACIA",
+   "DataAdmissao": "16/01/2025",
+   "ValorBruto": "7.741,83",
+   "ValorLiquido": "5.866,65"
+  },
+  {
+   "NomeServidor": "JOSIANE SAMARA POLATTO DA SILVA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADORA JACIRA CHÁVARE",
+   "DataAdmissao": "14/01/2025",
+   "ValorBruto": "2.509,45",
+   "ValorLiquido": "2.509,45"
+  },
+  {
+   "NomeServidor": "NICOLLY BEATRIZ DADDERIO SOBRINHO",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR GUALTER AMADO",
+   "DataAdmissao": "30/01/2025",
+   "ValorBruto": "2.047,07",
+   "ValorLiquido": "2.047,07"
+  },
+  {
+   "NomeServidor": "BEATHRIZ CAMARA RODRIGO",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR JEAN MIZZONI",
+   "DataAdmissao": "05/02/2025",
+   "ValorBruto": "2.314,36",
+   "ValorLiquido": "2.314,36"
+  },
+  {
+   "NomeServidor": "MARCOS ROBERTO FERREIRA",
+   "Cargo": "ASSESSOR DE GABINETE",
+   "DescrLotacao": "GABINETE VEREADOR LEVI ROSSI",
+   "DataAdmissao": "27/02/2025",
+   "ValorBruto": "9.193,37",
+   "ValorLiquido": "6.792,97"
+  },
+  {
+   "NomeServidor": "GUSTAVO HENRIQUE TOZZI",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADORA TALITHA DE NADAI",
+   "DataAdmissao": "24/06/2025",
+   "ValorBruto": "2.509,45",
+   "ValorLiquido": "2.509,45"
+  },
+  {
+   "NomeServidor": "EMANUEL DE ARAUJO GODOY TEIXEIRA",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR LEVI ROSSI",
+   "DataAdmissao": "30/06/2025",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  },
+  {
+   "NomeServidor": "DEBORA BARBOSA BALAN",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR FERNANDO DA FARMACIA",
+   "DataAdmissao": "26/11/2025",
+   "ValorBruto": "2.536,66",
+   "ValorLiquido": "2.536,66"
+  },
+  {
+   "NomeServidor": "GUILHERME AUGUSTO MORENO ALCARAZ",
+   "Cargo": "ESTAGIARIO",
+   "DescrLotacao": "GABINETE VEREADOR MARCOS CAETANO",
+   "DataAdmissao": "02/03/2026",
+   "ValorBruto": "2.278,26",
+   "ValorLiquido": "2.278,26"
+  }
+ ]
+}

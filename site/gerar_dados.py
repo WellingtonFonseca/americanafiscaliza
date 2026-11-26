@@ -193,15 +193,42 @@ def ler_gabinete(txt):
     linhas = txt.splitlines()
     itens = []
     lim_txt = txt.split("LIMITE MENSAL", 1)[1] if "LIMITE MENSAL" in txt else ""
+    cab = next((l for l in linhas if "Janeiro" in l and "Dezembro" in l), "")
     for rx, rot, uni, chave_lim in ITENS_GABINETE:
         linha = next((l for l in linhas if re.match(r"\s*" + rx, l, re.I) and "=" not in l), None)
         if linha is None:
             continue
         total = linha.split()[-1]
         lim = re.search(r"(?im)^.*" + chave_lim + r".*=\s*([\d.]+)", lim_txt)
-        itens.append({"item": rot, "unidade": uni, "total": numero_br(total) if re.fullmatch(r"[\d.,-]+", total) else 0.0,
-                      "limite_mensal": numero_br(lim.group(1)) if lim else None})
+        tot = numero_br(total) if re.fullmatch(r"[\d.,-]+", total) else 0.0
+        itens.append({"item": rot, "unidade": uni, "total": tot,
+                      "limite_mensal": numero_br(lim.group(1)) if lim else None,
+                      "meses": gabinete_por_mes(cab, linha, rx, tot)})
     return {"ano": titulo.group(1) if titulo else "", "nome_pdf": nome.group(1).strip() if nome else "", "itens": itens}
+
+
+MESES_CAB = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
+
+def gabinete_por_mes(cab, linha, rx, total):
+    """Põe cada número da linha no mês cujo título está mais perto (pela coluna no texto
+    do PDF). Só aceita se a soma dos meses bater com o Total impresso; senão devolve None."""
+    if not cab:
+        return None
+    centros = [(m.start() + m.end()) / 2 for m in (re.search(r"\b" + n + r"\b", cab) for n in MESES_CAB) if m]
+    if len(centros) != 12:
+        return None
+    ini = re.match(r"\s*" + rx + r"\S*", linha, re.I).end()
+    nums = [(m.start(), m.end(), m.group()) for m in re.finditer(r"\d[\d.,]*", linha[ini:])]
+    if not nums:
+        return [0.0] * 12 if total == 0 else None
+    nums = nums[:-1]  # o último é a coluna Total
+    meses = [0.0] * 12
+    for a, b, t in nums:
+        c = ini + (a + b) / 2
+        i = min(range(12), key=lambda k: abs(centros[k] - c))
+        meses[i] += numero_br(t)
+    return [round(x, 2) for x in meses]
 
 
 # ---------------------------------------------------------------- emendas impositivas
@@ -353,26 +380,31 @@ def main():
             else:
                 verif["avisos"].append(f"Relatório de gabinete “{a['nome_na_lista']}” não foi ligado a um único vereador.")
         checar(len(gab_por_slug) == len(vereadores), f"Relatórios de gastos de gabinete ligados a {len(gab_por_slug)} de {len(vereadores)} vereadores")
+        checar(all(i["meses"] is not None for g in gab_por_slug.values() for i in g["itens"]),
+               "Gastos de gabinete mês a mês: todas as linhas dos relatórios foram lidas")
+        for slug_, g in gab_por_slug.items():
+            for i in g["itens"]:
+                if i["meses"] is not None and abs(sum(i["meses"]) - i["total"]) >= 0.01:
+                    i["soma_difere"] = True
+                    verif["avisos"].append(f"Gabinete {slug_}: em {i['item']}, a soma dos meses ({sum(i['meses']):.2f}) não bate com o Total impresso no PDF ({i['total']:.2f}). O site mostra os dois.")
         checar(all(len(g["itens"]) == len(ITENS_GABINETE) for g in gab_por_slug.values()), "Todos os relatórios de gabinete têm as 5 linhas esperadas (correspondências, cópias, telefone fixo, celular, combustível)")
 
-    # ---------------- folha do mês (Portal da Transparência): vereador e equipe do gabinete
-    folha_por_slug, folha_info = {}, None
-    arq_f = os.path.join(DADOS, "portal", "folha.json")
-    if os.path.exists(arq_f):
-        F = json.load(open(arq_f, encoding="utf-8"))
-        folha_info = {k: F[k] for k in ("fonte", "ano", "mes", "coletado_em")}
-        vazio = {"da", "de", "do", "dos", "das", "e", "dr", "pr", "vereador", "vereadora", "gabinete"}
+    # ---------------- folha por mês (Portal da Transparência): vereador e equipe do gabinete
+    folha_por_slug, folha_info, folha_meses, meses_folha, sem_pag = {}, None, {}, [], {}
+    vazio = {"da", "de", "do", "dos", "das", "e", "dr", "pr", "vereador", "vereadora", "gabinete"}
 
-        def toks(x):
-            return set(chave_nome(x).split()) - vazio
+    def toks(x):
+        return set(chave_nome(x).split()) - vazio
 
-        def achar(texto, campo):
-            t = toks(texto)
-            pont = sorted(((len(t & toks(campo(v))), v["slug"]) for v in vereadores), reverse=True)
-            if pont[0][0] >= 1 and pont[0][0] > pont[1][0]:
-                return pont[0][1]
-            return None
-        nao_ligados = []
+    def achar(texto, campo):
+        t = toks(texto)
+        pont = sorted(((len(t & toks(campo(v))), v["slug"]) for v in vereadores), reverse=True)
+        if pont[0][0] >= 1 and pont[0][0] > pont[1][0]:
+            return pont[0][1]
+        return None
+
+    def ler_folha(F):
+        fs_mes, nao_ligados, fracas = {}, [], []
         for x in F["linhas"]:
             reg = {"nome": x["NomeServidor"].strip(), "cargo": x["Cargo"].strip().capitalize(),
                    "bruto": numero_br(x["ValorBruto"] or "0"), "liquido": numero_br(x["ValorLiquido"] or "0"),
@@ -390,25 +422,56 @@ def main():
             if not slug:
                 nao_ligados.append(f"{lot or reg['nome']} ({reg['cargo']})")
                 continue
-            d = folha_por_slug.setdefault(slug, {"vereador": None, "equipe": []})
+            d = fs_mes.setdefault(slug, {"vereador": None, "equipe": []})
             if papel == "vereador":
-                d["vereador"] = reg
+                if d["vereador"]:  # dois pagamentos no mesmo mês (ex.: 13º): soma
+                    d["vereador"] = {**d["vereador"], "bruto": round(d["vereador"]["bruto"] + reg["bruto"], 2),
+                                     "liquido": round(d["vereador"]["liquido"] + reg["liquido"], 2)}
+                else:
+                    d["vereador"] = reg
                 v_ = next(v for v in vereadores if v["slug"] == slug)
                 if len(toks(reg["nome"]) & toks(v_["nome"] + " " + v_["apelido"])) < 2:
-                    reg["ligacao_fraca"] = True
-                    verif["avisos"].append(f"Folha: “{reg['nome']}” (cargo vereador) foi ligado a {v_['apelido']} só por uma parte do nome. Conferir.")
+                    d["vereador"]["ligacao_fraca"] = True
+                    fracas.append(f"“{reg['nome']}” (cargo vereador) foi ligado a {v_['apelido']} só por uma parte do nome")
             else:
                 d["equipe"].append(reg)
-        for d in folha_por_slug.values():
+        for d in fs_mes.values():
             d["equipe"].sort(key=lambda r: -r["bruto"])
             d["total_equipe"] = round(sum(r["bruto"] for r in d["equipe"]), 2)
-        sem_subsidio = [v["apelido"] for v in vereadores if not (folha_por_slug.get(v["slug"]) or {}).get("vereador")]
-        if sem_subsidio:
-            verif["avisos"].append(f"Folha de {F['mes'].lower()}/{F['ano']}: não encontramos o pagamento de {', '.join(sem_subsidio)} como vereador. O site mostra “não encontrado”, sem adivinhar.")
-        if nao_ligados:
-            verif["avisos"].append(f"Folha: linhas de gabinete que não ligamos a nenhum vereador: {'; '.join(nao_ligados)}.")
-        checar(len([1 for d in folha_por_slug.values() if d["equipe"]]) == len(vereadores),
-               f"Folha de {F['mes'].lower()}/{F['ano']}: equipe de gabinete encontrada para {len([1 for d in folha_por_slug.values() if d['equipe']])} de {len(vereadores)} vereadores")
+        return fs_mes, sorted(set(nao_ligados)), sorted(set(fracas))
+
+    pasta_p = os.path.join(DADOS, "portal")
+    arqs_f = sorted(f for f in os.listdir(pasta_p) if re.fullmatch(r"folha-\d{4}-\d{2}\.json", f)) if os.path.isdir(pasta_p) else []
+    for i, nome_arq in enumerate(arqs_f):
+        F = json.load(open(os.path.join(pasta_p, nome_arq), encoding="utf-8"))
+        chave = nome_arq[6:13]
+        fs_mes, nao_ligados, fracas = ler_folha(F)
+        for slug, d in fs_mes.items():
+            folha_meses.setdefault(slug, {})[chave] = d
+        meses_folha.append(chave)
+        ultimo = i == len(arqs_f) - 1
+        rot = f"{F['mes'].lower()}/{F['ano']}"
+        sem_subsidio = [v["apelido"] for v in vereadores if not (fs_mes.get(v["slug"]) or {}).get("vereador")]
+        if ultimo:
+            folha_por_slug = fs_mes
+            folha_info = {k: F[k] for k in ("fonte", "ano", "mes", "coletado_em")}
+            for t in fracas:
+                verif["avisos"].append(f"Folha: {t}. Conferir.")
+            if nao_ligados:
+                verif["avisos"].append(f"Folha de {rot}: linhas de gabinete que não ligamos a nenhum vereador: {'; '.join(nao_ligados)}.")
+            checar(len([1 for d in fs_mes.values() if d["equipe"]]) == len(vereadores),
+                   f"Folha de {rot}: equipe de gabinete encontrada para {len([1 for d in fs_mes.values() if d['equipe']])} de {len(vereadores)} vereadores")
+        for nome_v in sem_subsidio:
+            sem_pag.setdefault(nome_v, []).append(chave)
+    for nome_v, ms in sem_pag.items():
+        verif["avisos"].append(f"Folha: não encontramos o pagamento de {nome_v} como vereador em {len(ms)} de {len(meses_folha)} meses ({ms[0]} a {ms[-1]}). O site mostra “não encontrado”, sem adivinhar.")
+    if meses_folha:
+        esperado = []
+        a_, m_ = int(meses_folha[0][:4]), int(meses_folha[0][5:])
+        while f"{a_}-{m_:02d}" <= meses_folha[-1]:
+            esperado.append(f"{a_}-{m_:02d}"); a_, m_ = (a_, m_ + 1) if m_ < 12 else (a_ + 1, 1)
+        checar(meses_folha == esperado and meses_folha[0] == INICIO_MANDATO[:7],
+               f"Folha mês a mês sem buracos de {meses_folha[0]} a {meses_folha[-1]} ({len(meses_folha)} meses)")
 
     # ---------------- emendas impositivas (Anexo Especial da LOA aprovada)
     emendas_por_slug, emendas_info = {}, []
@@ -475,6 +538,7 @@ def main():
                  "total_todos_anos": p["total_todos_anos"] if p else None,
                  "grupos": grupos, "presenca": pres, "votos": votos, "gabinete": gab_por_slug.get(slug),
                  "folha": folha_por_slug.get(slug), "folha_info": folha_info,
+                 "folha_meses": folha_meses.get(slug, {}),
                  "emendas": emendas_por_slug.get(slug, {}), "emendas_info": emendas_info,
                  "fonte_propostas": f"{SISCAM}/Vereadores/Proposituras/{v['siscam_id']}"}
         json.dump(ficha, open(os.path.join(SAIDA, f"vereador-{slug}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
@@ -509,7 +573,7 @@ def main():
         "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO,
         "grupos": GRUPOS, "regras": CLASSIFICACAO_REGRAS, "assuntos_pedido": [a for a, _ in ASSUNTOS_PEDIDO] + ["Outros pedidos"],
         "vereadores": sorted(resumo_v, key=lambda x: sem_acento(x["apelido"])),
-        "slugs": slugs, "sessoes": sessoes_pub, "folha_info": folha_info, "emendas_info": emendas_info,
+        "slugs": slugs, "sessoes": sessoes_pub, "folha_info": folha_info, "meses_folha": meses_folha, "emendas_info": emendas_info,
         "gabinete_ano": next((g["ano"] for g in gab_por_slug.values()), ""),
         "periodo_sessoes": [sessoes[0]["data"], sessoes[-1]["data"]] if sessoes else None,
         "propostas_completas": all(por_slug.values()),

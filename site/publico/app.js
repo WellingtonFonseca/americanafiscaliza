@@ -85,7 +85,7 @@ function cartao(slugV, g, itens, fonte, parcial) {
 
 const ABAS = [["gastos", "Gastos"], ["propostas", "Propostas"], ["presenca", "Presença"], ["votos", "Votos"]];
 
-async function telaVereador(slug, aba) {
+async function telaVereador(slug, aba, mes) {
   if (!ABAS.some(([k]) => k === aba)) aba = "gastos";
   const v = vereador(slug);
   if (!v) return `<p>Vereador não encontrado. <a href="#/">Voltar</a></p>`;
@@ -128,14 +128,12 @@ async function telaVereador(slug, aba) {
     </div>
 
     <section class="painel" data-painel="gastos"${aba === "gastos" ? "" : " hidden"}>
-    <h2>Salário e equipe do gabinete</h2>
-    ${secaoFolha(f)}
-
-    <h2>Emendas impositivas</h2>
+    <h2>Anual</h2>
+    <h3>Emendas impositivas</h3>
     ${secaoEmendas(f)}
 
-    <h2>Gastos do gabinete</h2>
-    ${secaoGabinete(f)}
+    <h2>Mensal</h2>
+    ${seletorMes(f, mes)}
     </section>
 
     <section class="painel" data-painel="propostas"${aba === "propostas" ? "" : " hidden"}>
@@ -168,19 +166,32 @@ async function telaVereador(slug, aba) {
 const MESES_PT = { JANEIRO: "janeiro", FEVEREIRO: "fevereiro", MARCO: "março", ABRIL: "abril", MAIO: "maio", JUNHO: "junho", JULHO: "julho", AGOSTO: "agosto", SETEMBRO: "setembro", OUTUBRO: "outubro", NOVEMBRO: "novembro", DEZEMBRO: "dezembro" };
 const reais = (x) => Number(x).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-function secaoFolha(f) {
-  const i = f.folha_info;
-  if (!i) return `<p class="suave">A folha de pagamento ainda não foi baixada.</p>`;
-  const mes = `${MESES_PT[i.mes] || i.mes}/${i.ano}`;
-  const d = f.folha || { vereador: null, equipe: [], total_equipe: 0 };
+const MESES_NOMES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+const nomeMes = (k) => `${MESES_NOMES[+k.slice(5) - 1]}/${k.slice(0, 4)}`;
+
+function seletorMes(f, mes) {
+  const meses = (R.meses_folha || []).slice().reverse();
+  if (!meses.length) return `<p class="suave">A folha de pagamento ainda não foi baixada.</p>`;
+  if (!meses.includes(mes)) mes = meses[0];
+  return `<label class="seletor">Mês <select id="mes-gasto">${meses.map((k) => `<option value="${k}"${k === mes ? " selected" : ""}>${nomeMes(k)}</option>`).join("")}</select></label>
+    <div id="painel-mes">${secaoMes(f, mes)}</div>`;
+}
+
+function secaoMes(f, k) {
+  const mes = nomeMes(k);
+  const fonte = (f.folha_info || {}).fonte;
+  const d = (f.folha_meses || {})[k] || { vereador: null, equipe: [], total_equipe: 0 };
   const ver = d.vereador
-    ? `<div class="numero"><b>${reais(d.vereador.bruto)}</b><span>salário bruto do vereador em ${mes}</span><small>Líquido: ${reais(d.vereador.liquido)}. Nome na folha: ${$(d.vereador.nome)}${d.vereador.ligacao_fraca ? " (ligado a este vereador só pelo primeiro nome; confira no portal)" : ""}.</small><small>${ext(i.fonte, "Conferir no Portal da Transparência")}</small></div>`
-    : `<div class="numero"><b>—</b><span>salário do vereador em ${mes}</span><small>Não encontramos o pagamento deste vereador na folha desse mês. Pode ter havido licença ou mudança; confira no portal.</small><small>${ext(i.fonte, "Portal da Transparência")}</small></div>`;
-  const eq = `<div class="numero"><b>${reais(d.total_equipe)}</b><span>pagos em ${mes} à equipe do gabinete (${d.equipe.length} ${d.equipe.length === 1 ? "pessoa" : "pessoas"})</span><small>Soma dos salários brutos de quem está lotado no gabinete.</small><small>${ext(i.fonte, "Conferir no Portal da Transparência")}</small></div>`;
+    ? `<div class="numero"><b>${reais(d.vereador.bruto)}</b><span>salário bruto do vereador em ${mes}</span><small>Líquido: ${reais(d.vereador.liquido)}. Nome na folha: ${$(d.vereador.nome)}${d.vereador.ligacao_fraca ? " (ligado a este vereador só pelo primeiro nome; confira no portal)" : ""}.</small><small>${ext(fonte, "Conferir no Portal da Transparência")}</small></div>`
+    : `<div class="numero"><b>—</b><span>salário do vereador em ${mes}</span><small>Não encontramos o pagamento deste vereador na folha desse mês. Pode ter havido licença ou mudança; confira no portal.</small><small>${ext(fonte, "Portal da Transparência")}</small></div>`;
+  const eq = `<div class="numero"><b>${reais(d.total_equipe)}</b><span>pagos em ${mes} à equipe do gabinete (${d.equipe.length} ${d.equipe.length === 1 ? "pessoa" : "pessoas"})</span><small>Soma dos salários brutos de quem está lotado no gabinete.</small><small>${ext(fonte, "Conferir no Portal da Transparência")}</small></div>`;
   const linhas = d.equipe.map((r) => `<tr><td>${$(r.nome)}</td><td>${$(r.cargo)}</td><td style="white-space:nowrap">${reais(r.bruto)}</td></tr>`).join("");
-  return `<div class="numeros um">${ver}${eq}</div>
-    ${d.equipe.length ? `<h3>Quem trabalha no gabinete</h3><table><tr><th>Nome</th><th>Cargo</th><th>Bruto em ${mes}</th></tr>${linhas}</table>` : ""}
-    <p class="suave">Dados da folha de pagamento publicada pela Câmara no Portal da Transparência (${mes}, último mês fechado). O valor bruto é o do portal e pode incluir férias ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</p>`;
+  return `<h3>Salário e equipe do gabinete</h3>
+    <div class="numeros um">${ver}${eq}</div>
+    ${d.equipe.length ? `<h3>Quem trabalha no gabinete</h3><table><tr><th>Nome</th><th>Cargo</th><th>Bruto</th></tr>${linhas}</table>` : ""}
+    <p class="suave">Folha de pagamento publicada pela Câmara no Portal da Transparência. O valor bruto é o do portal e pode incluir férias, 13º ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</p>
+    <h3>Gastos do gabinete</h3>
+    ${secaoGabineteMes(f, k)}`;
 }
 
 function secaoEmendas(f) {
@@ -198,14 +209,20 @@ function secaoEmendas(f) {
   }).join("");
 }
 
-function secaoGabinete(f) {
+function secaoGabineteMes(f, k) {
   const g = f.gabinete;
   if (!g) return `<p class="suave">O relatório de gastos de gabinete deste vereador não foi encontrado no site da Câmara.</p>`;
+  if (g.ano !== k.slice(0, 4)) return `<p class="suave">A Câmara só publica no site o relatório do ano corrente (${$(g.ano)}). Para ${nomeMes(k)} não há relatório disponível. ${ext(g.fonte, "Ver a lista de relatórios")}</p>`;
+  const m = +k.slice(5) - 1;
   const fmt = (x) => Number(x).toLocaleString("pt-BR", { maximumFractionDigits: 2 });
-  const linhas = g.itens.map((i) => `<tr><th>${$(i.item)}</th><td>${i.total ? fmt(i.total) + " " + $(i.unidade) : "nada registrado"}</td><td class="suave">${i.limite_mensal ? "até " + fmt(i.limite_mensal) + " por mês" : ""}</td></tr>`).join("");
-  return `<p>O que o gabinete usou em ${$(g.ano)}, segundo o relatório oficial da Câmara. ${ext(g.pdf, "Ver o relatório (PDF)")}</p>
-    <table><tr><th>Item</th><th>Total no ano</th><th>Limite</th></tr>${linhas}</table>
-    <p class="suave">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. O total é o que está impresso no relatório, que vai até o último mês que a Câmara publicou. Lista de todos os relatórios: ${ext(g.fonte, "Gastos com Gabinete")}.</p>`;
+  const linhas = g.itens.map((i) => {
+    const v = i.meses ? i.meses[m] : null;
+    return `<tr><th>${$(i.item)}</th><td>${v == null ? "não foi possível ler" : v ? fmt(v) + " " + $(i.unidade) : "nada registrado"}</td><td class="suave">${i.limite_mensal ? "até " + fmt(i.limite_mensal) : ""}</td><td class="suave">${fmt(i.total)}${i.soma_difere ? "*" : ""}</td></tr>`;
+  }).join("");
+  const difere = g.itens.some((i) => i.soma_difere);
+  return `<table><tr><th>Item</th><th>Em ${nomeMes(k)}</th><th>Limite por mês</th><th>No ano</th></tr>${linhas}</table>
+    ${difere ? `<p class="suave">* Neste item, o total do ano impresso no relatório da Câmara não é igual à soma dos meses do próprio relatório. Mostramos os números como a Câmara publicou. Confira no PDF.</p>` : ""}
+    <p class="suave">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. Um mês sem número pode ainda não ter sido lançado. ${ext(g.pdf, "Ver o relatório (PDF)")}</p>`;
 }
 
 function itemVoto(x) {
@@ -412,7 +429,7 @@ async function rota() {
     if (!R) R = await carregar("resumo.json");
     let html;
     if (partes[0] === "v" && partes[2]) html = await telaGrupo(partes[1], partes[2]);
-    else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"));
+    else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"), new URLSearchParams(qs || "").get("mes"));
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
@@ -424,6 +441,12 @@ async function rota() {
       document.querySelectorAll(".painel").forEach((p) => { p.hidden = p.dataset.painel !== t.dataset.aba; });
       history.replaceState(null, "", `#/v/${partes[1]}?aba=${t.dataset.aba}`);
     });
+    const sel = document.getElementById("mes-gasto");
+    if (sel) sel.onchange = async () => {
+      const f = await carregar(`vereador-${partes[1]}.json`);
+      document.getElementById("painel-mes").innerHTML = secaoMes(f, sel.value);
+      history.replaceState(null, "", `#/v/${partes[1]}?aba=gastos&mes=${sel.value}`);
+    };
     const b = document.getElementById("mais-votos");
     if (b) b.onclick = async () => { const f = await carregar(`vereador-${partes[1]}.json`); document.getElementById("votos").innerHTML = f.votos.slice().reverse().map(itemVoto).join(""); b.remove(); };
     document.getElementById("atualizado").textContent = `Dados atualizados em ${new Date(R.gerado_em).toLocaleDateString("pt-BR")}.`;
