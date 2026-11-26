@@ -328,6 +328,61 @@ def main():
         checar(len(gab_por_slug) == len(vereadores), f"Relatórios de gastos de gabinete ligados a {len(gab_por_slug)} de {len(vereadores)} vereadores")
         checar(all(len(g["itens"]) == len(ITENS_GABINETE) for g in gab_por_slug.values()), "Todos os relatórios de gabinete têm as 5 linhas esperadas (correspondências, cópias, telefone fixo, celular, combustível)")
 
+    # ---------------- folha do mês (Portal da Transparência): vereador e equipe do gabinete
+    folha_por_slug, folha_info = {}, None
+    arq_f = os.path.join(DADOS, "portal", "folha.json")
+    if os.path.exists(arq_f):
+        F = json.load(open(arq_f, encoding="utf-8"))
+        folha_info = {k: F[k] for k in ("fonte", "ano", "mes", "coletado_em")}
+        vazio = {"da", "de", "do", "dos", "das", "e", "dr", "pr", "vereador", "vereadora", "gabinete"}
+
+        def toks(x):
+            return set(chave_nome(x).split()) - vazio
+
+        def achar(texto, campo):
+            t = toks(texto)
+            pont = sorted(((len(t & toks(campo(v))), v["slug"]) for v in vereadores), reverse=True)
+            if pont[0][0] >= 1 and pont[0][0] > pont[1][0]:
+                return pont[0][1]
+            return None
+        nao_ligados = []
+        for x in F["linhas"]:
+            reg = {"nome": x["NomeServidor"].strip(), "cargo": x["Cargo"].strip().capitalize(),
+                   "bruto": numero_br(x["ValorBruto"] or "0"), "liquido": numero_br(x["ValorLiquido"] or "0"),
+                   "admissao": (x.get("DataAdmissao") or "")[:10]}
+            lot = (x["DescrLotacao"] or "").strip()
+            if x["Cargo"].strip().upper() == "VEREADOR":
+                slug = achar(reg["nome"], lambda v: v["nome"] + " " + v["apelido"])
+                papel = "vereador"
+            elif re.match(r"GABINETE (VEREADOR|VEREADORA|[A-Z])", lot) and "PRESID" not in lot:
+                slug = achar(re.sub(r"^GABINETE\s+(VEREADORA?\s+)?", "", lot), lambda v: v["apelido"] + " " + v["nome"])
+                papel = "equipe"
+            else:
+                nao_ligados.append(f"{lot} ({reg['cargo']})")
+                continue
+            if not slug:
+                nao_ligados.append(f"{lot or reg['nome']} ({reg['cargo']})")
+                continue
+            d = folha_por_slug.setdefault(slug, {"vereador": None, "equipe": []})
+            if papel == "vereador":
+                d["vereador"] = reg
+                v_ = next(v for v in vereadores if v["slug"] == slug)
+                if len(toks(reg["nome"]) & toks(v_["nome"] + " " + v_["apelido"])) < 2:
+                    reg["ligacao_fraca"] = True
+                    verif["avisos"].append(f"Folha: “{reg['nome']}” (cargo vereador) foi ligado a {v_['apelido']} só por uma parte do nome. Conferir.")
+            else:
+                d["equipe"].append(reg)
+        for d in folha_por_slug.values():
+            d["equipe"].sort(key=lambda r: -r["bruto"])
+            d["total_equipe"] = round(sum(r["bruto"] for r in d["equipe"]), 2)
+        sem_subsidio = [v["apelido"] for v in vereadores if not (folha_por_slug.get(v["slug"]) or {}).get("vereador")]
+        if sem_subsidio:
+            verif["avisos"].append(f"Folha de {F['mes'].lower()}/{F['ano']}: não encontramos o pagamento de {', '.join(sem_subsidio)} como vereador. O site mostra “não encontrado”, sem adivinhar.")
+        if nao_ligados:
+            verif["avisos"].append(f"Folha: linhas de gabinete que não ligamos a nenhum vereador: {'; '.join(nao_ligados)}.")
+        checar(len([1 for d in folha_por_slug.values() if d["equipe"]]) == len(vereadores),
+               f"Folha de {F['mes'].lower()}/{F['ano']}: equipe de gabinete encontrada para {len([1 for d in folha_por_slug.values() if d['equipe']])} de {len(vereadores)} vereadores")
+
     # ---------------- presença e votos
     resumo_v = []
     sessoes_pub = []
@@ -368,6 +423,7 @@ def main():
         ficha = {**v, "propostas_baixadas": p is not None, "propostas_parcial": bool(p and p["parcial"]),
                  "total_todos_anos": p["total_todos_anos"] if p else None,
                  "grupos": grupos, "presenca": pres, "votos": votos, "gabinete": gab_por_slug.get(slug),
+                 "folha": folha_por_slug.get(slug), "folha_info": folha_info,
                  "fonte_propostas": f"{SISCAM}/Vereadores/Proposituras/{v['siscam_id']}"}
         json.dump(ficha, open(os.path.join(SAIDA, f"vereador-{slug}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         resumo_v.append({k: v[k] for k in ("slug", "apelido", "nome", "partido", "foto", "perfil_url", "telefone_gabinete", "email_gabinete", "siscam_id")} | {

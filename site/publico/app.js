@@ -136,8 +136,29 @@ async function telaVereador(slug) {
     <ul class="itens" id="votos">${votos.slice(0, 20).map(itemVoto).join("")}</ul>
     ${votos.length > 20 ? `<p class="mais"><button class="botao claro" id="mais-votos">Mostrar todas as ${num(votos.length)} votações</button></p>` : ""}
 
+    <h2>Salário e equipe do gabinete</h2>
+    ${secaoFolha(f)}
+
     <h2>Gastos do gabinete</h2>
     ${secaoGabinete(f)}`;
+}
+
+const MESES_PT = { JANEIRO: "janeiro", FEVEREIRO: "fevereiro", MARCO: "março", ABRIL: "abril", MAIO: "maio", JUNHO: "junho", JULHO: "julho", AGOSTO: "agosto", SETEMBRO: "setembro", OUTUBRO: "outubro", NOVEMBRO: "novembro", DEZEMBRO: "dezembro" };
+const reais = (x) => Number(x).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+function secaoFolha(f) {
+  const i = f.folha_info;
+  if (!i) return `<p class="suave">A folha de pagamento ainda não foi baixada.</p>`;
+  const mes = `${MESES_PT[i.mes] || i.mes}/${i.ano}`;
+  const d = f.folha || { vereador: null, equipe: [], total_equipe: 0 };
+  const ver = d.vereador
+    ? `<div class="numero"><b>${reais(d.vereador.bruto)}</b><span>salário bruto do vereador em ${mes}</span><small>Líquido: ${reais(d.vereador.liquido)}. Nome na folha: ${$(d.vereador.nome)}${d.vereador.ligacao_fraca ? " (ligado a este vereador só pelo primeiro nome; confira no portal)" : ""}.</small><small>${ext(i.fonte, "Conferir no Portal da Transparência")}</small></div>`
+    : `<div class="numero"><b>—</b><span>salário do vereador em ${mes}</span><small>Não encontramos o pagamento deste vereador na folha desse mês. Pode ter havido licença ou mudança; confira no portal.</small><small>${ext(i.fonte, "Portal da Transparência")}</small></div>`;
+  const eq = `<div class="numero"><b>${reais(d.total_equipe)}</b><span>pagos em ${mes} à equipe do gabinete (${d.equipe.length} ${d.equipe.length === 1 ? "pessoa" : "pessoas"})</span><small>Soma dos salários brutos de quem está lotado no gabinete.</small><small>${ext(i.fonte, "Conferir no Portal da Transparência")}</small></div>`;
+  const linhas = d.equipe.map((r) => `<tr><td>${$(r.nome)}</td><td>${$(r.cargo)}</td><td style="white-space:nowrap">${reais(r.bruto)}</td></tr>`).join("");
+  return `<div class="numeros um">${ver}${eq}</div>
+    ${d.equipe.length ? `<h3>Quem trabalha no gabinete</h3><table><tr><th>Nome</th><th>Cargo</th><th>Bruto em ${mes}</th></tr>${linhas}</table>` : ""}
+    <p class="suave">Dados da folha de pagamento publicada pela Câmara no Portal da Transparência (${mes}, último mês fechado). O valor bruto é o do portal e pode incluir férias ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</p>`;
 }
 
 function secaoGabinete(f) {
@@ -285,6 +306,7 @@ async function telaSobre() {
     <ul>
       <li><b>Vereadores, partido e contato do gabinete:</b> ${ext("https://www.camara-americana.sp.gov.br/Vereador", "site da Câmara")}.</li>
       <li><b>Propostas:</b> a página de proposituras de cada vereador no ${ext("https://americana.siscam.com.br/", "SISCAM")}, o sistema oficial da Câmara. Quando essa página é grande demais e não abre, usamos a exportação em planilha da pesquisa oficial do próprio SISCAM, que traz só os tipos principais; a ficha do vereador avisa quando isso acontece.</li>
+      <li><b>Salário e equipe do gabinete:</b> a folha de pagamento do ${ext("https://transparencia-cmamericana.smarapd.com.br/#/dinamico/restoapagar/pagamentosaservidores", "Portal da Transparência da Câmara")} (último mês fechado). Usamos só as linhas de vereadores e de quem está lotado em gabinete de vereador. O “Gabinete da Presidência” é da Mesa Diretora e não entra na conta de nenhum vereador.</li>
       <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>

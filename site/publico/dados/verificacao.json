@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-26T15:39:09+00:00",
+ "gerado_em": "2026-11-26T15:48:50+00:00",
  "checagens": [
   {
    "ok": true,
@@ -71,6 +71,10 @@
   },
   {
    "ok": true,
+   "texto": "Folha de outubro/2026: equipe de gabinete encontrada para 19 de 19 vereadores"
+  },
+  {
+   "ok": true,
    "texto": "4ª Sessão Extraordinária de 2026, Chamada Regimental - 13:52: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
   },
   {
@@ -96,6 +100,9 @@
   "Pastor Miguel Pires: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
   "Juninho Dias: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
   "Thiago Brochi: a página completa de propostas não abriu (o servidor da Câmara estourou o tempo). Usamos a exportação oficial da pesquisa, que traz indicações, moções, requerimentos e projetos, mas não emendas, pedidos de informação, pareceres e outros documentos.",
+  "Folha: “JACIRA MANEO” (cargo vereador) foi ligado a Jacira Chávare só por uma parte do nome. Conferir.",
+  "Folha de outubro/2026: não encontramos o pagamento de Levi Rossi como vereador. O site mostra “não encontrado”, sem adivinhar.",
+  "Folha: linhas de gabinete que não ligamos a nenhum vereador: GABINETE DA PRESIDÊNCIA (Secretario gabin presidencia).",
   "Em 1793 de 31483 pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra."
  ]
 }

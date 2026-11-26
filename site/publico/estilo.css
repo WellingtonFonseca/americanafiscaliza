@@ -67,3 +67,5 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 @media (min-width: 640px) {
   .lista-ver { grid-template-columns: 1fr 1fr; }
 }
+.numeros.um { grid-template-columns: 1fr; }
+.numero b { overflow-wrap: anywhere; }
