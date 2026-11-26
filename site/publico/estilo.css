@@ -214,3 +214,18 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .busca button, .busca .botao { flex: 1 1 0; }
 @media (min-width: 640px) { .busca input { flex: 1 1 auto; } .busca button, .busca .botao { flex: 0 0 auto; } }
 #todos { background: var(--fundo); color: var(--marinho); border: 2px solid var(--marinho); }
+
+/* Cartões dos vereadores na página inicial */
+.lista-ver a { position: relative; gap: 14px; padding: 14px 12px 14px 14px; align-items: center; }
+.lista-ver img { width: 64px; height: 64px; border: 3px solid var(--laranja-claro); align-self: flex-start; }
+.lista-ver .principal b { display: block; line-height: 1.2; }
+.lista-ver .corpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lista-ver .nome { display: inline; font-size: 19px; color: var(--marinho); }
+.lista-ver .linha-nome { margin-bottom: 2px; }
+.lista-ver .partido { display: inline-block; vertical-align: 2px; font-size: 15px; font-weight: 700; color: var(--marinho); background: var(--azul-claro); border-radius: 99px; padding: 0 9px; white-space: nowrap; }
+.lista-ver .principal { color: var(--texto); }
+.lista-ver .principal b { color: var(--azul); font-size: 20px; }
+.lista-ver .extra { color: var(--suave); }
+.lista-ver .parcial { align-self: flex-start; font-size: 15px; font-weight: 600; color: #8a5a00; background: var(--aviso); border-radius: 99px; padding: 1px 10px; margin-top: 4px; }
+.lista-ver .seta { flex: none; color: var(--azul); }
+.lista-ver .posicao { position: absolute; top: 8px; left: 8px; min-width: 30px; text-align: center; font-size: 15px; font-weight: 800; color: #fff; background: var(--marinho); border-radius: 99px; padding: 1px 6px; z-index: 1; }

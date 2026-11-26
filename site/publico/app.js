@@ -67,20 +67,27 @@ const ORDENS = [
   ["gabinete", "Maior custo de gabinete (último mês)", (v) => (v.dinheiro || {}).equipe_total],
 ];
 
-function itemLista(v, ordem) {
-  const destaque = {
-    faltas: `${num(v.ausente)} ausências em ${num(v.chamadas)} chamadas`,
-    lei: `${num(v.grupos.lei)} propostas de lei`, homenagem: `${num(v.grupos.homenagem)} homenagens`,
-    bairro: `${num(v.grupos.bairro)} pedidos de bairro`, cobranca: `${num(v.grupos.cobranca)} cobranças`,
-    contra: `${num(v.votos_contra)} votos contra em ${num(v.votacoes)} votações`,
-    gabinete: `equipe do gabinete: ${reais((v.dinheiro || {}).equipe_total || 0)}`,
-  }[ordem];
-  const padrao = v.propostas_baixadas ? `${num(v.grupos.bairro)} pedidos de bairro · presente em ${v.presente} de ${v.chamadas} chamadas` : "propostas ainda não baixadas";
-  const parcial = v.propostas_parcial && ["nome", "lei", "homenagem", "bairro", "cobranca"].includes(ordem) ? " · propostas parciais" : "";
+function itemLista(v, ordem, pos) {
+  // número principal do cartão: o da ordem escolhida, ou pedidos de bairro na ordem por nome
+  const d = v.dinheiro || {};
+  const principal = {
+    faltas: [num(v.ausente), `ausências em ${num(v.chamadas)} chamadas`],
+    lei: [num(v.grupos.lei), "propostas de lei"], homenagem: [num(v.grupos.homenagem), "homenagens"],
+    bairro: [num(v.grupos.bairro), "pedidos de bairro"], cobranca: [num(v.grupos.cobranca), "cobranças à Prefeitura"],
+    contra: [num(v.votos_contra), `votos contra em ${num(v.votacoes)} votações`],
+    gabinete: [reais(d.equipe_total || 0), "equipe do gabinete no mês"],
+  }[ordem] || (v.propostas_baixadas ? [num(v.grupos.bairro), "pedidos de bairro"] : ["—", "propostas ainda não baixadas"]);
+  const extra = ordem === "faltas" || ordem === "contra" ? "" : `Presença: ${v.presente} de ${v.chamadas}`;
+  const parcial = v.propostas_parcial && ["nome", "lei", "homenagem", "bairro", "cobranca"].includes(ordem);
   return `<li><a href="#/v/${v.slug}">
-      <img src="${$(fotoLocal(v))}" alt="" loading="lazy" width="56" height="56" onerror="this.style.visibility='hidden'">
-      <span><span class="nome">${$(v.apelido)}</span>
-      <span class="info">${$(v.partido)} · ${destaque ? `<b>${destaque}</b>` : padrao}${parcial}</span></span>
+      <img src="${$(fotoLocal(v))}" alt="" loading="lazy" width="64" height="64" onerror="this.style.visibility='hidden'">
+      <span class="corpo">
+        <span class="linha-nome"><span class="nome">${$(v.apelido)}</span> <span class="partido">${$(v.partido)}</span></span>
+        <span class="principal"><b>${principal[0]}</b> ${principal[1]}</span>
+        ${extra ? `<span class="extra">${extra}</span>` : ""}
+        ${parcial ? `<span class="parcial">Propostas parciais</span>` : ""}
+      </span>
+      <svg class="seta" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a></li>`;
 }
 
@@ -92,7 +99,7 @@ function desenharLista() {
   let vs = R.vereadores.filter((v) => (!partido || v.partido === partido) && (!q || chave(v.apelido + " " + v.nome).includes(q)));
   vs = vs.slice().sort((a, b) => (o[2] ? (o[2](b) || 0) - (o[2](a) || 0) : 0) || a.apelido.localeCompare(b.apelido, "pt-BR"));
   const el = document.getElementById("lista-ver");
-  if (el) el.innerHTML = vs.length ? vs.map((v) => itemLista(v, ordem)).join("") : `<li class="suave" style="padding:12px 0">Nenhum vereador encontrado.</li>`;
+  if (el) el.innerHTML = vs.length ? vs.map((v, i) => itemLista(v, ordem, i + 1)).join("") : `<li class="suave" style="padding:12px 0">Nenhum vereador encontrado.</li>`;
   const nota = document.getElementById("nota-ordem");
   if (nota) nota.innerHTML = {
     faltas: "Ausência registrada não quer dizer falta sem motivo: pode haver licença, atestado ou missão oficial. Vale só para as sessões já coletadas.",
