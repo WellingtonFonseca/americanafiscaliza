@@ -183,14 +183,21 @@ async function telaRepetidos() {
 
 function telaComparar() {
   const gs = ["bairro", "cobranca", "homenagem", "lei"];
-  const curto = { bairro: "Bairro", cobranca: "Cobrança", homenagem: "Homena&shy;gem", lei: "Lei" };
+  const curto = { bairro: "Pedidos de bairro", cobranca: "Cobranças", homenagem: "Homenagens", lei: "Leis" };
+  const max = Object.fromEntries(gs.map((g) => [g, Math.max(1, ...R.vereadores.map((v) => v.grupos[g] || 0))]));
   const vs = R.vereadores.slice().sort((a, b) => a.apelido.localeCompare(b.apelido, "pt-BR"));
-  const linhas = vs.map((v) => `<tr><th><a href="#/v/${v.slug}?aba=propostas">${$(v.apelido)}</a>${v.propostas_parcial ? "*" : ""}</th>${gs.map((g) => `<td><a href="#/v/${v.slug}/${g}">${num(v.grupos[g])}</a></td>`).join("")}</tr>`).join("");
+  const cartoes = vs.map((v) => `<div class="comp">
+      <div class="comp-cab"><img src="${$(fotoLocal(v))}" alt="" loading="lazy" width="48" height="48" onerror="this.style.visibility='hidden'">
+        <div><a class="comp-nome" href="#/v/${v.slug}?aba=propostas">${$(v.apelido)}</a><span class="comp-partido">${$(v.partido)}</span>${v.propostas_parcial ? `<span class="parcial">Propostas parciais *</span>` : ""}</div></div>
+      <div class="comp-grade">${gs.map((g) => `<a class="comp-num comp-${g}" href="#/v/${v.slug}/${g}">
+          <b>${num(v.grupos[g])}</b><span>${curto[g]}</span>
+          <i class="barra" style="width:${Math.max(2, Math.round((v.grupos[g] / max[g]) * 100))}%"></i></a>`).join("")}</div>
+    </div>`).join("");
   return `<a class="voltar" href="#/">← Início</a>
     <h1>Homenagem ou trabalho?</h1>
-    <p>Quantos documentos de cada grupo cada vereador apresentou desde ${data(R.inicio_mandato)}. Toque num número para ler os documentos um por um.</p>
-    <div class="rolagem"><table class="comparar"><tr><th>Vereador</th>${gs.map((g) => `<th>${curto[g]}</th>`).join("")}</tr>${linhas}</table></div>
-    ${vs.some((v) => v.propostas_parcial) ? `<p class="suave">* Propostas parciais: a página completa deste vereador não abriu no sistema da Câmara. Usamos a exportação oficial, que não traz pedidos de informação nem emendas, então “Cobranças” e “Leis” podem estar abaixo do real.</p>` : ""}
+    <p>Quantos documentos de cada grupo cada vereador apresentou desde ${data(R.inicio_mandato)}. Toque num número para ler os documentos um por um. A barrinha compara com o maior número do grupo.</p>
+    ${vs.some((v) => v.propostas_parcial) ? `<div class="aviso">* <b>Propostas parciais:</b> a página completa deste vereador não abriu no sistema da Câmara. Usamos a exportação oficial, que não traz pedidos de informação nem emendas, então “Cobranças” e “Leis” podem estar abaixo do real.</div>` : ""}
+    ${cartoes}
     <p class="suave">Os grupos seguem <a href="#/sobre#grupos">uma regra única</a>, igual para todos. Quantidade não mede qualidade: uma lei pode valer mais que muitos pedidos. Um documento com mais de um autor conta para cada um deles.</p>`;
 }
 

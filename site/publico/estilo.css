@@ -245,3 +245,20 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .caso[open] .caso-abrir { display: none; }
 .caso .itens { margin: 0 12px 12px; box-shadow: none; }
 .aviso.alerta { background: #fdecea; border-left-color: #c62828; color: #5f1410; }
+
+/* Homenagem ou trabalho: cartões */
+.comp { background: var(--fundo); border: 1px solid var(--linha); border-radius: 16px; box-shadow: var(--sombra); padding: 14px; margin: 12px 0; }
+.comp-cab { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.comp-cab img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: var(--fundo-2); flex: none; }
+.comp-nome { display: block; font-size: 19px; font-weight: 700; color: var(--marinho); text-decoration: none; }
+.comp-partido { display: inline-block; font-size: 15px; font-weight: 700; color: var(--marinho); background: var(--azul-claro); border-radius: 99px; padding: 0 9px; margin-right: 6px; }
+.comp .parcial { display: inline-block; font-size: 15px; font-weight: 600; color: #8a5a00; background: var(--aviso); border-radius: 99px; padding: 0 9px; }
+.comp-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.comp-num { position: relative; display: block; padding: 10px 12px 14px; border-radius: 12px; background: var(--fundo-pagina); text-decoration: none; color: var(--texto); overflow: hidden; }
+.comp-num b { display: block; font-size: 24px; line-height: 1.15; color: var(--marinho); }
+.comp-num span { display: block; color: var(--suave); }
+.comp-num .barra { position: absolute; left: 0; bottom: 0; height: 5px; border-radius: 0 3px 3px 0; }
+.comp-bairro .barra { background: #1d55b8; }
+.comp-cobranca .barra { background: #6a3fb5; }
+.comp-homenagem .barra { background: #c4410f; }
+.comp-lei .barra { background: #1e7a46; }
