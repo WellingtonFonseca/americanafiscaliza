@@ -84,3 +84,15 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--linh
 .destaque b { display: block; font-size: 30px; color: var(--azul); line-height: 1.15; }
 .destaque span { display: block; margin-top: 4px; }
 .destaque small { display: block; color: var(--suave); font-size: 13px; margin-top: 6px; }
+.entradas { display: grid; gap: 10px; margin: 16px 0; }
+.entradas a { display: block; border: 1px solid var(--linha); border-radius: 12px; padding: 12px 14px; text-decoration: none; color: inherit; }
+.entradas a b { display: block; color: var(--azul); font-size: 18px; }
+.entradas a span { display: block; color: var(--suave); font-size: 15px; margin-top: 2px; }
+.origem dt { font-weight: 700; margin-top: 12px; }
+.origem dd { margin: 2px 0 0; color: var(--suave); }
+.rolagem { overflow-x: auto; }
+.comparar td { text-align: right; }
+.comparar th, .comparar td { padding: 8px 4px; font-size: 15px; }
+.comparar tr:first-child th { font-size: 13px; text-align: right; }
+.comparar tr:first-child th:first-child { text-align: left; }
+.comparar th a { font-weight: 600; }

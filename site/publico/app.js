@@ -109,7 +109,11 @@ function telaInicio() {
     <h1>O que cada vereador de Americana faz</h1>
     <p>Presença nas sessões, propostas, votos e gastos dos ${R.vereadores.length} vereadores, só com dados oficiais da Câmara Municipal. Cada número tem link para a fonte.</p>
     ${contador}
-    <p><a class="botao" href="#/busca">Ver o que pediram para o meu bairro</a></p>
+    <div class="entradas">
+      <a href="#/busca"><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></a>
+      <a href="#/comparar"><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></a>
+      <a href="#/gastos"><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></a>
+    </div>
     ${avisoSessoes()}
     ${R.vereadores.some((v) => v.propostas_parcial || !v.propostas_baixadas) ? `<div class="aviso">Para ${R.vereadores.filter((v) => v.propostas_parcial || !v.propostas_baixadas).length} vereadores as propostas ainda estão parciais (o sistema da Câmara não abriu a página completa deles). Isso está marcado na ficha de cada um.</div>` : ""}
     <h2>Vereadores</h2>
@@ -120,7 +124,35 @@ function telaInicio() {
     </div>
     <p class="suave" id="nota-ordem"></p>
     <ul class="lista-ver" id="lista-ver"></ul>
-    <p class="suave">Ordenar a lista não é dar nota. Os números mostram quantidade, não qualidade. Propostas contadas desde ${data(R.inicio_mandato)}, início do mandato atual, para todos da mesma forma.</p>`;
+    <p class="suave">Ordenar a lista não é dar nota. Os números mostram quantidade, não qualidade. Propostas contadas desde ${data(R.inicio_mandato)}, início do mandato atual, para todos da mesma forma.</p>
+    ${deOndeVem()}`;
+}
+
+function deOndeVem() {
+  return `<h2>De onde vêm os números</h2>
+    <dl class="origem">
+      <dt>Propostas</dt><dd>Do sistema da Câmara (SISCAM), desde ${data(R.inicio_mandato)}. Cada documento é colocado num grupo por <a href="#/sobre#grupos">uma regra única</a>, pelo tipo e pelo texto oficial, igual para todos.</dd>
+      <dt>Pedido não é obra feita</dt><dd>Um pedido de melhoria mostra que o vereador pediu. O sistema da Câmara não diz se a Prefeitura atendeu. Pedido repetido na mesma rua também não prova que nada foi feito: pode ser outro trecho.</dd>
+      <dt>Presença</dt><dd>Da lista de chamada de cada sessão. Ausência registrada não quer dizer falta sem motivo: pode haver licença, atestado ou missão oficial.</dd>
+      <dt>Votos</dt><dd>Do voto nominal registrado em cada sessão, matéria por matéria.</dd>
+      <dt>Salário e equipe</dt><dd>Da folha de pagamento no Portal da Transparência da Câmara, mês a mês. Valor bruto, como o portal publica.</dd>
+      <dt>Gastos do gabinete</dt><dd>Do relatório oficial da Câmara, que desde 2019 vem em quantidades (cópias, minutos, litros), não em reais.</dd>
+      <dt>Emendas impositivas</dt><dd>Da lei do orçamento aprovada. É o valor previsto, não o que a Prefeitura já gastou.</dd>
+      <dt>Achou um erro?</dt><dd>Compare com o link oficial ao lado de cada número e <a href="#/sobre#correcao">avise aqui</a>. Se a Câmara corrigir o registro dela, o número muda aqui na atualização seguinte.</dd>
+    </dl>`;
+}
+
+function telaComparar() {
+  const gs = ["bairro", "cobranca", "homenagem", "lei"];
+  const curto = { bairro: "Bairro", cobranca: "Cobrança", homenagem: "Homena&shy;gem", lei: "Lei" };
+  const vs = R.vereadores.slice().sort((a, b) => a.apelido.localeCompare(b.apelido, "pt-BR"));
+  const linhas = vs.map((v) => `<tr><th><a href="#/v/${v.slug}?aba=propostas">${$(v.apelido)}</a>${v.propostas_parcial ? "*" : ""}</th>${gs.map((g) => `<td><a href="#/v/${v.slug}/${g}">${num(v.grupos[g])}</a></td>`).join("")}</tr>`).join("");
+  return `<a class="voltar" href="#/">← Início</a>
+    <h1>Homenagem ou trabalho?</h1>
+    <p>Quantos documentos de cada grupo cada vereador apresentou desde ${data(R.inicio_mandato)}. Toque num número para ler os documentos um por um.</p>
+    <div class="rolagem"><table class="comparar"><tr><th>Vereador</th>${gs.map((g) => `<th>${curto[g]}</th>`).join("")}</tr>${linhas}</table></div>
+    ${vs.some((v) => v.propostas_parcial) ? `<p class="suave">* Propostas parciais: a página completa deste vereador não abriu no sistema da Câmara. Usamos a exportação oficial, que não traz pedidos de informação nem emendas, então “Cobranças” e “Leis” podem estar abaixo do real.</p>` : ""}
+    <p class="suave">Os grupos seguem <a href="#/sobre#grupos">uma regra única</a>, igual para todos. Quantidade não mede qualidade: uma lei pode valer mais que muitos pedidos. Um documento com mais de um autor conta para cada um deles.</p>`;
 }
 
 function fotoLocal(v) { return `fotos/${v.slug}.jpg`; }
@@ -491,6 +523,7 @@ async function rota() {
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
+    else if (partes[0] === "comparar") html = telaComparar();
     else if (partes[0] === "sobre") html = await telaSobre();
     else html = telaInicio();
     app.innerHTML = html;
