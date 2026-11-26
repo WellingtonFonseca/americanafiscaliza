@@ -567,7 +567,9 @@ async function rota() {
     };
     const b = document.getElementById("mais-votos");
     if (b) b.onclick = async () => { const f = await carregar(`vereador-${partes[1]}.json`); document.getElementById("votos").innerHTML = f.votos.slice().reverse().map(itemVoto).join(""); b.remove(); };
-    document.getElementById("atualizado").textContent = `Dados atualizados em ${new Date(R.gerado_em).toLocaleDateString("pt-BR")}.`;
+    const quando = new Date(R.gerado_em);
+    document.getElementById("atualizado").textContent = `Dados atualizados em ${quando.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" })}.`;
+    document.getElementById("atualizado-topo").textContent = `Atualizado em ${quando.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" })} às ${quando.toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo", hour: "2-digit", minute: "2-digit" })}`;
     const ancora = location.hash.split("#")[2];
     if (ancora && document.getElementById(ancora)) document.getElementById(ancora).scrollIntoView();
     else window.scrollTo(0, 0);

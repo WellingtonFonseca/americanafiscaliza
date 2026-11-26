@@ -199,3 +199,4 @@ body { font-size: 18px; line-height: 1.55; }
 .comparar tr:first-child th { font-size: 15px; }
 table { border-collapse: separate; border-spacing: 0; }
 th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
+.atualizado-topo { margin: 0; font-size: 17px; color: var(--suave); text-align: center; }
