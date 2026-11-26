@@ -14,7 +14,7 @@ presença nas sessões, propostas e votos. Só dados oficiais, com link para a f
 ## Como atualizar à mão
 
 ```
-python3 -I ../coletor/coletar_sessoes.py ../coletor/dados          # até 3 páginas
+python3 -I ../coletor/coletar_sessoes.py ../coletor/dados          # até 15 páginas (nova + 10 antigas)
 python3 -I ../coletor/coletar_proposituras.py ../coletor/dados      # só quem falta
 python3 -I gerar_dados.py ../coletor
 python3 -I montar_previa.py

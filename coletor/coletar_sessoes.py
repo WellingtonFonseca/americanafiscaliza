@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Coletor leve de sessões da Câmara Municipal de Americana (SISCAM).
 
-Cada execução baixa no máximo 3 páginas:
+Cada execução baixa no máximo 15 páginas:
   1. a lista de sessões recentes (/sessoes), para descobrir a sessão mais nova;
   2. a sessão mais nova ainda não coletada;
-  3. uma sessão antiga, recuando uma por execução (histórico aos poucos).
+  3. até 10 sessões antigas, recuando (histórico do mandato aos poucos; decisão do
+     Wellington em 26/11/2026). Para ao chegar antes do início do mandato.
 
 Regras combinadas:
   - o robô se identifica como AmericanaFiscaliza (não finge ser navegador);
@@ -22,7 +23,9 @@ from datetime import datetime, timezone
 BASE = "https://americana.siscam.com.br"
 UA = "AmericanaFiscaliza/0.1 (robo civico; coleta leve de dados publicos, poucas paginas por semana)"
 PAUSA = 10  # segundos entre pedidos
-MAX_TENTATIVAS_ANTIGAS = 3  # IDs inexistentes pulados por execução (cada um é um pedido)
+ANTIGAS_POR_EXECUCAO = 10  # sessões antigas guardadas por execução
+MAX_TENTATIVAS_ANTIGAS = 13  # pedidos de sessões antigas por execução (inclui IDs que não existem)
+INICIO_MANDATO = "2025-01-01"  # não recua para antes disso
 
 PASTA = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "dados"))
 HTML = os.path.join(PASTA, "html")
@@ -140,9 +143,9 @@ def main():
     else:
         log("nenhuma sessão nova")
 
-    # 2. uma sessão antiga (recuando)
-    alvo = estado["proxima_antiga"] or (min(ja) - 1 if ja else (ids[-1] - 1 if ids else None))
-    tent = 0
+    # 2. sessões antigas (recuando)
+    alvo = estado["proxima_antiga"] if estado["proxima_antiga"] is not None else (min(ja) - 1 if ja else (ids[-1] - 1 if ids else None))
+    tent = guardadas = 0
     while alvo and alvo > 0 and tent < MAX_TENTATIVAS_ANTIGAS:
         if alvo in ja:
             alvo -= 1; continue
@@ -150,8 +153,17 @@ def main():
         st, txt = baixar(f"/Sessoes/Sessao/{alvo}")
         log(f"sessão antiga {alvo}: HTTP {st}")
         if st == 200 and "Sessões -" in txt:
+            d = extrair(str(alvo), txt)[0][2]  # dd/mm/aaaa
+            data_s = "-".join(reversed(d.split("/"))) if d else ""
+            if data_s and data_s < INICIO_MANDATO:
+                log(f"sessão {alvo} é de {data_s}, antes do mandato; histórico completo")
+                alvo = 0
+                break
             salvar_sessao(alvo, txt); estado["coletadas"].append(alvo); alvo -= 1
-            break
+            guardadas += 1
+            if guardadas >= ANTIGAS_POR_EXECUCAO:
+                break
+            continue
         estado["inexistentes"].append(alvo); alvo -= 1
     estado["proxima_antiga"] = alvo
     estado["coletadas"] = sorted(set(estado["coletadas"]))
