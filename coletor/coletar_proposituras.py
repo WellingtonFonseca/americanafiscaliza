@@ -116,6 +116,13 @@ def main():
         })
     # Perfis sem o link para o SISCAM: o ID do autor vem da lista de autores
     # do formulário de pesquisa do SISCAM (mesmo número usado na página de propostas).
+    # IDs já descobertos numa execução anterior (evita pedir a lista de autores de novo)
+    arq_v = os.path.join(PASTA, "vereadores.json")
+    antigos = {x["slug"]: x.get("siscam_id") for x in json.load(open(arq_v, encoding="utf-8"))} if os.path.exists(arq_v) else {}
+    for v in vereadores:
+        if not v["siscam_id"] and antigos.get(v["slug"]):
+            v["siscam_id"] = antigos[v["slug"]]
+            v["siscam_id_origem"] = "lista de autores do SISCAM"
     if any(not v["siscam_id"] for v in vereadores):
         st, idx = baixar(SISCAM + "/index/74", PAUSA_SISCAM)
         log(f"lista de autores do SISCAM: HTTP {st}")
@@ -134,8 +141,14 @@ def main():
                 return a, os.path.getmtime(a)
         return None, 0
 
-    rodizio = sorted((guardado(v)[1], v["siscam_id"]) for v in vereadores if v["siscam_id"] and guardado(v)[0])
-    renovar = {sid for _, sid in rodizio[:RENOVAR]}
+    # Rodízio guardado em arquivo (a data dos arquivos não serve: o checkout do git zera tudo).
+    arq_r = os.path.join(PASTA, "rodizio.json")
+    rod = json.load(open(arq_r)) if os.path.exists(arq_r) else {}
+    fila = sorted((rod.get(str(v["siscam_id"]), ""), v["siscam_id"]) for v in vereadores if v["siscam_id"] and guardado(v)[0])
+    renovar = {sid for _, sid in fila[:RENOVAR]}
+    for sid in renovar:
+        rod[str(sid)] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    json.dump(rod, open(arq_r, "w"), indent=1, sort_keys=True)
     for v in vereadores:
         if not v["siscam_id"]:
             continue
