@@ -301,6 +301,27 @@ function itemPedido(p) {
     <div class="meta">${data(p[1])} · ${p[7].map((i) => `<a href="#/v/${R.slugs[i]}">${$(nomeVer(i))}</a>`).join(", ")}</div></li>`;
 }
 
+// ------------------------------------------------------------------ gastos (todos os vereadores)
+function telaGastos() {
+  const i = R.folha_info, e = (R.emendas_info || []).slice(-1)[0];
+  const mes = i ? `${MESES_PT[i.mes] || i.mes}/${i.ano}` : "";
+  const fmt = (x) => (x == null ? "—" : Number(x).toLocaleString("pt-BR", { maximumFractionDigits: 1 }));
+  const cards = R.vereadores.map((v) => {
+    const d = v.dinheiro || {};
+    return `<div class="caixa"><a href="#/v/${v.slug}"><b>${$(v.apelido)}</b></a> <span class="suave">${$(v.partido)}</span>
+      <table>
+        <tr><td>Salário bruto (${mes})</td><td style="text-align:right">${d.salario ? reais(d.salario) : "não encontrado"}</td></tr>
+        <tr><td>Equipe do gabinete (${mes}), ${d.equipe_pessoas || 0} pessoas</td><td style="text-align:right">${reais(d.equipe_total || 0)}</td></tr>
+        <tr><td>Emendas no orçamento de ${e ? e.ano : ""}</td><td style="text-align:right">${e && d.emendas ? reais(d.emendas[e.ano] || 0) : "—"}</td></tr>
+        <tr><td>Gabinete em ${$(R.gabinete_ano)}: cópias e combustível</td><td style="text-align:right">${fmt(d.copias)} cópias<br>${fmt(d.combustivel)} litros</td></tr>
+      </table><p class="suave"><a href="#/v/${v.slug}">Ver nomes da equipe, destino das emendas e fontes</a></p></div>`;
+  }).join("");
+  return `<h1>Gastos de cada vereador</h1>
+    <p>Quanto cada vereador recebe, quanto custa a equipe do gabinete, quanto indicou em emendas do orçamento e o que o gabinete usou. Ordem alfabética.</p>
+    ${cards}
+    <p class="suave">Fontes: folha de pagamento no ${i ? ext(i.fonte, "Portal da Transparência") : "Portal da Transparência"}; emendas na ${e ? ext(e.documento, "lei do orçamento aprovada") : "lei do orçamento"}; cópias e combustível nos relatórios ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "Gastos com Gabinete")}, que a Câmara publica em quantidades, não em reais. Emenda é valor previsto no orçamento, não o que já foi gasto.</p>`;
+}
+
 // ------------------------------------------------------------------ sessões e sobre
 function telaSessoes() {
   return `<h1>Sessões coletadas</h1>
@@ -377,6 +398,7 @@ async function rota() {
     else if (partes[0] === "v") html = await telaVereador(partes[1]);
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
     else if (partes[0] === "sessoes") html = telaSessoes();
+    else if (partes[0] === "gastos") html = telaGastos();
     else if (partes[0] === "sobre") html = await telaSobre();
     else html = telaInicio();
     app.innerHTML = html;

@@ -483,7 +483,15 @@ def main():
             "grupos": {g: len(l) for g, l in grupos.items()},
             "chamadas": len(pres), "presente": sum(1 for x in pres if x["situacao"] == "presente"),
             "ausente": sum(1 for x in pres if x["situacao"] == "ausente"),
-            "fonte_propostas": ficha["fonte_propostas"]})
+            "fonte_propostas": ficha["fonte_propostas"],
+            "dinheiro": {
+                "salario": ((folha_por_slug.get(slug) or {}).get("vereador") or {}).get("bruto"),
+                "equipe_pessoas": len((folha_por_slug.get(slug) or {}).get("equipe", [])),
+                "equipe_total": (folha_por_slug.get(slug) or {}).get("total_equipe", 0),
+                "emendas": {ano: round(sum(e["valor"] for e in l), 2) for ano, l in emendas_por_slug.get(slug, {}).items()},
+                "copias": next((i["total"] for i in (gab_por_slug.get(slug) or {}).get("itens", []) if i["item"].startswith("Impress")), None),
+                "combustivel": next((i["total"] for i in (gab_por_slug.get(slug) or {}).get("itens", []) if i["item"].startswith("Combust")), None),
+            }})
 
     # ---------------- pedidos de bairro (base da busca)
     slugs = [v["slug"] for v in vereadores]
@@ -501,7 +509,8 @@ def main():
         "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO,
         "grupos": GRUPOS, "regras": CLASSIFICACAO_REGRAS, "assuntos_pedido": [a for a, _ in ASSUNTOS_PEDIDO] + ["Outros pedidos"],
         "vereadores": sorted(resumo_v, key=lambda x: sem_acento(x["apelido"])),
-        "slugs": slugs, "sessoes": sessoes_pub,
+        "slugs": slugs, "sessoes": sessoes_pub, "folha_info": folha_info, "emendas_info": emendas_info,
+        "gabinete_ano": next((g["ano"] for g in gab_por_slug.values()), ""),
         "periodo_sessoes": [sessoes[0]["data"], sessoes[-1]["data"]] if sessoes else None,
         "propostas_completas": all(por_slug.values()),
         "total_pedidos": len(pedidos),
