@@ -262,3 +262,8 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .comp-cobranca .barra { background: #6a3fb5; }
 .comp-homenagem .barra { background: #c4410f; }
 .comp-lei .barra { background: #1e7a46; }
+.comp-mais { margin: 10px 2px 0; }
+.comp-num b { overflow-wrap: anywhere; }
+.comp-dinheiro { grid-template-columns: 1fr; }
+.comp-dinheiro b { white-space: nowrap; overflow-wrap: normal; }
+@media (min-width: 560px) { .comp-dinheiro { grid-template-columns: 1fr 1fr; } }

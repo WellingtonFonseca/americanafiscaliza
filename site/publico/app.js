@@ -479,20 +479,34 @@ function telaGastos() {
   const i = R.folha_info, e = (R.emendas_info || []).slice(-1)[0];
   const mes = i ? `${MESES_PT[i.mes] || i.mes}/${i.ano}` : "";
   const fmt = (x) => (x == null ? "—" : Number(x).toLocaleString("pt-BR", { maximumFractionDigits: 1 }));
-  const cards = R.vereadores.map((v) => {
+  const val = {
+    salario: (v) => (v.dinheiro || {}).salario || 0,
+    equipe: (v) => (v.dinheiro || {}).equipe_total || 0,
+    emendas: (v) => (e && ((v.dinheiro || {}).emendas || {})[e.ano]) || 0,
+    copias: (v) => (v.dinheiro || {}).copias || 0,
+  };
+  const max = Object.fromEntries(Object.entries(val).map(([k, f]) => [k, Math.max(1, ...R.vereadores.map(f))]));
+  const barra = (k, v, cor) => `<i class="barra" style="background:${cor};width:${Math.max(2, Math.round((val[k](v) / max[k]) * 100))}%"></i>`;
+  const vs = R.vereadores.slice().sort((a, b) => a.apelido.localeCompare(b.apelido, "pt-BR"));
+  const cartoes = vs.map((v) => {
     const d = v.dinheiro || {};
-    return `<div class="caixa"><a href="#/v/${v.slug}"><b>${$(v.apelido)}</b></a> <span class="suave">${$(v.partido)}</span>
-      <table>
-        <tr><td>Salário bruto (${mes})</td><td style="text-align:right">${d.salario ? reais(d.salario) : "não encontrado"}</td></tr>
-        <tr><td>Equipe do gabinete (${mes}), ${d.equipe_pessoas || 0} pessoas</td><td style="text-align:right">${reais(d.equipe_total || 0)}</td></tr>
-        <tr><td>Emendas no orçamento de ${e ? e.ano : ""}</td><td style="text-align:right">${e && d.emendas ? reais(d.emendas[e.ano] || 0) : "—"}</td></tr>
-        <tr><td>Gabinete em ${$(R.gabinete_ano)}: cópias e combustível</td><td style="text-align:right">${fmt(d.copias)} cópias<br>${fmt(d.combustivel)} litros</td></tr>
-      </table><p class="suave"><a href="#/v/${v.slug}">Ver nomes da equipe, destino das emendas e fontes</a></p></div>`;
+    return `<div class="comp">
+      <div class="comp-cab"><img src="${$(fotoLocal(v))}" alt="" loading="lazy" width="48" height="48" onerror="this.style.visibility='hidden'">
+        <div><a class="comp-nome" href="#/v/${v.slug}">${$(v.apelido)}</a><span class="comp-partido">${$(v.partido)}</span></div></div>
+      <div class="comp-grade comp-dinheiro">
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${d.salario ? reais(d.salario) : "—"}</b><span>${d.salario ? `Salário bruto em ${mes}` : `Salário não encontrado em ${mes}`}</span>${barra("salario", v, "#1d55b8")}</a>
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${reais(d.equipe_total || 0)}</b><span>Equipe do gabinete em ${mes} (${d.equipe_pessoas || 0} ${d.equipe_pessoas === 1 ? "pessoa" : "pessoas"})</span>${barra("equipe", v, "#6a3fb5")}</a>
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${e && d.emendas ? reais(d.emendas[e.ano] || 0) : "—"}</b><span>Emendas no orçamento de ${e ? e.ano : ""}</span>${barra("emendas", v, "#1e7a46")}</a>
+        <a class="comp-num" href="#/v/${v.slug}?aba=gastos"><b>${fmt(d.copias)}</b><span>Cópias em ${$(R.gabinete_ano)} · ${fmt(d.combustivel)} litros de combustível</span>${barra("copias", v, "#c4410f")}</a>
+      </div>
+      <p class="comp-mais"><a href="#/v/${v.slug}?aba=gastos">Ver nomes da equipe, destino das emendas e outros meses</a></p>
+    </div>`;
   }).join("");
   return `<h1>Gastos de cada vereador</h1>
-    <p>Quanto cada vereador recebe, quanto custa a equipe do gabinete, quanto indicou em emendas do orçamento e o que o gabinete usou. Ordem alfabética.</p>
-    ${cards}
-    <p class="suave">Fontes: folha de pagamento no ${i ? ext(i.fonte, "Portal da Transparência") : "Portal da Transparência"}; emendas na ${e ? ext(e.documento, "lei do orçamento aprovada") : "lei do orçamento"}; cópias e combustível nos relatórios ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "Gastos com Gabinete")}, que a Câmara publica em quantidades, não em reais. Emenda é valor previsto no orçamento, não o que já foi gasto.</p>`;
+    <div class="aviso info">Quanto cada vereador recebe, quanto custa a equipe do gabinete, quanto indicou em emendas do orçamento e o que o gabinete usou. Toque num quadro para ver os detalhes e escolher outros meses. A barrinha compara com o maior valor de cada quadro.</div>
+    <div class="aviso">Salário e equipe são de <b>${mes}</b>, último mês fechado da folha. Emenda é o valor <b>previsto</b> no orçamento, não o que já foi gasto. Cópias e combustível são o total do ano no relatório da Câmara, que vem em quantidades, não em reais.</div>
+    ${cartoes}
+    <p class="suave">Fontes: folha de pagamento no ${i ? ext(i.fonte, "Portal da Transparência") : "Portal da Transparência"}; emendas na ${e ? ext(e.documento, "lei do orçamento aprovada") : "lei do orçamento"}; cópias e combustível nos relatórios ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "Gastos com Gabinete")}.</p>`;
 }
 
 // ------------------------------------------------------------------ sessões e sobre
