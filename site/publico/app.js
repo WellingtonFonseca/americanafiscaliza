@@ -51,7 +51,8 @@ function vereador(slug) { return R.vereadores.find((v) => v.slug === slug); }
 function avisoSessoes() {
   const p = R.periodo_sessoes;
   if (!p) return `<div class="aviso">Ainda não há sessões coletadas.</div>`;
-  return `<div class="aviso"><b>Histórico de sessões ainda parcial.</b> Por enquanto o site tem ${R.sessoes.length} sessões, de ${data(p[0])} a ${data(p[1])}. As outras estão sendo baixadas aos poucos, para não sobrecarregar o sistema da Câmara. Presença e votos abaixo valem só para essas sessões.</div>`;
+  if (R.sessoes_completas) return "";
+  return `<div class="aviso"><b>Histórico de sessões ainda parcial.</b> Por enquanto o site tem ${R.sessoes.length} sessões, de ${data(p[0])} a ${data(p[1])}. As outras estão sendo baixadas aos poucos (até 10 por atualização), para não sobrecarregar o sistema da Câmara. Presença e votos valem só para essas sessões. Este aviso some quando todas as sessões do mandato estiverem no site.</div>`;
 }
 
 // ------------------------------------------------------------------ telas

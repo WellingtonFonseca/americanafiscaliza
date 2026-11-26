@@ -181,6 +181,12 @@ ITENS_GABINETE = [  # (rótulo no PDF, nome no site, unidade, chave do limite)
 ]
 
 
+def historico_sessoes_completo():
+    """O coletor de sessões marca proxima_antiga = 0 quando chega antes do início do mandato."""
+    arq = os.path.join(DADOS, "estado.json")
+    return os.path.exists(arq) and json.load(open(arq, encoding="utf-8")).get("proxima_antiga") == 0
+
+
 def numero_br(t):
     t = t.strip()
     if t in ("", "-"):
@@ -578,6 +584,7 @@ def main():
     sessoes_lista = [s["id"] for s in sessoes]
     resumo = {
         "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO, "fim_mandato": FIM_MANDATO,
+        "sessoes_completas": historico_sessoes_completo(),
         "mandato": MANDATO, "mandatos": MANDATOS,
         "grupos": GRUPOS, "regras": CLASSIFICACAO_REGRAS, "assuntos_pedido": [a for a, _ in ASSUNTOS_PEDIDO] + ["Outros pedidos"],
         "vereadores": sorted(resumo_v, key=lambda x: sem_acento(x["apelido"])),
