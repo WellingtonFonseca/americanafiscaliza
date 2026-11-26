@@ -112,7 +112,11 @@ function telaInicio() {
       <span class="etiqueta">Folha oficial</span>
       <b>R$ ${milhoes(pt.vereadores + pt.equipes)}</b>
       <span>pagos aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
-      <small>Vereadores: ${reais(pt.vereadores)} · Equipes: ${reais(pt.equipes)}. Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
+      <ul class="arvore">
+        <li><span>Vereadores</span><strong>${reais(pt.vereadores)}</strong></li>
+        <li><span>Equipes dos gabinetes</span><strong>${reais(pt.equipes)}</strong></li>
+      </ul>
+      <small>Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
     </div>` : "";
   return `
     <h1 class="so-leitor">O que cada vereador de Americana faz</h1>
