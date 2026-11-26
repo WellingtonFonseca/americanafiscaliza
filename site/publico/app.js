@@ -114,9 +114,7 @@ function telaInicio() {
       <small>Vereadores: ${reais(pt.vereadores)} · Equipes: ${reais(pt.equipes)}. Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
     </div>` : "";
   return `
-    <h1>O que cada vereador de Americana faz</h1>
-    ${R.mandato ? `<p class="suave">${$(R.mandato.nome)}: de ${data(R.mandato.inicio)} a ${data(R.mandato.fim)}. Troque o mandato no alto da página.</p>` : ""}
-    <p>Presença nas sessões, propostas, votos e gastos dos ${R.vereadores.length} vereadores, só com dados oficiais da Câmara Municipal. Cada número tem link para a fonte.</p>
+    <h1 class="so-leitor">O que cada vereador de Americana faz</h1>
     ${contador}
     <div class="entradas">
       <a href="#/busca"><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></a>
