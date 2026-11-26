@@ -203,3 +203,8 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .atualizado-topo svg { flex: none; }
 .atualizado-topo span { white-space: nowrap; }
 .atualizado-topo:has(span:empty) { display: none; }
+.quem-pediu { list-style: none; padding: 0 14px; margin: 8px 0 12px; background: var(--fundo); border: 1px solid var(--linha); border-radius: 14px; box-shadow: var(--sombra); }
+.quem-pediu li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--linha); }
+.quem-pediu li:last-child { border-bottom: 0; }
+.quem-pediu a { font-weight: 600; }
+.quem-pediu span { color: var(--suave); white-space: nowrap; }

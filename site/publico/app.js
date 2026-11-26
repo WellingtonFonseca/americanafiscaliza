@@ -411,7 +411,8 @@ function ligarBusca(ped, q0) {
     achados.forEach((p) => p[7].forEach((i) => { porVer[i] = (porVer[i] || 0) + 1; }));
     out.innerHTML = `
       <h2>${num(achados.length)} pedidos encontrados</h2>
-      <p class="suave">Quem pediu: ${Object.entries(porVer).sort((a, b) => b[1] - a[1]).map(([i, n]) => `<a href="#/v/${R.slugs[i]}">${$(nomeVer(i))}</a> (${num(n)})`).join(", ")}.</p>
+      <h3>Quem pediu</h3>
+      <ul class="quem-pediu">${Object.entries(porVer).sort((a, b) => b[1] - a[1]).map(([i, n]) => `<li><a href="#/v/${R.slugs[i]}">${$(nomeVer(i))}</a><span>${num(n)} ${n === 1 ? "pedido" : "pedidos"}</span></li>`).join("")}</ul>
       ${rep.length ? `<h2>Pedidos que se repetem</h2>
       <div class="aviso">Pedido repetido <b>não prova</b> que a Prefeitura ignorou o problema. O serviço pode ter sido feito e o problema ter voltado, o pedido pode ser para outro trecho da mesma rua, ou vereadores diferentes podem ter pedido a mesma coisa. Rua e assunto foram lidos do texto do pedido por um programa, e podem ter erros.</div>
       ${rep.slice(0, 30).map(itemRepetido).join("")}
