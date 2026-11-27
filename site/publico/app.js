@@ -325,7 +325,7 @@ function secaoMes(f, k) {
   return `<h3>Salário e equipe do gabinete</h3>
     <div class="numeros um">${ver}${eq}</div>
     ${d.equipe.length ? `<h3>Quem trabalha no gabinete</h3><table><tr><th>Nome</th><th>Cargo</th><th>Bruto</th></tr>${linhas}</table>` : ""}
-    <p class="suave">Folha de pagamento publicada pela Câmara no Portal da Transparência. O valor bruto é o do portal e pode incluir férias, 13º ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</p>
+    <div class="aviso info">Folha de pagamento publicada pela Câmara no Portal da Transparência. O valor bruto é o do portal e pode incluir férias, 13º ou outras verbas do mês. A lotação no gabinete é a informada pela Câmara.</div>
     <h3>Gastos do gabinete</h3>
     ${secaoGabineteMes(f, k)}`;
 }
