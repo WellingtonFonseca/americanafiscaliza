@@ -143,6 +143,24 @@ def main():
     else:
         log("nenhuma sessão nova")
 
+    # 1b. sessões já guardadas que ainda não tinham acontecido (sem chamada nem votos):
+    #     pede de novo, no máximo 2 por execução, só quando a data já passou.
+    hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    refeitas = 0
+    for sid in sorted(ja, reverse=True)[:30]:
+        arq = os.path.join(HTML, f"{sid}.html")
+        if refeitas >= 2 or sid == nova or not os.path.exists(arq):
+            continue
+        cab, pres, vts = extrair(str(sid), open(arq, encoding="utf-8").read())
+        data_s = "-".join(reversed(cab[2].split("/"))) if cab[2] else ""
+        if pres or vts or not data_s or data_s >= hoje:
+            continue
+        st, txt = baixar(f"/Sessoes/Sessao/{sid}")
+        log(f"sessão {sid} de {data_s} estava sem chamada; pedida de novo: HTTP {st}")
+        if st == 200 and "Sessões -" in txt:
+            salvar_sessao(sid, txt)
+        refeitas += 1
+
     # 2. sessões antigas (recuando)
     alvo = estado["proxima_antiga"] if estado["proxima_antiga"] is not None else (min(ja) - 1 if ja else (ids[-1] - 1 if ids else None))
     tent = guardadas = 0
