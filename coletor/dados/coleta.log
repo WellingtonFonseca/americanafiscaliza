@@ -131,3 +131,43 @@
 2026-11-26T16:26:51+00:00 [portal] fevereiro/2025: guardadas 89 linhas (vereadores e gabinetes)
 2026-11-26T16:26:56+00:00 [portal] folha janeiro/2025: 176 registros
 2026-11-26T16:26:56+00:00 [portal] janeiro/2025: guardadas 107 linhas (vereadores e gabinetes)
+2026-11-27T14:14:13+00:00 lista de sessões: HTTP 200, 10 IDs ([1716, 1715, 1714]...)
+2026-11-27T14:14:25+00:00 sessão nova 1716: HTTP 200
+2026-11-27T14:14:38+00:00 sessão antiga 1710: HTTP 200
+2026-11-27T14:14:50+00:00 sessão antiga 1709: HTTP 200
+2026-11-27T14:15:02+00:00 sessão antiga 1708: HTTP 200
+2026-11-27T14:15:14+00:00 sessão antiga 1707: HTTP 200
+2026-11-27T14:15:25+00:00 sessão antiga 1706: HTTP 404
+2026-11-27T14:15:38+00:00 sessão antiga 1705: HTTP 200
+2026-11-27T14:15:50+00:00 sessão antiga 1704: HTTP 200
+2026-11-27T14:16:03+00:00 sessão antiga 1703: HTTP 200
+2026-11-27T14:16:15+00:00 sessão antiga 1702: HTTP 200
+2026-11-27T14:16:27+00:00 sessão antiga 1701: HTTP 200
+2026-11-27T14:16:42+00:00 sessão antiga 1700: HTTP 200
+2026-11-27T14:16:42+00:00 fim: 13 pedidos; total 16 sessões, 285 linhas de presença, 9025 linhas de voto
+2026-11-27T14:16:44+00:00 [proposituras] lista de vereadores: HTTP 200
+2026-11-27T14:16:44+00:00 [proposituras] 19 vereadores; 19 com ID no SISCAM
+2026-11-27T14:17:44+00:00 [proposituras] proposituras Leonora Périco (17): HTTP 200, 1367 KB
+2026-11-27T14:18:18+00:00 [proposituras] exportação CSV Thiago Brochi (27): HTTP 200, 111 KB
+2026-11-27T14:18:18+00:00 [proposituras] fim
+2026-11-27T14:18:34+00:00 [gabinete] Fernando da Farmácia: ok
+2026-11-27T14:18:39+00:00 [gabinete] Gualter Amado: ok
+2026-11-27T14:18:44+00:00 [gabinete] Gutão do Lanche: ok
+2026-11-27T14:18:49+00:00 [gabinete] Jacira Chavare: ok
+2026-11-27T14:18:54+00:00 [gabinete] Jean Mizzoni: ok
+2026-11-27T14:18:58+00:00 [gabinete] Juninho Dias: ok
+2026-11-27T14:19:04+00:00 [gabinete] Leco Soares: ok
+2026-11-27T14:19:08+00:00 [gabinete] Léo da Padaria: ok
+2026-11-27T14:19:13+00:00 [gabinete] Leonora: ok
+2026-11-27T14:19:19+00:00 [gabinete] Levi Rossi: ok
+2026-11-27T14:19:24+00:00 [gabinete] Lucas Leoncine: ok
+2026-11-27T14:19:29+00:00 [gabinete] Marcos Caetano: ok
+2026-11-27T14:19:33+00:00 [gabinete] Pr. Miguel Pires: ok
+2026-11-27T14:19:38+00:00 [gabinete] Profª Juliana: ok
+2026-11-27T14:19:42+00:00 [gabinete] Renan de Angelo: ok
+2026-11-27T14:19:46+00:00 [gabinete] Roberta Lima: ok
+2026-11-27T14:19:52+00:00 [gabinete] Talitha de Nadai: ok
+2026-11-27T14:19:56+00:00 [gabinete] Thiago Brochi: ok
+2026-11-27T14:20:01+00:00 [gabinete] Wagner Rovina: ok
+2026-11-27T14:20:01+00:00 [gabinete] fim: 19 relatórios
+2026-11-27T14:20:01+00:00 [portal] todas as folhas desde o início do mandato já estão guardadas

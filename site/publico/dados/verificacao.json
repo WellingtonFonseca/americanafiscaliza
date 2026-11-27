@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-26T18:03:16+00:00",
+ "gerado_em": "2026-11-27T14:20:01+00:00",
  "checagens": [
   {
    "ok": true,
@@ -88,6 +88,46 @@
   {
    "ok": true,
    "texto": "LOA 2026: a soma das emendas é a mesma para todos os vereadores (R$ 226.736,84)"
+  },
+  {
+   "ok": true,
+   "texto": "31ª Sessão Ordinária de 2026, Chamada Regimental - 14:15: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "32ª Sessão Ordinária de 2026, Chamada Regimental - 14:07: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "33ª Sessão Ordinária de 2026, Chamada Regimental - 14:08: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "34ª Sessão Ordinária de 2026, Chamada Regimental - 14:03: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "35ª Sessão Ordinária de 2026, Chamada Regimental - 14:12: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "36ª Sessão Ordinária de 2026, Chamada Regimental - 14:16: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "3ª Sessão Extraordinária de 2026, Chamada Regimental - 13:32: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "37ª Sessão Ordinária de 2026, Chamada Regimental - 14:09: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "38ª Sessão Ordinária de 2026, Chamada Regimental - 14:07: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
+  },
+  {
+   "ok": true,
+   "texto": "39ª Sessão Ordinária de 2026, Chamada Regimental - 14:06: presentes + ausentes = 19 (a Câmara tem 19 vereadores)"
   },
   {
    "ok": true,
