@@ -358,7 +358,7 @@ function secaoGabineteMes(f, k) {
   const difere = g.itens.some((i) => i.soma_difere);
   return `<table><tr><th>Item</th><th>No mês</th><th>No ano</th></tr>${linhas}</table>
     ${difere ? `<p class="suave">* Neste item, o total do ano impresso no relatório da Câmara não é igual à soma dos meses do próprio relatório. Mostramos os números como a Câmara publicou. Confira no PDF.</p>` : ""}
-    <p class="suave">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. Um mês sem número pode ainda não ter sido lançado. ${ext(g.pdf, "Ver o relatório (PDF)")}</p>`;
+    <div class="aviso info">Desde 2019 (Ato da Mesa 254/2019) a Câmara publica esse relatório em quantidades (cópias, minutos, litros), e não em reais. Um mês sem número pode ainda não ter sido lançado. ${ext(g.pdf, "Ver o relatório (PDF)")}</div>`;
 }
 
 function itemVoto(x) {
