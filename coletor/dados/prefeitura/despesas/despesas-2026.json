@@ -1,0 +1,2023 @@
+{
+ "ano": 2026,
+ "meses": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "fonte": "https://transparencia.americana.sp.gov.br/transparencia_index.php?p=movDiario_consultaDespesa&t=5&r=33",
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "importado_em": "2026-11-28T14:29:48+00:00",
+ "totais": {
+  "empenhado": 1172713060.21,
+  "liquidado": 1043675310.56,
+  "pago": 979957046.1
+ },
+ "unidades": [
+  {
+   "codigo": "02",
+   "nome": "GABINETE DO PREFEITO",
+   "empenhado": 8314091.54,
+   "liquidado": 7171795.58,
+   "pago": 6626586.98,
+   "por_mes": {
+    "01": {
+     "empenhado": 3626311.38,
+     "liquidado": 463787.96,
+     "pago": 259486.37
+    },
+    "02": {
+     "empenhado": 437021.08,
+     "liquidado": 784952.06,
+     "pago": 288432.38
+    },
+    "03": {
+     "empenhado": 709413.75,
+     "liquidado": 1087978.23,
+     "pago": 850374.41
+    },
+    "04": {
+     "empenhado": 503296.89,
+     "liquidado": 751842.34,
+     "pago": 862573.34
+    },
+    "05": {
+     "empenhado": 834212.32,
+     "liquidado": 660881.4,
+     "pago": 741288.32
+    },
+    "06": {
+     "empenhado": 387844.88,
+     "liquidado": 485714.74,
+     "pago": 680885.38
+    },
+    "07": {
+     "empenhado": 407844.28,
+     "liquidado": 921113.09,
+     "pago": 748663.19
+    },
+    "08": {
+     "empenhado": 498048.31,
+     "liquidado": 710981.41,
+     "pago": 857419.67
+    },
+    "09": {
+     "empenhado": 394738.34,
+     "liquidado": 673117.76,
+     "pago": 657314.82
+    },
+    "10": {
+     "empenhado": 515360.31,
+     "liquidado": 631426.59,
+     "pago": 680149.1
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 2846193.83
+    },
+    {
+     "cnpj": "56.681.562/0001-00",
+     "nome": "MULTIWAY COMERCIO E REPRESENTACOES LTDA",
+     "valor": 1862599.49
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 536903.82
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 299586.0
+    },
+    {
+     "cnpj": "07.019.105/0001-31",
+     "nome": "AGÊNCIA METROPOLITANA DE CAMPINAS - AGEMPCAMP",
+     "valor": 234997.98
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 63051.56
+    },
+    {
+     "cnpj": "32.621.263/0001-04",
+     "nome": "LISE DRONES E SOLUÇÕES TECNOLOGICAS LTDA EPP",
+     "valor": 59297.9
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 48143.03
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 44746.72
+    },
+    {
+     "cnpj": "44.682.979/0001-09",
+     "nome": "SERV ORIENT MULTIDISCIPLINAR PARA ADOLESCENTES DE",
+     "valor": 41503.97
+    }
+   ]
+  },
+  {
+   "codigo": "03",
+   "nome": "SECRETARIA DE NEGÓCIOS JURÍDICOS",
+   "empenhado": 9556462.55,
+   "liquidado": 9163921.65,
+   "pago": 8703252.89,
+   "por_mes": {
+    "01": {
+     "empenhado": 1817997.81,
+     "liquidado": 627842.38,
+     "pago": 303406.4
+    },
+    "02": {
+     "empenhado": 583043.51,
+     "liquidado": 644638.34,
+     "pago": 657152.89
+    },
+    "03": {
+     "empenhado": 781118.14,
+     "liquidado": 977521.21,
+     "pago": 705779.51
+    },
+    "04": {
+     "empenhado": 933926.62,
+     "liquidado": 997197.71,
+     "pago": 777293.94
+    },
+    "05": {
+     "empenhado": 967010.12,
+     "liquidado": 1033984.77,
+     "pago": 1389620.74
+    },
+    "06": {
+     "empenhado": 1014411.29,
+     "liquidado": 1175166.88,
+     "pago": 1053240.25
+    },
+    "07": {
+     "empenhado": 1059615.17,
+     "liquidado": 988590.61,
+     "pago": 1134695.41
+    },
+    "08": {
+     "empenhado": 859399.47,
+     "liquidado": 963930.25,
+     "pago": 860651.85
+    },
+    "09": {
+     "empenhado": 780676.08,
+     "liquidado": 919657.29,
+     "pago": 963238.38
+    },
+    "10": {
+     "empenhado": 759264.34,
+     "liquidado": 835392.21,
+     "pago": 858173.52
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 6272274.8
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 599743.63
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 462217.0
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 310471.87
+    },
+    {
+     "cnpj": "05.970.432/0001-49",
+     "nome": "CR EMPREENDIMENTOS IMOBILIÁRIOS LTDA",
+     "valor": 250889.0
+    },
+    {
+     "cnpj": "82.845.322/0001-04",
+     "nome": "SOFTPLAN PLANEJAMENTO E SISTEMAS LTDA",
+     "valor": 142942.8
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 101529.69
+    },
+    {
+     "cnpj": "10.761.012/0001-92",
+     "nome": "CALLADO, PETRIN, PAES E CEZAR ADVOGADOS",
+     "valor": 99148.84
+    },
+    {
+     "cnpj": "44.682.979/0001-09",
+     "nome": "SERV ORIENT MULTIDISCIPLINAR PARA ADOLESCENTES DE",
+     "valor": 61448.92
+    },
+    {
+     "cnpj": "41.834.972/0001-69",
+     "nome": "NUCLEO CONSULTORIA EM GESTAO PUBLICA LTDA",
+     "valor": 48305.77
+    }
+   ]
+  },
+  {
+   "codigo": "04",
+   "nome": "SECRETARIA DE GOVERNO",
+   "empenhado": 1338505.26,
+   "liquidado": 1321692.88,
+   "pago": 1220482.99,
+   "por_mes": {
+    "01": {
+     "empenhado": 208466.68,
+     "liquidado": 118172.38,
+     "pago": 23789.67
+    },
+    "02": {
+     "empenhado": 130372.79,
+     "liquidado": 130960.19,
+     "pago": 144974.81
+    },
+    "03": {
+     "empenhado": 112873.99,
+     "liquidado": 130931.9,
+     "pago": 111138.36
+    },
+    "04": {
+     "empenhado": 136241.48,
+     "liquidado": 139630.53,
+     "pago": 133192.01
+    },
+    "05": {
+     "empenhado": 126199.01,
+     "liquidado": 135814.55,
+     "pago": 143579.49
+    },
+    "06": {
+     "empenhado": 147760.38,
+     "liquidado": 168687.77,
+     "pago": 145873.64
+    },
+    "07": {
+     "empenhado": 149314.53,
+     "liquidado": 160264.27,
+     "pago": 216721.6
+    },
+    "08": {
+     "empenhado": 138543.24,
+     "liquidado": 138691.91,
+     "pago": 93822.13
+    },
+    "09": {
+     "empenhado": 77235.34,
+     "liquidado": 85501.8,
+     "pago": 121889.48
+    },
+    "10": {
+     "empenhado": 111497.82,
+     "liquidado": 113037.58,
+     "pago": 85501.8
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 890633.51
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 179824.86
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 84329.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 29023.46
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 4406.49
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 4386.97
+    },
+    {
+     "cnpj": "24.077.447/0001-27",
+     "nome": "FLEXXLIMP COMERCIAL LTDA",
+     "valor": 162.8
+    },
+    {
+     "cnpj": "31.849.502/0001-15",
+     "nome": "GWG TELCO TELECOMUNICACOES LTDA",
+     "valor": 139.9
+    },
+    {
+     "cnpj": "78.933.322/0001-80",
+     "nome": "G A M COMERCIAL LTDA",
+     "valor": 57.0
+    },
+    {
+     "cnpj": "44.411.590/0001-10",
+     "nome": "JM SUPRIMENTOS LTDA",
+     "valor": 42.6
+    }
+   ]
+  },
+  {
+   "codigo": "05",
+   "nome": "SECRETARIA DE ADMINISTRAÇÃO",
+   "empenhado": 42918715.78,
+   "liquidado": 40735384.74,
+   "pago": 38804523.69,
+   "por_mes": {
+    "01": {
+     "empenhado": 18053051.98,
+     "liquidado": 8789456.38,
+     "pago": 2168098.8
+    },
+    "02": {
+     "empenhado": 3956725.99,
+     "liquidado": 3639044.0,
+     "pago": 4483067.21
+    },
+    "03": {
+     "empenhado": 2489994.6,
+     "liquidado": 3987795.85,
+     "pago": 3984393.57
+    },
+    "04": {
+     "empenhado": 3065800.7,
+     "liquidado": 3204265.15,
+     "pago": 4267539.38
+    },
+    "05": {
+     "empenhado": 2677478.26,
+     "liquidado": 3692045.22,
+     "pago": 4138372.67
+    },
+    "06": {
+     "empenhado": 2621327.03,
+     "liquidado": 4254710.45,
+     "pago": 3983114.06
+    },
+    "07": {
+     "empenhado": 2497339.22,
+     "liquidado": 3561468.06,
+     "pago": 4066335.83
+    },
+    "08": {
+     "empenhado": 2590372.18,
+     "liquidado": 3314224.49,
+     "pago": 3803259.54
+    },
+    "09": {
+     "empenhado": 2536559.88,
+     "liquidado": 3499725.79,
+     "pago": 3952131.7
+    },
+    "10": {
+     "empenhado": 2430065.94,
+     "liquidado": 2792649.35,
+     "pago": 3958210.93
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "00.394.460/0058-87",
+     "nome": "MINISTERIO DA FAZENDA",
+     "valor": 11203914.44
+    },
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 10814715.92
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 5942671.0
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 4889013.29
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 1379185.06
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 535436.41
+    },
+    {
+     "cnpj": "44.682.979/0001-09",
+     "nome": "SERV ORIENT MULTIDISCIPLINAR PARA ADOLESCENTES DE",
+     "valor": 446131.0
+    },
+    {
+     "cnpj": "19.625.833/0001-76",
+     "nome": "1DOC TECNOLOGIA LTDA",
+     "valor": 365101.62
+    },
+    {
+     "cnpj": "33.050.196/0001-88",
+     "nome": "CPFL - COMPANHIA PAULISTA DE FORCA E LUZ",
+     "valor": 358577.65
+    },
+    {
+     "cnpj": "50.735.505/0001-72",
+     "nome": "SMARAPD INFORMÁTICA LTDA",
+     "valor": 323343.68
+    }
+   ]
+  },
+  {
+   "codigo": "06",
+   "nome": "SECRETARIA DE FAZENDA",
+   "empenhado": 84870848.33,
+   "liquidado": 83890860.71,
+   "pago": 82389071.39,
+   "por_mes": {
+    "01": {
+     "empenhado": 11073473.24,
+     "liquidado": 8483065.07,
+     "pago": 6833638.46
+    },
+    "02": {
+     "empenhado": 6416596.42,
+     "liquidado": 6635821.71,
+     "pago": 7779358.15
+    },
+    "03": {
+     "empenhado": 7505171.84,
+     "liquidado": 7785561.14,
+     "pago": 7006116.11
+    },
+    "04": {
+     "empenhado": 16767584.53,
+     "liquidado": 16635651.71,
+     "pago": 15868064.04
+    },
+    "05": {
+     "empenhado": 6290109.2,
+     "liquidado": 6697854.42,
+     "pago": 7563768.35
+    },
+    "06": {
+     "empenhado": 9393373.37,
+     "liquidado": 9194664.97,
+     "pago": 6694060.02
+    },
+    "07": {
+     "empenhado": 5284012.83,
+     "liquidado": 5064175.01,
+     "pago": 7409045.9
+    },
+    "08": {
+     "empenhado": 7220605.76,
+     "liquidado": 8019883.54,
+     "pago": 8103285.58
+    },
+    "09": {
+     "empenhado": 7410356.87,
+     "liquidado": 7702453.73,
+     "pago": 7566277.95
+    },
+    "10": {
+     "empenhado": 7509564.27,
+     "liquidado": 7671729.41,
+     "pago": 7565456.83
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "51.174.001/0001-93",
+     "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+     "valor": 25878884.94
+    },
+    {
+     "cnpj": "00.394.460/0058-87",
+     "nome": "MINISTERIO DA FAZENDA",
+     "valor": 11923238.12
+    },
+    {
+     "cnpj": "03.773.524/0001-03",
+     "nome": "TRIBUNAL REGIONAL DO TRABALHO DA 15A. REGIAO",
+     "valor": 10513170.07
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 8813138.18
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 6647265.78
+    },
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 6478545.03
+    },
+    {
+     "cnpj": "10.663.610/0001-29",
+     "nome": "DESENVOLVE SP - AGENCIA DE FOMENTO DO ESTADO DE SÃP PAULO S.A.",
+     "valor": 6365070.82
+    },
+    {
+     "cnpj": "46.374.500/0034-52",
+     "nome": "SÃO PAULO SECRETARIA DA SAÚDE",
+     "valor": 1400674.9
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 939483.74
+    },
+    {
+     "cnpj": "04.642.554/0001-43",
+     "nome": "TIPLAN - CONSULTORIA E SERVIÇOS EM INFORMÁTICA LTD",
+     "valor": 822000.0
+    }
+   ]
+  },
+  {
+   "codigo": "07",
+   "nome": "SECRETARIA DE PLANEJAMENTO",
+   "empenhado": 9434395.12,
+   "liquidado": 8840669.05,
+   "pago": 8284110.72,
+   "por_mes": {
+    "01": {
+     "empenhado": 1849462.14,
+     "liquidado": 728213.21,
+     "pago": 262559.85
+    },
+    "02": {
+     "empenhado": 1068874.3,
+     "liquidado": 704472.43,
+     "pago": 653612.77
+    },
+    "03": {
+     "empenhado": 1622989.0,
+     "liquidado": 1091833.21,
+     "pago": 1070732.05
+    },
+    "04": {
+     "empenhado": 709102.15,
+     "liquidado": 1260839.68,
+     "pago": 1066459.3
+    },
+    "05": {
+     "empenhado": 661806.11,
+     "liquidado": 1254239.39,
+     "pago": 979865.47
+    },
+    "06": {
+     "empenhado": 696712.31,
+     "liquidado": 815359.8,
+     "pago": 1210301.36
+    },
+    "07": {
+     "empenhado": 673462.91,
+     "liquidado": 778630.64,
+     "pago": 874621.78
+    },
+    "08": {
+     "empenhado": 752085.73,
+     "liquidado": 799822.66,
+     "pago": 679809.08
+    },
+    "09": {
+     "empenhado": 705353.52,
+     "liquidado": 741859.09,
+     "pago": 784959.42
+    },
+    "10": {
+     "empenhado": 694546.95,
+     "liquidado": 665398.94,
+     "pago": 701189.64
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 4919675.57
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 646365.59
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 631855.0
+    },
+    {
+     "cnpj": "15.795.352/0001-58",
+     "nome": "ZAYCO CONSTRUÇÕES LTDA",
+     "valor": 522372.7
+    },
+    {
+     "cnpj": "66.582.784/0001-11",
+     "nome": "NTI BRASIL SOLUÇÕES DIGITAIS LTDA",
+     "valor": 328180.0
+    },
+    {
+     "cnpj": "60.626.627/0001-84",
+     "nome": "CONSORCIO AEROPORTO AMERICANA",
+     "valor": 290385.49
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 254374.73
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 194820.35
+    },
+    {
+     "cnpj": "16.422.758/0001-58",
+     "nome": "Serralheria Amerifer ME LTDA",
+     "valor": 149590.82
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 88123.75
+    }
+   ]
+  },
+  {
+   "codigo": "08",
+   "nome": "SECRETARIA DE CULTURA E TURISMO",
+   "empenhado": 18636896.71,
+   "liquidado": 17945404.05,
+   "pago": 16922391.04,
+   "por_mes": {
+    "01": {
+     "empenhado": 3788845.61,
+     "liquidado": 1564656.94,
+     "pago": 817608.16
+    },
+    "02": {
+     "empenhado": 1094131.12,
+     "liquidado": 1128594.11,
+     "pago": 951269.23
+    },
+    "03": {
+     "empenhado": 2916971.48,
+     "liquidado": 1985534.58,
+     "pago": 2162059.98
+    },
+    "04": {
+     "empenhado": 1885314.01,
+     "liquidado": 1640849.14,
+     "pago": 1307405.66
+    },
+    "05": {
+     "empenhado": 1769505.33,
+     "liquidado": 2045059.9,
+     "pago": 2035227.41
+    },
+    "06": {
+     "empenhado": 1541520.99,
+     "liquidado": 1994509.01,
+     "pago": 1899300.05
+    },
+    "07": {
+     "empenhado": 1481258.92,
+     "liquidado": 1724032.5,
+     "pago": 1579026.55
+    },
+    "08": {
+     "empenhado": 1691638.55,
+     "liquidado": 2682653.97,
+     "pago": 2455717.93
+    },
+    "09": {
+     "empenhado": 1232614.27,
+     "liquidado": 1867520.67,
+     "pago": 2098424.55
+    },
+    "10": {
+     "empenhado": 1235096.43,
+     "liquidado": 1311993.23,
+     "pago": 1616351.52
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 8829109.39
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 1602025.46
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 1427468.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 459384.6
+    },
+    {
+     "cnpj": "06.974.438/0001-57",
+     "nome": "E & H PRODUCOES ARTISTICAS LTDA",
+     "valor": 425000.0
+    },
+    {
+     "cnpj": "05.729.005/0001-73",
+     "nome": "MANGABA PRODUCOES ARTISTICAS LTDA",
+     "valor": 350000.0
+    },
+    {
+     "cnpj": "10.295.593/0001-14",
+     "nome": "TURMA DO PAGODE PRODUCOES ARTISTICAS LTDA",
+     "valor": 300000.0
+    },
+    {
+     "cnpj": "27.687.755/0001-62",
+     "nome": "ACAUA PRODUTORA LIMITADA",
+     "valor": 290000.0
+    },
+    {
+     "cnpj": "17.454.022/0001-24",
+     "nome": "LEANDRO DE ARAUJO CINTRA",
+     "valor": 267690.5
+    },
+    {
+     "cnpj": "33.667.661/0001-24",
+     "nome": "BANDA MORADA PRODUCOES E EVENTOS LTDA",
+     "valor": 260000.0
+    }
+   ]
+  },
+  {
+   "codigo": "09",
+   "nome": "SECRETARIA DE EDUCAÇÃO",
+   "empenhado": 271163954.59,
+   "liquidado": 241207613.88,
+   "pago": 224396782.19,
+   "por_mes": {
+    "01": {
+     "empenhado": 98832698.68,
+     "liquidado": 22539458.02,
+     "pago": 15636396.88
+    },
+    "02": {
+     "empenhado": 24343685.98,
+     "liquidado": 16275258.62,
+     "pago": 11997828.1
+    },
+    "03": {
+     "empenhado": 18362402.02,
+     "liquidado": 27406341.1,
+     "pago": 23521753.61
+    },
+    "04": {
+     "empenhado": 16816536.04,
+     "liquidado": 24070859.19,
+     "pago": 25626050.84
+    },
+    "05": {
+     "empenhado": 21919705.09,
+     "liquidado": 25483776.85,
+     "pago": 23697872.77
+    },
+    "06": {
+     "empenhado": 19523068.09,
+     "liquidado": 27733697.75,
+     "pago": 25724363.78
+    },
+    "07": {
+     "empenhado": 15155409.36,
+     "liquidado": 23980776.38,
+     "pago": 26814408.94
+    },
+    "08": {
+     "empenhado": 20427696.92,
+     "liquidado": 24985356.63,
+     "pago": 21662288.46
+    },
+    "09": {
+     "empenhado": 16659907.39,
+     "liquidado": 25075037.31,
+     "pago": 27415617.4
+    },
+    "10": {
+     "empenhado": 19122845.02,
+     "liquidado": 23657052.03,
+     "pago": 22300201.41
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 109035186.36
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 15910006.0
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 15052375.72
+    },
+    {
+     "cnpj": "58.981.366/0001-79",
+     "nome": "OMEGA ALIMENTAÇÃO E SERVIÇOS ESPECIALIZADOS S/A",
+     "valor": 13635765.28
+    },
+    {
+     "cnpj": "69.144.434/0001-61",
+     "nome": "SANCETUR - SANTA CECÍLIA TURISMO LTDA.",
+     "valor": 10380124.25
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 5306621.43
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 4744783.67
+    },
+    {
+     "cnpj": "24.490.730/0001-86",
+     "nome": "RGF AMBIENTAL LTDA",
+     "valor": 3888738.77
+    },
+    {
+     "cnpj": "21.580.609/0001-57",
+     "nome": "AMADO TECNOLOGIA LTDA",
+     "valor": 3203629.55
+    },
+    {
+     "cnpj": "04.659.085/0001-75",
+     "nome": "AVD SERVICOS A SAUDE LTDA",
+     "valor": 2043614.17
+    }
+   ]
+  },
+  {
+   "codigo": "10",
+   "nome": "SECRETARIA DE ESPORTES",
+   "empenhado": 9583765.85,
+   "liquidado": 8885388.11,
+   "pago": 8351329.4,
+   "por_mes": {
+    "01": {
+     "empenhado": 2717275.25,
+     "liquidado": 750351.26,
+     "pago": 376884.86
+    },
+    "02": {
+     "empenhado": 642524.65,
+     "liquidado": 690238.8,
+     "pago": 642404.5
+    },
+    "03": {
+     "empenhado": 860452.11,
+     "liquidado": 1130133.17,
+     "pago": 791375.46
+    },
+    "04": {
+     "empenhado": 1070252.51,
+     "liquidado": 853889.48,
+     "pago": 1008868.49
+    },
+    "05": {
+     "empenhado": 661538.47,
+     "liquidado": 859230.98,
+     "pago": 1029616.56
+    },
+    "06": {
+     "empenhado": 836857.95,
+     "liquidado": 1040757.92,
+     "pago": 760095.04
+    },
+    "07": {
+     "empenhado": 673227.02,
+     "liquidado": 920236.25,
+     "pago": 927143.53
+    },
+    "08": {
+     "empenhado": 855333.9,
+     "liquidado": 913299.61,
+     "pago": 1055222.68
+    },
+    "09": {
+     "empenhado": 710161.2,
+     "liquidado": 873951.28,
+     "pago": 916122.06
+    },
+    "10": {
+     "empenhado": 556142.79,
+     "liquidado": 853299.36,
+     "pago": 843596.22
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 4403921.52
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 914977.0
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 642405.62
+    },
+    {
+     "cnpj": "33.050.196/0001-88",
+     "nome": "CPFL - COMPANHIA PAULISTA DE FORCA E LUZ",
+     "valor": 393746.26
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 193559.27
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 160595.18
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 125466.48
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 102912.7
+    },
+    {
+     "cnpj": "15.195.640/0001-71",
+     "nome": "MARFEX LOPES COMÉRCIO DE MATERIAIS PARA CONSTRUÇÃO LTDA-ME",
+     "valor": 68068.04
+    },
+    {
+     "cnpj": "46.755.690/0001-90",
+     "nome": "DEPARTAMENTO DE AGUA E ESGOTO - DAE",
+     "valor": 63284.39
+    }
+   ]
+  },
+  {
+   "codigo": "11",
+   "nome": "SECRETARIA DE HABITAÇÃO E DESENVOLVIMENTO URBANO",
+   "empenhado": 3928927.4,
+   "liquidado": 3769584.37,
+   "pago": 3438128.13,
+   "por_mes": {
+    "01": {
+     "empenhado": 794886.66,
+     "liquidado": 354813.19,
+     "pago": 81696.06
+    },
+    "02": {
+     "empenhado": 314178.99,
+     "liquidado": 299753.68,
+     "pago": 324092.71
+    },
+    "03": {
+     "empenhado": 316748.77,
+     "liquidado": 409043.27,
+     "pago": 358369.26
+    },
+    "04": {
+     "empenhado": 310910.9,
+     "liquidado": 363127.12,
+     "pago": 345169.17
+    },
+    "05": {
+     "empenhado": 350889.05,
+     "liquidado": 393684.83,
+     "pago": 434639.74
+    },
+    "06": {
+     "empenhado": 370172.59,
+     "liquidado": 415590.7,
+     "pago": 369819.14
+    },
+    "07": {
+     "empenhado": 366592.22,
+     "liquidado": 364728.97,
+     "pago": 375086.76
+    },
+    "08": {
+     "empenhado": 360857.47,
+     "liquidado": 396057.31,
+     "pago": 358084.37
+    },
+    "09": {
+     "empenhado": 370537.87,
+     "liquidado": 440231.65,
+     "pago": 412551.86
+    },
+    "10": {
+     "empenhado": 373152.88,
+     "liquidado": 332553.65,
+     "pago": 378619.06
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 2234431.59
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 392941.19
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 312277.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 85477.88
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 55770.95
+    },
+    {
+     "cnpj": "03.709.814/0075-24",
+     "nome": "SERVICO NACIONAL DE APRENDIZAGEM COMERCIAL SENAC",
+     "valor": 38746.22
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 37718.01
+    },
+    {
+     "cnpj": "66.582.784/0001-11",
+     "nome": "NTI BRASIL SOLUÇÕES DIGITAIS LTDA",
+     "valor": 27960.0
+    },
+    {
+     "cnpj": "52.845.569/0001-51",
+     "nome": "2 TABELIÃO DE NOTAS E DE PROTESTOS DE LETRAS E TITULOS DA COMARCA DE AMERICANA",
+     "valor": 19387.2
+    },
+    {
+     "cnpj": "51.055.408/0001-00",
+     "nome": "OF.DE REG.DE IMÓV., TÍTULOS E DOC.CIVIL DE PES.JUR",
+     "valor": 16971.88
+    }
+   ]
+  },
+  {
+   "codigo": "12",
+   "nome": "SECRETARIA DE MEIO AMBIENTE",
+   "empenhado": 35379193.39,
+   "liquidado": 29078372.34,
+   "pago": 26533217.05,
+   "por_mes": {
+    "01": {
+     "empenhado": 16417194.4,
+     "liquidado": 1602796.46,
+     "pago": 722016.19
+    },
+    "02": {
+     "empenhado": 1204970.59,
+     "liquidado": 2288091.46,
+     "pago": 1527290.31
+    },
+    "03": {
+     "empenhado": 2092711.19,
+     "liquidado": 2978402.63,
+     "pago": 2533006.31
+    },
+    "04": {
+     "empenhado": 1510447.34,
+     "liquidado": 2521891.72,
+     "pago": 2667566.03
+    },
+    "05": {
+     "empenhado": 1994452.34,
+     "liquidado": 3021685.86,
+     "pago": 3047376.85
+    },
+    "06": {
+     "empenhado": 1529270.16,
+     "liquidado": 3122461.48,
+     "pago": 2758158.47
+    },
+    "07": {
+     "empenhado": 3700076.98,
+     "liquidado": 2986254.23,
+     "pago": 3074462.25
+    },
+    "08": {
+     "empenhado": 1953196.33,
+     "liquidado": 3896039.36,
+     "pago": 2977557.61
+    },
+    "09": {
+     "empenhado": 1502249.82,
+     "liquidado": 3438327.77,
+     "pago": 3806814.96
+    },
+    "10": {
+     "empenhado": 3474624.24,
+     "liquidado": 3222421.37,
+     "pago": 3418968.07
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 9791973.52
+    },
+    {
+     "cnpj": "00.126.468/0001-27",
+     "nome": "M.B. ENGENHARIA E MEIO AMBIENTE S/C LTDA",
+     "valor": 8140631.67
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 1863617.0
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 1832148.91
+    },
+    {
+     "cnpj": "16.422.758/0001-58",
+     "nome": "Serralheria Amerifer ME LTDA",
+     "valor": 623724.38
+    },
+    {
+     "cnpj": "15.795.352/0001-58",
+     "nome": "ZAYCO CONSTRUÇÕES LTDA",
+     "valor": 495140.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 481884.99
+    },
+    {
+     "cnpj": "27.522.050/0001-95",
+     "nome": "C S FREITAS COMERCIO DE ALIMENTOS LTDA",
+     "valor": 434191.23
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 324893.69
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 239526.88
+    }
+   ]
+  },
+  {
+   "codigo": "13",
+   "nome": "SECRETARIA DE ASSISTÊNCIA SOCIAL E DIREITOS HUMANO",
+   "empenhado": 33992420.16,
+   "liquidado": 32787029.99,
+   "pago": 31538174.29,
+   "por_mes": {
+    "01": {
+     "empenhado": 5884687.86,
+     "liquidado": 2949690.33,
+     "pago": 2020569.07
+    },
+    "02": {
+     "empenhado": 3047543.15,
+     "liquidado": 3027000.19,
+     "pago": 3406322.11
+    },
+    "03": {
+     "empenhado": 2975523.8,
+     "liquidado": 3279732.98,
+     "pago": 3117779.8
+    },
+    "04": {
+     "empenhado": 3048196.86,
+     "liquidado": 3186297.19,
+     "pago": 3000878.42
+    },
+    "05": {
+     "empenhado": 3143234.23,
+     "liquidado": 3354056.96,
+     "pago": 3149712.47
+    },
+    "06": {
+     "empenhado": 3103934.75,
+     "liquidado": 3540127.22,
+     "pago": 3725832.45
+    },
+    "07": {
+     "empenhado": 3183469.97,
+     "liquidado": 3415031.34,
+     "pago": 3132943.17
+    },
+    "08": {
+     "empenhado": 3278050.59,
+     "liquidado": 3287494.43,
+     "pago": 3241695.84
+    },
+    "09": {
+     "empenhado": 3316618.41,
+     "liquidado": 3566388.81,
+     "pago": 3305235.47
+    },
+    "10": {
+     "empenhado": 3011160.54,
+     "liquidado": 3181210.54,
+     "pago": 3437205.49
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 8542640.2
+    },
+    {
+     "cnpj": "57.519.654/0001-43",
+     "nome": "ASSOCIAÇÃO DE ASSISTÊNCIA AO MENOR ÁGUA VIVA",
+     "valor": 3642276.82
+    },
+    {
+     "cnpj": "43.263.821/0003-95",
+     "nome": "VILA DE SAO VICENTE DE PAULO DE AMERICANA - OBRA U",
+     "valor": 2103335.77
+    },
+    {
+     "cnpj": "30.111.445/0001-00",
+     "nome": "ASSOCIACAO FRATERNIDADE GUARDIOES DA IMACULADA",
+     "valor": 1868245.24
+    },
+    {
+     "cnpj": "43.266.758/0001-89",
+     "nome": "ASSOCIAÇÃO BENEFICIENTE RESIDENCIAL EVANG. BENAIAH",
+     "valor": 1825567.04
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 1413111.0
+    },
+    {
+     "cnpj": "43.266.378/0001-44",
+     "nome": "COASSEJE - CASA DE ORIENTACAO E ASSISTENCIA SOCIAL",
+     "valor": 1331481.97
+    },
+    {
+     "cnpj": "52.154.424/0001-04",
+     "nome": "ASSOCIACAO AMERICANENSE DE ACOLHIMENTO - A.A.M.A.",
+     "valor": 1282164.66
+    },
+    {
+     "cnpj": "43.262.708/0001-23",
+     "nome": "ASSOCIAÇÃO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE AMERICANA",
+     "valor": 1068971.89
+    },
+    {
+     "cnpj": "26.563.581/0007-59",
+     "nome": "ASSOCIAÇÃO BRAZILIAN KIDS KARE",
+     "valor": 1055960.54
+    }
+   ]
+  },
+  {
+   "codigo": "14",
+   "nome": "SECRETARIA DE SAÚDE/FUNDO MUNICIPAL DE SAÚDE",
+   "empenhado": 378770255.04,
+   "liquidado": 338002688.64,
+   "pago": 314947435.03,
+   "por_mes": {
+    "01": {
+     "empenhado": 220434074.23,
+     "liquidado": 42155485.15,
+     "pago": 19315444.22
+    },
+    "02": {
+     "empenhado": 16645623.81,
+     "liquidado": 30357310.96,
+     "pago": 26156732.9
+    },
+    "03": {
+     "empenhado": 21268139.57,
+     "liquidado": 33924241.67,
+     "pago": 31608532.6
+    },
+    "04": {
+     "empenhado": 13567510.96,
+     "liquidado": 32991357.65,
+     "pago": 35551742.89
+    },
+    "05": {
+     "empenhado": 14017676.84,
+     "liquidado": 33346437.3,
+     "pago": 30986770.38
+    },
+    "06": {
+     "empenhado": 25142517.7,
+     "liquidado": 34419697.24,
+     "pago": 35012113.43
+    },
+    "07": {
+     "empenhado": 18834912.98,
+     "liquidado": 34381891.25,
+     "pago": 32860775.02
+    },
+    "08": {
+     "empenhado": 16075064.14,
+     "liquidado": 35450167.48,
+     "pago": 33416279.45
+    },
+    "09": {
+     "empenhado": 12606250.55,
+     "liquidado": 33969400.76,
+     "pago": 36183795.61
+    },
+    "10": {
+     "empenhado": 20178484.26,
+     "liquidado": 27006699.18,
+     "pago": 33855248.53
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "73.027.690/0001-46",
+     "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+     "valor": 141702281.79
+    },
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 63535688.72
+    },
+    {
+     "cnpj": "19.947.645/0001-64",
+     "nome": "CONSORCIO INTERMUNICIPAL DE SAÚDE NA REGIÃO METROPOLITANA DE CAMPINAS - NORTE - CISMETRO",
+     "valor": 29046293.31
+    },
+    {
+     "cnpj": "23.453.830/0001-70",
+     "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO - INDSH",
+     "valor": 13862669.86
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 10364480.0
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 9588237.06
+    },
+    {
+     "cnpj": "43.262.708/0001-23",
+     "nome": "ASSOCIAÇÃO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE AMERICANA",
+     "valor": 4240514.83
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 3269251.93
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 2721455.49
+    },
+    {
+     "cnpj": "25.126.895/0001-36",
+     "nome": "REAL SAUDE GESTAO MEDICA LTDA",
+     "valor": 1451300.6
+    }
+   ]
+  },
+  {
+   "codigo": "15",
+   "nome": "CONTROLADORIA GERAL DO MUNICÍPIO",
+   "empenhado": 921187.63,
+   "liquidado": 893939.77,
+   "pago": 818526.19,
+   "por_mes": {
+    "01": {
+     "empenhado": 116099.65,
+     "liquidado": 50979.18,
+     "pago": 7874.92
+    },
+    "02": {
+     "empenhado": 70691.08,
+     "liquidado": 73866.24,
+     "pago": 66207.54
+    },
+    "03": {
+     "empenhado": 89801.17,
+     "liquidado": 103068.18,
+     "pago": 82061.78
+    },
+    "04": {
+     "empenhado": 173024.61,
+     "liquidado": 133571.17,
+     "pago": 118978.54
+    },
+    "05": {
+     "empenhado": 72161.3,
+     "liquidado": 96481.62,
+     "pago": 104060.29
+    },
+    "06": {
+     "empenhado": 79088.58,
+     "liquidado": 79463.8,
+     "pago": 96272.35
+    },
+    "07": {
+     "empenhado": 74265.15,
+     "liquidado": 92052.61,
+     "pago": 84485.49
+    },
+    "08": {
+     "empenhado": 97775.79,
+     "liquidado": 84137.45,
+     "pago": 87770.19
+    },
+    "09": {
+     "empenhado": 73565.15,
+     "liquidado": 92754.12,
+     "pago": 84263.51
+    },
+    "10": {
+     "empenhado": 74715.15,
+     "liquidado": 87565.4,
+     "pago": 86551.58
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 560547.97
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 106833.55
+    },
+    {
+     "cnpj": "08.714.485/0001-97",
+     "nome": "METABIT SISTEMAS PARA GESTAO PUBLICA LTDA",
+     "valor": 56119.86
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 38772.97
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 27048.0
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 21496.0
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 3961.9
+    },
+    {
+     "cnpj": "00.656.809/0001-76",
+     "nome": "ASSOCIACAO BRASILEIRA DE OUVIDORES",
+     "valor": 1964.0
+    },
+    {
+     "cnpj": "02.558.157/0001-62",
+     "nome": "TELEFONICA BRASIL S.A.",
+     "valor": 403.2
+    },
+    {
+     "cnpj": "04.088.208/0001-65",
+     "nome": "SEM PARAR INSTITUIÇÃO DE PAGAMENTO LTDA",
+     "valor": 317.6
+    }
+   ]
+  },
+  {
+   "codigo": "16",
+   "nome": "SECRETARIA DE OBRAS E SERVIÇOS URBANOS",
+   "empenhado": 249156558.62,
+   "liquidado": 206224888.56,
+   "pago": 194167461.36,
+   "por_mes": {
+    "01": {
+     "empenhado": 104297709.54,
+     "liquidado": 11778783.2,
+     "pago": 3838856.24
+    },
+    "02": {
+     "empenhado": 7946797.38,
+     "liquidado": 10374751.66,
+     "pago": 9869221.94
+    },
+    "03": {
+     "empenhado": 7856944.97,
+     "liquidado": 15959420.02,
+     "pago": 11630147.93
+    },
+    "04": {
+     "empenhado": 15194476.63,
+     "liquidado": 19176849.97,
+     "pago": 18846193.27
+    },
+    "05": {
+     "empenhado": 6604681.68,
+     "liquidado": 16135143.12,
+     "pago": 15324761.76
+    },
+    "06": {
+     "empenhado": 47381501.77,
+     "liquidado": 17049001.7,
+     "pago": 16422886.5
+    },
+    "07": {
+     "empenhado": 11009125.13,
+     "liquidado": 27670969.96,
+     "pago": 28109259.45
+    },
+    "08": {
+     "empenhado": 12110681.6,
+     "liquidado": 28904833.37,
+     "pago": 30292404.45
+    },
+    "09": {
+     "empenhado": 19917704.36,
+     "liquidado": 36609707.67,
+     "pago": 34914722.74
+    },
+    "10": {
+     "empenhado": 16836935.56,
+     "liquidado": 22565427.89,
+     "pago": 24919007.08
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "08.183.516/0001-20",
+     "nome": "CASAMAX COMERCIAL E SERVICOS LTDA",
+     "valor": 44770031.5
+    },
+    {
+     "cnpj": "69.144.434/0004-04",
+     "nome": "SANCETUR - SANTA CECÍLIA TURISMO LTDA. (FILIAL)",
+     "valor": 30242044.0
+    },
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 22769756.11
+    },
+    {
+     "cnpj": "00.126.468/0001-27",
+     "nome": "M.B. ENGENHARIA E MEIO AMBIENTE S/C LTDA",
+     "valor": 20584540.63
+    },
+    {
+     "cnpj": "33.952.459/0001-44",
+     "nome": "UTGR AMERICANA AMBIENTAL LTDA",
+     "valor": 9752731.71
+    },
+    {
+     "cnpj": "60.626.627/0001-84",
+     "nome": "CONSORCIO AEROPORTO AMERICANA",
+     "valor": 8602188.69
+    },
+    {
+     "cnpj": "02.542.939/0001-03",
+     "nome": "FBF CONSTRUCOES E SERVICOS EIRELI",
+     "valor": 7246802.9
+    },
+    {
+     "cnpj": "33.050.196/0001-88",
+     "nome": "CPFL - COMPANHIA PAULISTA DE FORCA E LUZ",
+     "valor": 6556646.17
+    },
+    {
+     "cnpj": "13.325.785/0001-14",
+     "nome": "CEL USINA DE ASFALTO EIRELI",
+     "valor": 5852186.6
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 4949392.0
+    }
+   ]
+  },
+  {
+   "codigo": "21",
+   "nome": "SECRETARIA DE DESENVOLVIMENTO ECONÔMICO",
+   "empenhado": 3479282.9,
+   "liquidado": 3342383.4,
+   "pago": 3076539.29,
+   "por_mes": {
+    "01": {
+     "empenhado": 879878.9,
+     "liquidado": 322036.86,
+     "pago": 85584.97
+    },
+    "02": {
+     "empenhado": 244815.47,
+     "liquidado": 265418.75,
+     "pago": 276113.14
+    },
+    "03": {
+     "empenhado": 253274.33,
+     "liquidado": 326837.41,
+     "pago": 326970.32
+    },
+    "04": {
+     "empenhado": 277009.68,
+     "liquidado": 312297.86,
+     "pago": 266896.56
+    },
+    "05": {
+     "empenhado": 339821.92,
+     "liquidado": 392648.4,
+     "pago": 408687.23
+    },
+    "06": {
+     "empenhado": 321400.7,
+     "liquidado": 390735.35,
+     "pago": 361185.03
+    },
+    "07": {
+     "empenhado": 343461.28,
+     "liquidado": 395424.38,
+     "pago": 333659.17
+    },
+    "08": {
+     "empenhado": 286092.37,
+     "liquidado": 322628.65,
+     "pago": 392427.19
+    },
+    "09": {
+     "empenhado": 268213.27,
+     "liquidado": 323740.25,
+     "pago": 319398.69
+    },
+    "10": {
+     "empenhado": 265314.98,
+     "liquidado": 290615.49,
+     "pago": 305616.99
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 1985750.77
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 338122.59
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 330701.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 83059.75
+    },
+    {
+     "cnpj": "12.937.005/0001-24",
+     "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA-",
+     "valor": 55923.57
+    },
+    {
+     "cnpj": "33.050.196/0001-88",
+     "nome": "CPFL - COMPANHIA PAULISTA DE FORCA E LUZ",
+     "valor": 43779.5
+    },
+    {
+     "cnpj": "50.730.549/0001-00",
+     "nome": "OBSERVATÓRIO SOLUÇÕES EM GESTÃO LTDA INOVA SIMPLES (I.S.)",
+     "valor": 39708.6
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 34026.41
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 21496.0
+    },
+    {
+     "cnpj": "24.077.447/0001-27",
+     "nome": "FLEXXLIMP COMERCIAL LTDA",
+     "valor": 13439.0
+    }
+   ]
+  },
+  {
+   "codigo": "22",
+   "nome": "SECRETARIA DE GESTÃO DE CONVÊNIOS",
+   "empenhado": 1324207.18,
+   "liquidado": 1296751.13,
+   "pago": 1200514.17,
+   "por_mes": {
+    "01": {
+     "empenhado": 223535.04,
+     "liquidado": 115375.77,
+     "pago": 21851.22
+    },
+    "02": {
+     "empenhado": 109970.94,
+     "liquidado": 113950.5,
+     "pago": 112009.98
+    },
+    "03": {
+     "empenhado": 113855.09,
+     "liquidado": 131063.58,
+     "pago": 146062.38
+    },
+    "04": {
+     "empenhado": 117386.17,
+     "liquidado": 123716.18,
+     "pago": 98023.99
+    },
+    "05": {
+     "empenhado": 161984.58,
+     "liquidado": 172572.52,
+     "pago": 185956.97
+    },
+    "06": {
+     "empenhado": 119742.04,
+     "liquidado": 136927.61,
+     "pago": 131551.49
+    },
+    "07": {
+     "empenhado": 110269.18,
+     "liquidado": 124761.05,
+     "pago": 123915.99
+    },
+    "08": {
+     "empenhado": 126380.86,
+     "liquidado": 117830.0,
+     "pago": 119233.93
+    },
+    "09": {
+     "empenhado": 115140.68,
+     "liquidado": 127645.65,
+     "pago": 124091.23
+    },
+    "10": {
+     "empenhado": 125942.6,
+     "liquidado": 132908.27,
+     "pago": 137816.99
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 877597.2
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 176445.79
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 69972.0
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 34696.6
+    },
+    {
+     "cnpj": "14.009.370/0001-02",
+     "nome": "GERMANICA LOCADORA DE VEICULOS LIMITADA",
+     "valor": 21496.0
+    },
+    {
+     "cnpj": "22.893.182/0001-00",
+     "nome": "PURO SABOR SERVICOS DE ALIMENTACAO LTDA",
+     "valor": 8636.21
+    },
+    {
+     "cnpj": "05.676.190/0001-85",
+     "nome": "FAE VIAGENS E TURISMO LTDA",
+     "valor": 5837.0
+    },
+    {
+     "cnpj": "27.010.813/0001-19",
+     "nome": "SARITA NICOLETI /FLYWORLD AMERICANA",
+     "valor": 2726.57
+    },
+    {
+     "cnpj": "25.165.749/0001-10",
+     "nome": "NEO CONSULTORIA E ADMINISTRACAO DE BENEFICIOS EIRE",
+     "valor": 603.73
+    },
+    {
+     "cnpj": "04.088.208/0001-65",
+     "nome": "SEM PARAR INSTITUIÇÃO DE PAGAMENTO LTDA",
+     "valor": 187.6
+    }
+   ]
+  },
+  {
+   "codigo": "23",
+   "nome": "SECRETARIA DE COMUNICAÇÃO E TECNOLOGIA DA INFORMAÇ",
+   "empenhado": 9943392.16,
+   "liquidado": 9116941.71,
+   "pago": 8538519.3,
+   "por_mes": {
+    "01": {
+     "empenhado": 3147373.2,
+     "liquidado": 655230.77,
+     "pago": 70874.7
+    },
+    "02": {
+     "empenhado": 2832208.57,
+     "liquidado": 707973.39,
+     "pago": 684499.58
+    },
+    "03": {
+     "empenhado": 473747.96,
+     "liquidado": 973687.99,
+     "pago": 689676.84
+    },
+    "04": {
+     "empenhado": 402373.97,
+     "liquidado": 708567.3,
+     "pago": 955502.95
+    },
+    "05": {
+     "empenhado": 583144.7,
+     "liquidado": 1146503.69,
+     "pago": 956581.76
+    },
+    "06": {
+     "empenhado": 884360.27,
+     "liquidado": 869649.33,
+     "pago": 1032663.29
+    },
+    "07": {
+     "empenhado": 396684.97,
+     "liquidado": 1283480.81,
+     "pago": 1044356.69
+    },
+    "08": {
+     "empenhado": 474740.49,
+     "liquidado": 559446.3,
+     "pago": 981196.84
+    },
+    "09": {
+     "empenhado": 457299.06,
+     "liquidado": 1324758.28,
+     "pago": 1208399.47
+    },
+    "10": {
+     "empenhado": 291458.97,
+     "liquidado": 887643.85,
+     "pago": 914767.18
+    }
+   },
+   "maiores_pagos": [
+    {
+     "cnpj": "45.781.176/0001-66",
+     "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+     "valor": 2710261.73
+    },
+    {
+     "cnpj": "04.956.954/0001-23",
+     "nome": "E 3 - COMUNICACAO INTEGRADA LTDA",
+     "valor": 2704856.57
+    },
+    {
+     "cnpj": "80.680.093/0001-81",
+     "nome": "SENIOR SISTEMAS S.A",
+     "valor": 1216966.04
+    },
+    {
+     "cnpj": "00.394.528/0004-35",
+     "nome": "INSS-INSTITUTO NACIONAL SEGURO SOCIAL",
+     "valor": 468257.97
+    },
+    {
+     "cnpj": "00.604.122/0001-97",
+     "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+     "valor": 261170.0
+    },
+    {
+     "cnpj": "48.197.859/0001-69",
+     "nome": "INFORMÁTICA DE MUNICÍPIOS ASSOCIADOS S/A",
+     "valor": 245622.59
+    },
+    {
+     "cnpj": "00.360.305/0001-04",
+     "nome": "CAIXA ECONOMICA FEDERAL",
+     "valor": 133253.32
+    },
+    {
+     "cnpj": "03.820.167/0001-97",
+     "nome": "SK TECNOLOGIA LTDA",
+     "valor": 133000.0
+    },
+    {
+     "cnpj": "02.360.032/0001-23",
+     "nome": "MICRO LASER COM.E SERVIÇOS LTDA.",
+     "valor": 118680.91
+    },
+    {
+     "cnpj": "38.339.360/0001-95",
+     "nome": "TOLDOS ANDRADENSE LTDA.",
+     "valor": 71696.69
+    }
+   ]
+  }
+ ]
+}

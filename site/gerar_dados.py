@@ -450,8 +450,32 @@ def gerar_prefeito(sessoes, mapa, vereadores, checar, verif):
         for k, f in sorted(folha_pref.items()):
             if sub and f["prefeito"] and abs(f["prefeito"]["vencimentos"] - sub) >= 0.01:
                 verif["avisos"].append(f"Folha da Prefeitura {k}: vencimento do prefeito R$ {f['prefeito']['vencimentos']:.2f}, diferente do subsídio fixado em lei.")
+    # despesas por secretaria (planilhas do portal: importar_despesas_prefeitura.py), ligadas ao orçamento pelo nome
+    pasta_d = os.path.join(DADOS, "prefeitura", "despesas")
+    despesas = {}
+    norm = lambda t: unicodedata.normalize("NFD", t.split("/")[0]).encode("ascii", "ignore").decode().lower().strip()
+    if os.path.isdir(pasta_d):
+        for nome in sorted(os.listdir(pasta_d)):
+            if not (nome.startswith("despesas-") and nome.endswith(".json")):
+                continue
+            d = json.load(open(os.path.join(pasta_d, nome), encoding="utf-8"))
+            orc = next((o for o in orcamento if str(o["ano"]) == str(d["ano"]) and o.get("orgaos")), None)
+            nomes_loa = {norm(g["nome"]): g for g in (orc or {}).get("orgaos", [])}
+            for u in d["unidades"]:
+                n = norm(u["nome"])
+                g = next((g for k, g in nomes_loa.items() if k.startswith(n) or n.startswith(k)), None)
+                u["nome_lei"] = g["nome"] if g else None
+                u["previsto"] = g["valor"] if g else None
+            if orc:
+                checar(all(u["nome_lei"] for u in d["unidades"]),
+                       f"Despesas {d['ano']}: as {len(d['unidades'])} secretarias do portal foram ligadas ao orçamento da lei pelo nome")
+            checar(all(abs(sum(m[k] for m in u["por_mes"].values()) - u[k]) < 0.05 for u in d["unidades"] for k in ("empenhado", "pago")),
+                   f"Despesas {d['ano']}: a soma dos meses bate com o total de cada secretaria")
+            checar(all(u["pago"] >= sum(x["valor"] for x in u["maiores_pagos"]) - 0.01 for u in d["unidades"]),
+                   f"Despesas {d['ano']}: em cada secretaria, a soma das empresas que mais receberam não passa do total pago")
+            despesas[str(d["ano"])] = d
     return {
-        "cadastro": cadastro, "orcamento_gabinete": orcamento, "tce": tce, "folha": folha_pref,
+        "cadastro": cadastro, "orcamento_gabinete": orcamento, "tce": tce, "folha": folha_pref, "despesas": despesas,
         "autor_siscam": EXECUTIVO, "coletado_em": estado.get("coletado_em", ""),
         "fonte_projetos": f"{SISCAM}/Documentos/Pesquisa?Pesquisa=Avancada&id=74&pagina=1&Modulo=DocumentosLista&DocumentosRelacionadosDetalhes=false&NoTexto=false&Documento=0&Numeracao=Documento&AnoInicial={INICIO_MANDATO[:4]}&Situacao=0&TipoAutor=Prefeito&AutoriaId=29&Iniciativa=Nenhum",
         "projetos": projetos, "contagem": dict(Counter(p["grupo"] for p in projetos)),

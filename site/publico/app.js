@@ -651,7 +651,33 @@ function tabelaOrc(ano) {
     ${o.orgaos.map((g) => { const pct = (g.valor / o.total) * 100; return `<tr><td>${$(g.nome)}<i class="barra-orc" style="width:${Math.max(1, Math.round((g.valor / o.orgaos[0].valor) * 100))}%"></i></td><td>${reais(g.valor)}</td><td>${pct < 0.1 ? "menos de 0,1" : pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% do total</td></tr>`; }).join("")}
     </tbody></table></div>
     <div class="aviso">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</div>
-    ${Number(o.ano) < 2026 ? `<div class="aviso">O orçamento de ${o.ano} foi votado em 2024, pela Câmara do mandato anterior. As emendas dos vereadores nessa lei não são dos vereadores atuais e por isso não aparecem nas fichas deles.</div>` : ""}`;
+    ${Number(o.ano) < 2026 ? `<div class="aviso">O orçamento de ${o.ano} foi votado em 2024, pela Câmara do mandato anterior. As emendas dos vereadores nessa lei não são dos vereadores atuais e por isso não aparecem nas fichas deles.</div>` : ""}
+    ${secaoGastoSecretarias(o.ano)}`;
+}
+
+function secaoGastoSecretarias(ano) {
+  const d = (P.despesas || {})[String(ano)];
+  if (!d) return "";
+  const ult = d.meses[d.meses.length - 1];
+  const periodo = d.meses.length === 12 ? `o ano todo de ${ano}` : `janeiro a ${MESES_NUM[ult - 1]} de ${ano}`;
+  const pct = (x) => x < 0.1 ? "menos de 0,1" : x.toLocaleString("pt-BR", { maximumFractionDigits: 0 });
+  const itens = d.unidades.slice().sort((a, b) => b.pago - a.pago).map((u) => {
+    const p = u.previsto ? (u.pago / u.previsto) * 100 : null;
+    const nome = u.nome_lei || u.nome;
+    return `<li><b class="nome-gasto">${$(nome)}</b>
+      ${p !== null ? `<span class="trilho-gasto" aria-hidden="true"><i style="width:${Math.min(100, Math.max(1, p)).toFixed(1)}%"></i></span>` : ""}
+      <span class="linha-gasto">Pago: <b>${reais(u.pago)}</b>${p !== null ? ` de ${reais(u.previsto)} previstos (<b>${pct(p)}%</b>)` : ""}</span>
+      <span class="linha-gasto suave">Empenhado (reservado para gastar): ${reais(u.empenhado)}</span>
+      ${u.maiores_pagos.length ? `<details><summary>Empresas e órgãos que mais receberam</summary>
+        <table class="tabela-pagos"><thead><tr><th>Quem recebeu (CNPJ)</th><th>Pago</th></tr></thead><tbody>
+        ${u.maiores_pagos.map((x) => `<tr><td>${$(x.nome)}<div class="meta">CNPJ ${$(x.cnpj)}</div></td><td>${reais(x.valor)}</td></tr>`).join("")}
+        </tbody></table></details>` : ""}
+    </li>`;
+  }).join("");
+  return `<h3>Quanto cada secretaria já gastou em ${ano}</h3>
+    <div class="aviso info">Gastos de ${periodo}, como estão no ${ext(d.fonte, "Portal da Transparência da Prefeitura")} (despesas por dotação). Total pago: <b>${reais(d.totais.pago)}</b>.</div>
+    <ul class="lista-gasto">${itens}</ul>
+    <div class="aviso">O orçamento pode ser aumentado durante o ano (créditos adicionais), por isso uma secretaria pode gastar mais do que o previsto na lei. “Empenhado” é o dinheiro já reservado para um contrato ou compra; “pago” é o que já saiu do caixa. A folha de salários aparece como pagamentos à própria Prefeitura, ao INSS e ao instituto de previdência; pagamentos a pessoas físicas entram só nos totais.</div>`;
 }
 
 function itemProjetoPref(p) {
@@ -779,6 +805,7 @@ async function telaSobre() {
       <li><b>Prefeito:</b> a pesquisa oficial de documentos do SISCAM, filtrada pelo autor “Poder Executivo de Americana” (projetos enviados) e pela situação “Veto” (projetos de vereadores vetados). Os votos vêm das mesmas páginas de sessão. O nome vem de um projeto assinado pelo Gabinete do Prefeito; o salário, da lei que fixou os subsídios (Projeto de Lei nº 27/2024); o orçamento do gabinete, da lei do orçamento.</li>
       <li><b>Despesas da Prefeitura:</b> a ${ext("https://transparencia.tce.sp.gov.br/apis", "API aberta do Tribunal de Contas do Estado (TCE-SP)")}, com o que a própria Prefeitura informa ao sistema Audesp, mês a mês. O Portal da Transparência da Prefeitura não aceita acesso automático de fora do Brasil, por isso usamos o TCE.</li>
       <li><b>Salários do prefeito, do vice, dos secretários e do Gabinete do Prefeito:</b> a planilha “Remuneração dos Servidores” do ${ext("https://transparencia.americana.sp.gov.br/transparencia_index.php?p=servidor_remuneracao", "Portal da Transparência da Prefeitura")}, baixada mês a mês de dentro do Brasil e importada sem mudar nenhum valor. Nos meses que ainda não temos, o salário do prefeito aparece como estimativa pelo valor fixado em lei, sempre marcado.</li>
+      <li><b>Gastos de cada secretaria:</b> a tela “Despesa” (movimento diário, por dotação) do ${ext("https://transparencia.americana.sp.gov.br/transparencia_index.php?p=movDiario_consultaDespesa&t=5&r=33", "Portal da Transparência da Prefeitura")}, exportada em Excel mês a mês e somada por secretaria, sem mudar nenhum valor. O previsto vem da lei do orçamento de cada ano.</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>
     <p>Um robô identificado como “AmericanaFiscaliza” baixa poucas páginas por vez, com pausa entre elas, para não pesar no sistema da Câmara. Se a Câmara pedir, ele para.</p>
