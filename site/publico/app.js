@@ -641,6 +641,12 @@ async function telaPrefeito(aba, mes) {
       ${o ? `<div class="numero"><b>${reais(o.valor)}</b><span>orçamento do Gabinete do Prefeito em ${o.ano}</span><small>${ext(o.pdf, $(o.lei))}</small></div>` : ""}
     </div>
     ${s ? `<div class="aviso">${$(s.obs)}</div>` : ""}
+    ${o && o.orgaos ? `<h3>Orçamento de cada secretaria e órgão em ${o.ano}</h3>
+    <div class="aviso info">Valor <b>previsto</b> na lei do orçamento de ${o.ano} para cada secretaria e órgão do município, não o que já foi gasto. Total: ${reais(o.total)}. ${ext(o.pdf, "Ver a lei (PDF)")}</div>
+    <div class="tabela-rolar"><table class="tabela-orc"><thead><tr><th>Secretaria ou órgão</th><th>Previsto</th><th>Parte</th></tr></thead><tbody>
+    ${o.orgaos.map((g) => { const pct = (g.valor / o.total) * 100; return `<tr><td>${$(g.nome)}<i class="barra-orc" style="width:${Math.max(1, Math.round((g.valor / o.orgaos[0].valor) * 100))}%"></i></td><td>${reais(g.valor)}</td><td>${pct < 0.1 ? "menos de 0,1" : pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% do total</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <p class="suave">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</p>` : ""}
     <h2>Mensal</h2>
     <div class="aviso info">Despesas de <b>toda a Prefeitura</b> (sem o DAE, a Guarda e os outros órgãos), como a própria Prefeitura informou ao Tribunal de Contas do Estado (TCE-SP). O sistema do TCE não separa o que é do Gabinete do Prefeito.</div>
     ${seletorTce(mes)}
