@@ -305,3 +305,10 @@ details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding:
 }
 .destaque b.inline { display: inline; font-size: inherit; color: #ffd2bd; }
 .numeros.um { grid-template-columns: 1fr; }
+.lista-gasto { list-style: none; padding: 0; margin: 0 0 16px; }
+.lista-gasto li { padding: 14px 0; border-bottom: 1px solid var(--linha); }
+.lista-gasto .nome-gasto { display: block; font-size: 18px; }
+.lista-gasto .linha-gasto { display: block; margin-top: 4px; }
+.trilho-gasto { display: block; height: 10px; margin: 8px 0 4px; border-radius: 5px; background: var(--linha); overflow: hidden; }
+.trilho-gasto i { display: block; height: 100%; background: var(--laranja); }
+.lista-gasto details { margin-top: 8px; }

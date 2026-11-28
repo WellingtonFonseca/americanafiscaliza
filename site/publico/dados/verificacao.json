@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-28T04:32:32+00:00",
+ "gerado_em": "2026-11-28T14:30:04+00:00",
  "checagens": [
   {
    "ok": true,
@@ -184,6 +184,30 @@
   {
    "ok": true,
    "texto": "Folha da Prefeitura: o vencimento do prefeito não passa do subsídio fixado em lei em nenhum mês"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2025: as 18 secretarias do portal foram ligadas ao orçamento da lei pelo nome"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2025: a soma dos meses bate com o total de cada secretaria"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2025: em cada secretaria, a soma das empresas que mais receberam não passa do total pago"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2026: as 18 secretarias do portal foram ligadas ao orçamento da lei pelo nome"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2026: a soma dos meses bate com o total de cada secretaria"
+  },
+  {
+   "ok": true,
+   "texto": "Despesas 2026: em cada secretaria, a soma das empresas que mais receberam não passa do total pago"
   }
  ],
  "avisos": [
