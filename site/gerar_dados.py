@@ -433,8 +433,25 @@ def gerar_prefeito(sessoes, mapa, vereadores, checar, verif):
                 tce[f"{t['ano']}-{t['mes']:02d}"] = t
     checar(all(t["totais"]["pago"] >= sum(x["valor"] for x in t["maiores_pagos"]) - 0.01 for t in tce.values()),
            f"Prefeitura (TCE-SP): em cada um dos {len(tce)} meses, a soma dos maiores recebedores não passa do total pago")
+    # folha da Prefeitura (planilhas do portal importadas à mão: importar_folha_prefeitura.py)
+    pasta_f = os.path.join(DADOS, "prefeitura", "folha")
+    folha_pref = {}
+    if os.path.isdir(pasta_f):
+        for nome in sorted(os.listdir(pasta_f)):
+            if nome.startswith("folha-") and nome.endswith(".json"):
+                f = json.load(open(os.path.join(pasta_f, nome), encoding="utf-8"))
+                folha_pref[f"{f['ano']}-{f['mes']:02d}"] = f
+    if folha_pref:
+        sub = (cadastro.get("subsidio") or {}).get("prefeito")
+        checar(all(f["prefeito"] for f in folha_pref.values()),
+               f"Folha da Prefeitura: o prefeito aparece em todos os {len(folha_pref)} meses importados")
+        checar(not sub or all(f["prefeito"] and f["prefeito"]["vencimentos"] <= sub + 0.01 for f in folha_pref.values()),
+               "Folha da Prefeitura: o vencimento do prefeito não passa do subsídio fixado em lei em nenhum mês")
+        for k, f in sorted(folha_pref.items()):
+            if sub and f["prefeito"] and abs(f["prefeito"]["vencimentos"] - sub) >= 0.01:
+                verif["avisos"].append(f"Folha da Prefeitura {k}: vencimento do prefeito R$ {f['prefeito']['vencimentos']:.2f}, diferente do subsídio fixado em lei.")
     return {
-        "cadastro": cadastro, "orcamento_gabinete": orcamento, "tce": tce,
+        "cadastro": cadastro, "orcamento_gabinete": orcamento, "tce": tce, "folha": folha_pref,
         "autor_siscam": EXECUTIVO, "coletado_em": estado.get("coletado_em", ""),
         "fonte_projetos": f"{SISCAM}/Documentos/Pesquisa?Pesquisa=Avancada&id=74&pagina=1&Modulo=DocumentosLista&DocumentosRelacionadosDetalhes=false&NoTexto=false&Documento=0&Numeracao=Documento&AnoInicial={INICIO_MANDATO[:4]}&Situacao=0&TipoAutor=Prefeito&AutoriaId=29&Iniciativa=Nenhum",
         "projetos": projetos, "contagem": dict(Counter(p["grupo"] for p in projetos)),
