@@ -131,12 +131,12 @@ function telaInicio() {
       <b>R$ ${milhoes(pt.vereadores + pt.equipes + prefEst)}</b>
       <span>pagos ${prefEst ? "ao prefeito, " : ""}aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
       <ul class="arvore">
-        ${prefEst ? `<li><span>Prefeito *</span><strong>${reais(prefEst)}</strong></li>` : ""}
+        ${prefEst ? `<li><span>Prefeito${nEst ? " *" : ""}</span><strong>${reais(prefEst)}</strong></li>` : ""}
         <li><span>Vereadores</span><strong>${reais(pt.vereadores)}</strong></li>
         <li><span>Equipes dos gabinetes</span><strong>${reais(pt.equipes)}</strong></li>
       </ul>
       <small>Vereadores e equipes: soma dos salários brutos na folha oficial da Câmara, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
-      ${prefEst ? `<small>* Prefeito: ${reaisPref.length ? `valor real de ${periodoReal} (${reais(somaReal)}), da folha da Prefeitura. ` : ""}${nEst ? `${reaisPref.length ? "Nos outros" : "Nos"} ${nEst} meses é <b class="inline">estimativa</b>: ${reais(sub.prefeito)} por mês, o salário fixado em lei. ${ext(sub.pdf, "Ver a lei")} · ` : ""}<a href="#/prefeito?aba=gastos">Ver o prefeito</a></small>` : ""}
+      ${prefEst ? `<small>${nEst ? "* " : ""}Prefeito: ${reaisPref.length ? `valor real de ${periodoReal} (${reais(somaReal)}), da folha da Prefeitura. ` : ""}${nEst ? `${reaisPref.length ? "Nos outros" : "Nos"} ${nEst} meses é <b class="inline">estimativa</b>: ${reais(sub.prefeito)} por mês, o salário fixado em lei. ${ext(sub.pdf, "Ver a lei")} · ` : ""}<a href="#/prefeito?aba=gastos">Ver o prefeito</a></small>` : ""}
     </div>` : "";
   const orc = P && (P.orcamento_gabinete || []).slice(-1)[0];
   const cartaoOrc = orc && orc.orgaos ? `<div class="destaque destaque-orc">
