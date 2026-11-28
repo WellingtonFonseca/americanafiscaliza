@@ -235,7 +235,7 @@ async function telaVereador(slug, aba, mes) {
     const total = Object.values(f.grupos).reduce((a, l) => a + l.length, 0);
     propostas = `<p>${num(total)} documentos com o nome de ${$(f.apelido)} desde ${data(R.inicio_mandato)}. Toque num grupo para ler um por um.</p>
       ${f.propostas_parcial ? `<div class="aviso"><b>Dados parciais.</b> A página completa de propostas deste vereador é muito grande e o sistema da Câmara não conseguiu abri-la. Por isso usamos a exportação oficial da pesquisa da Câmara, que traz indicações, moções, requerimentos e projetos, mas <b>não traz emendas, pedidos de informação nem os outros documentos</b>. Esses números podem estar abaixo do real e não devem ser comparados com os de outros vereadores nesses grupos. Vamos tentar de novo nas próximas atualizações.</div>` : ""}
-      <div class="numeros">${Object.keys(R.grupos).map((g) => cartao(slug, g, f.grupos[g], f.fonte_propostas, f.propostas_parcial)).join("")}</div>
+      <div class="numeros dois">${Object.keys(R.grupos).map((g) => cartao(slug, g, f.grupos[g], f.fonte_propostas, f.propostas_parcial)).join("")}</div>
       <p class="suave">Quando um documento tem mais de um autor, ele conta para cada um deles. A separação em grupos segue <a href="#/sobre#grupos">uma regra única</a>, igual para todos.</p>`;
   }
 

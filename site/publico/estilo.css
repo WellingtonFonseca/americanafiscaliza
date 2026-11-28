@@ -267,3 +267,7 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .comp-dinheiro { grid-template-columns: 1fr; }
 .comp-dinheiro b { white-space: nowrap; overflow-wrap: normal; }
 @media (min-width: 560px) { .comp-dinheiro { grid-template-columns: 1fr 1fr; } }
+
+/* Propostas do vereador: dois cartões por linha */
+.numeros.dois { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 600px) { .numeros.dois { grid-template-columns: 1fr; } }
