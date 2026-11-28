@@ -8,16 +8,17 @@ exercício, o mês, o tipo de lançamento (Empenhadas, Liquidadas, Pagas), deixa
 "Classificar por Dotação" marcado e clicar no botão do CSV. A dotação traz a
 secretaria (unidade orçamentária) de cada despesa.
 
-São 3 arquivos por mês, com 10 segundos de pausa entre os pedidos e robô
+Para cada arquivo são 2 pedidos (Consultar e CSV), 3 arquivos por mês, com 10 segundos de pausa entre os pedidos e robô
 identificado. Pula os meses que já estão na pasta, mas baixa de novo os 2
 últimos meses fechados (a Prefeitura ainda pode completar esses lançamentos).
-Para na hora se o portal responder 403 ou 429.
+Para na hora se o portal responder 403 ou 429, ou se o primeiro arquivo não
+vier (aí guarda um diagnostico-despesas-falha.zip para mandar no chat).
 
 Uso no WSL:  python3 baixar_despesas_prefeitura.py
 Saída:       W:\\Desktop\\AmericanaFiscaliza\\despesas-secretarias\\despesas-AAAA-MM-<tipo>.csv
              W:\\Desktop\\AmericanaFiscaliza\\despesas-secretarias-AAAA-MM-a-AAAA-MM.zip  (mandar no chat)
 """
-import os, sys, time, urllib.error, urllib.parse, urllib.request, zipfile
+import os, re, sys, time, urllib.error, urllib.parse, urllib.request, zipfile
 from datetime import date
 from http.cookiejar import CookieJar
 
@@ -73,15 +74,42 @@ def parece_csv(b):
     return len(b) > 50 and not ini.startswith(b"<") and b"<html" not in ini and (b";" in ini or b"," in ini)
 
 
+class Falha(Exception):
+    pass
+
+
 def baixar(ano, mes, tipo):
+    """Faz como no navegador: primeiro Consultar, depois o botão do CSV da tela de resultado."""
     f = formulario(ano, mes, tipo)
-    b = pedir(CSV, f)
-    if parece_csv(b):
-        return b
-    # se não veio, faz a consulta na página (como clicar em Consultar) e pede o CSV de novo
-    pedir(PAGINA, f)
-    b = pedir(CSV, f)
-    return b if parece_csv(b) else None
+    pagina = pedir(PAGINA, f)
+    txt = pagina.decode("latin-1", "replace")
+    # o endereço do CSV vem da própria tela de resultado, se ela trouxer outro
+    achados = re.findall(r"[\w./-]*_csv\.php[^\"' ]*", txt)
+    url = urllib.parse.urljoin(PAGINA, achados[0]) if achados else CSV
+    try:
+        b = pedir(url, f)
+    except urllib.error.HTTPError as e:
+        b = e.read() if hasattr(e, "read") else b""
+        raise Falha(f"HTTP {e.code} em {url}", pagina, b)
+    if not parece_csv(b):
+        raise Falha(f"resposta não é CSV ({len(b)} bytes) em {url}", pagina, b)
+    return b
+
+
+def guardar_falha(ano, mes, tipo, erro):
+    pasta = os.path.join(DESTINO, "diagnosticos", "despesas-falha")
+    os.makedirs(pasta, exist_ok=True)
+    msg, pagina, resposta = erro.args
+    open(os.path.join(pasta, "consulta.html"), "wb").write(pagina)
+    open(os.path.join(pasta, "resposta.bin"), "wb").write(resposta or b"")
+    open(os.path.join(pasta, "erro.txt"), "w", encoding="utf-8").write(f"{mes:02d}/{ano} {TIPOS[tipo]}: {msg}\n")
+    zipado = os.path.join(DESTINO, "diagnostico-despesas-falha.zip")
+    with zipfile.ZipFile(zipado, "w", zipfile.ZIP_DEFLATED) as z:
+        for n in os.listdir(pasta):
+            z.write(os.path.join(pasta, n), n)
+    print(f"Não deu certo ({msg}). Parei para não insistir.")
+    print(f"Mande este arquivo no chat para eu ajustar: {zipado}")
+    sys.exit(1)
 
 
 def main():
@@ -93,18 +121,17 @@ def main():
     arq = lambda a, m, t: os.path.join(PASTA, f"despesas-{a}-{m:02d}-{TIPOS[t]}.csv")
     completo = lambda a, m: all(os.path.exists(arq(a, m, t)) for t in TIPOS)
     fila = [x for x in meses if not completo(*x) or x in meses[-RENOVAR:]][:MAX_MESES]
-    print(f"Vou baixar {len(fila)} mês(es), 3 arquivos cada, com {PAUSA} s de pausa entre os pedidos. Pode levar uns {len(fila) * 3 * PAUSA // 60 + 1} minutos.")
+    print(f"Vou baixar {len(fila)} mês(es), 3 arquivos cada, com {PAUSA} s de pausa entre os pedidos. Pode levar uns {len(fila) * 6 * PAUSA // 60 + 1} minutos.")
     if fila:
         pedir(PAGINA)  # abre a página uma vez, como um navegador
     for a, m in fila:
         for t, nome in TIPOS.items():
             try:
                 b = baixar(a, m, t)
+            except Falha as e:
+                guardar_falha(a, m, t, e)
             except Exception as e:
                 print(f"{m:02d}/{a} {nome}: falhou ({e.__class__.__name__}: {e}); tento de novo na próxima vez")
-                continue
-            if not b:
-                print(f"{m:02d}/{a} {nome}: o portal não devolveu o arquivo")
                 continue
             open(arq(a, m, t), "wb").write(b)
             print(f"{m:02d}/{a} {nome}: ok ({len(b) // 1024} KB)")
