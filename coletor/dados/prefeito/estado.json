@@ -1,0 +1,12 @@
+{
+ "coletado_em": "2026-11-28T03:15:00+00:00",
+ "situacoes_veto": {
+  "535": "Veto acatado",
+  "536": "Veto rejeitado",
+  "620": "Veto em tramitação",
+  "668": "Veto parcial acatado",
+  "633": "Veto ao Substitutivo acatado",
+  "624": "Veto Subst. acatado",
+  "1473": "Veto ao Substitutivo Tramitando"
+ }
+}

@@ -135,6 +135,7 @@ function telaInicio() {
       <a href="#/repetidos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg></span><span><b>O problema que não some</b><span>Ruas onde o mesmo pedido voltou várias vezes desde 2025.</span></span></a>
       <a href="#/comparar"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></span></a>
       <a href="#/gastos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8m0 8v1.5"/></svg></span><span><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></span></a>
+      <a href="#/prefeito"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg></span><span><b>O prefeito na Câmara</b><span>Projetos que o prefeito mandou, o que ele vetou e como os vereadores votaram.</span></span></a>
     </div>
     ${avisoSessoes()}
     ${R.vereadores.some((v) => v.propostas_parcial || !v.propostas_baixadas) ? `<div class="aviso">Para ${R.vereadores.filter((v) => v.propostas_parcial || !v.propostas_baixadas).length} vereadores as propostas ainda estão parciais (o sistema da Câmara não abriu a página completa deles). Isso está marcado na ficha de cada um.</div>` : ""}
@@ -513,6 +514,75 @@ function telaGastos() {
     <p class="suave">Fontes: folha de pagamento no ${i ? ext(i.fonte, "Portal da Transparência") : "Portal da Transparência"}; emendas na ${e ? ext(e.documento, "lei do orçamento aprovada") : "lei do orçamento"}; cópias e combustível nos relatórios ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "Gastos com Gabinete")}.</p>`;
 }
 
+// ------------------------------------------------------------------ prefeito
+const SIT_PREF = { aprovado: ["Aprovados", "sim"], tramitando: ["Ainda em votação", "neutro"], retirado: ["Retirados pelo prefeito", ""], rejeitado: ["Rejeitados ou arquivados", "nao"] };
+
+function itemProjetoPref(p) {
+  const [, cls] = SIT_PREF[p.grupo] || ["", ""];
+  return `<li><span class="tag ${cls}">${$(p.situacao)}</span> ${ext(SISCAM_DOC(p.id), $(p.ident))}
+    <div>${$(p.assunto).slice(0, 260)}${p.assunto.length > 260 ? "…" : ""}</div>
+    <div class="meta">Chegou à Câmara em ${data(p.data)}</div></li>`;
+}
+
+async function telaPrefeito() {
+  let P;
+  try { P = await carregar("prefeito.json"); } catch (e) { return `<h1>Prefeito</h1><p>Os dados do prefeito ainda não foram coletados.</p>`; }
+  const c = P.contagem || {};
+  const total = P.projetos.length;
+  const nomeVer = (sl) => { const v = vereador(sl); return v ? v.apelido : sl; };
+  const vetos = P.vetos.map((x) => `<li><span class="tag ${/derrubou/.test(x.explica) ? "sim" : /não foi votado/.test(x.explica) ? "neutro" : "nao"}">${$(x.explica)}</span> ${ext(SISCAM_DOC(x.id), $(x.ident))}
+      <div>${$(x.assunto).slice(0, 260)}${x.assunto.length > 260 ? "…" : ""}</div>
+      <div class="meta">Projeto de ${x.autores.map(([n, sl]) => sl ? `<a href="#/v/${sl}">${$(nomeVer(sl))}</a>` : $(n)).join(", ")} · apresentado em ${data(x.data)} · Situação no sistema da Câmara: ${$(x.situacao)}</div></li>`).join("");
+  const derrubados = P.vetos.filter((x) => /derrubou/.test(x.explica)).length;
+  const mantidos = P.vetos.filter((x) => /manteve/.test(x.explica)).length;
+  const pend = P.vetos.length - derrubados - mantidos;
+  const votacoes = P.votacoes.map((x) => {
+    const partes = Object.entries(x.votos).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${$(k)}: ${num(n)}`).join(" · ");
+    return `<li><span class="tag ${x.resultado === "Aprovado" ? "sim" : x.resultado ? "nao" : ""}">${$(x.resultado || "Resultado não informado")}</span> ${ext(x.url, $(x.materia))}
+      <div>${$(x.assunto).slice(0, 220)}${x.assunto.length > 220 ? "…" : ""}</div>
+      <div class="meta">${data(x.data)}${x.fase && x.fase !== "Não informado" ? " · " + $(x.fase) : ""} · ${partes}${x.contra.length ? " · Votaram contra: " + x.contra.map($).join(", ") : ""} · ${ext(x.sessao_url, "sessão")}</div></li>`;
+  }).join("");
+  const linhasVer = R.vereadores.map((v) => {
+    const k = P.por_vereador[v.slug] || {};
+    return `<tr><th><a href="#/v/${v.slug}?aba=votos">${$(v.apelido)}</a></th><td>${num(k["A favor"] || 0)}</td><td>${num(k["Contra"] || 0)}</td><td>${num(k["Ausente"] || 0)}</td><td>${num(k["Não vota"] || 0)}</td></tr>`;
+  }).join("");
+  const pv = P.periodo_votos;
+  return `<a class="voltar" href="#/">← Início</a>
+    <h1>O prefeito na Câmara</h1>
+    <div class="aviso info">O prefeito não é vereador: ele não vota nem tem presença nas sessões. O que dá para acompanhar com os dados oficiais da Câmara é <b>o que ele manda para a Câmara</b> (projetos de lei), <b>o que ele veta</b> dos projetos dos vereadores e <b>como os vereadores votam</b> nesses projetos e vetos. No sistema da Câmara o autor aparece como “${$(P.autor_siscam)}”.</div>
+
+    <h2>Projetos que o prefeito mandou</h2>
+    <div class="numeros">
+      <div class="numero"><b>${num(total)}</b><span>projetos enviados desde ${data(R.inicio_mandato)}</span><small>${ext(P.fonte_projetos, "Conferir na Câmara")}</small></div>
+      <div class="numero"><b>${num(c.aprovado || 0)}</b><span>já aprovados pela Câmara (em qualquer fase)</span></div>
+      <div class="numero"><b>${num(c.tramitando || 0)}</b><span>ainda em votação</span></div>
+      <div class="numero"><b>${num(c.retirado || 0)}</b><span>retirados pelo prefeito</span></div>
+      ${c.rejeitado ? `<div class="numero"><b>${num(c.rejeitado)}</b><span>rejeitados ou arquivados</span></div>` : ""}
+    </div>
+    <p class="suave">“Aprovado” aqui segue a situação que o sistema da Câmara mostra hoje para cada projeto. Um projeto aprovado em primeira discussão ainda precisa da segunda.</p>
+    <details><summary>Ver os ${num(total)} projetos</summary><ul class="itens">${P.projetos.map(itemProjetoPref).join("")}</ul></details>
+
+    <h2>Vetos do prefeito</h2>
+    <p>Quando a Câmara aprova um projeto, o prefeito pode sancionar (virar lei) ou vetar, no todo ou em parte. O veto volta para a Câmara, que decide se mantém ou derruba.</p>
+    <div class="numeros">
+      <div class="numero"><b>${num(P.vetos.length)}</b><span>projetos de vereadores com veto desde ${data(R.inicio_mandato)}</span></div>
+      <div class="numero"><b>${num(mantidos)}</b><span>vetos mantidos pela Câmara</span></div>
+      <div class="numero"><b>${num(derrubados)}</b><span>vetos derrubados pela Câmara</span></div>
+      ${pend ? `<div class="numero"><b>${num(pend)}</b><span>ainda sem votação</span></div>` : ""}
+    </div>
+    <ul class="itens">${vetos}</ul>
+    <div class="aviso">Esta lista vem da pesquisa oficial da Câmara pela situação “Veto” de cada projeto. Um projeto vetado cuja situação depois mudou no sistema (por exemplo, para arquivado) pode não aparecer aqui.</div>
+
+    <h2>Como os vereadores votam nas matérias do prefeito</h2>
+    ${pv ? `<p>${num(P.votacoes.length)} votações de projetos e vetos do prefeito nas sessões já coletadas (de ${data(pv[0])} a ${data(pv[1])}). Votar “a favor” de um veto quer dizer manter o veto.</p>` : ""}
+    ${avisoSessoes()}
+    <div class="tabela-rolar"><table class="tabela-votos"><thead><tr><th>Vereador</th><th>A favor</th><th>Contra</th><th>Ausente</th><th>Não vota</th></tr></thead><tbody>${linhasVer}</tbody></table></div>
+    <p class="suave">“Não vota” costuma aparecer para quem preside a sessão, que pelo regimento só vota em alguns casos. “Ausente” é ausente no momento daquela votação.</p>
+    <details><summary>Ver as ${num(P.votacoes.length)} votações</summary><ul class="itens">${votacoes}</ul></details>
+
+    <p class="suave">Fonte: ${ext("https://americana.siscam.com.br/", "sistema oficial da Câmara (SISCAM)")}, pela pesquisa de documentos e pelas páginas de cada sessão. Salário e gastos do gabinete do prefeito ficam no Portal da Transparência da Prefeitura e ainda não estão neste site.</p>`;
+}
+
 // ------------------------------------------------------------------ sessões e sobre
 function telaSessoes() {
   return `<h1>Sessões coletadas</h1>
@@ -541,6 +611,7 @@ async function telaSobre() {
       <li><b>Emendas impositivas:</b> o “Anexo Especial de Emendas Individuais Impositivas” da lei do orçamento aprovada (para 2026, o Autógrafo nº 125/2025), no SISCAM. Mostramos o valor previsto, não o que já foi gasto.</li>
       <li><b>Salário e equipe do gabinete:</b> a folha de pagamento do ${ext("https://transparencia-cmamericana.smarapd.com.br/#/dinamico/restoapagar/pagamentosaservidores", "Portal da Transparência da Câmara")} (último mês fechado). Usamos só as linhas de vereadores e de quem está lotado em gabinete de vereador. O “Gabinete da Presidência” é da Mesa Diretora e não entra na conta de nenhum vereador.</li>
       <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
+      <li><b>Prefeito:</b> a pesquisa oficial de documentos do SISCAM, filtrada pelo autor “Poder Executivo de Americana” (projetos enviados) e pela situação “Veto” (projetos de vereadores vetados). Os votos vêm das mesmas páginas de sessão.</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>
     <p>Um robô identificado como “AmericanaFiscaliza” baixa poucas páginas por vez, com pausa entre elas, para não pesar no sistema da Câmara. Se a Câmara pedir, ele para.</p>
@@ -599,6 +670,7 @@ async function rota() {
     if (partes[0] === "v" && partes[2]) html = await telaGrupo(partes[1], partes[2]);
     else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"), new URLSearchParams(qs || "").get("mes"));
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
+    else if (partes[0] === "prefeito") html = await telaPrefeito();
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
     else if (partes[0] === "comparar") html = telaComparar();

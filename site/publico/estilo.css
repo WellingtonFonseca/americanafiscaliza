@@ -281,3 +281,8 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 .numero.dividido .parte-camara { flex: 0 0 auto; min-height: 72px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: #e6eaf2; border-top: 2px solid #c9d0dd; color: var(--marinho); font-weight: 600; font-size: 17px; text-decoration: underline; text-underline-offset: 3px; }
 .numero.dividido .parte-camara:hover, .numero.dividido .parte-camara:focus-visible { background: #d9dfeb; }
 .numero.dividido .parte-camara svg { flex: none; }
+
+/* Página do prefeito */
+details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding: 10px 0; color: var(--azul); }
+.tabela-rolar { overflow-x: auto; }
+.tabela-votos td { text-align: center; }
