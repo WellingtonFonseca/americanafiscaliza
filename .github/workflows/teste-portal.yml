@@ -1,0 +1,16 @@
+# Teste temporário: o Portal da Transparência da Prefeitura responde ao GitHub Actions?
+name: Teste portal Prefeitura
+on:
+  push:
+    branches: [claude/project-thread-x39s6f]
+    paths: [.github/workflows/teste-portal.yml]
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA="AmericanaFiscaliza/0.1 (robo civico; coleta leve de dados publicos)"
+          curl -s -m 60 -A "$UA" -o rem.html -w "remuneracao %{http_code} %{size_download}\n" "https://transparencia.americana.sp.gov.br/transparencia_index.php?p=servidor_remuneracao" || echo "falhou $?"
+          head -c 3000 rem.html || true
+          echo
+          grep -oE '(href|src|action)="[^"]+"' rem.html | sort -u | head -80 || true
