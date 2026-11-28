@@ -1,0 +1,11 @@
+# Teste temporário: a API do TCE-SP responde ao GitHub Actions?
+name: Teste TCE
+on:
+  push:
+    branches: [claude/project-thread-x39s6f]
+    paths: [.github/workflows/teste-portal.yml]
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -s -m 120 -A "AmericanaFiscaliza/0.1" -o d.json -w "tce %{http_code} %{size_download}\n" "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/10" || echo "falhou $?"
