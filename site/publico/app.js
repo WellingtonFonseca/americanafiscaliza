@@ -22,6 +22,7 @@ function SISCAM_DOC(id) {
   }
   return `https://americana.siscam.com.br/Documentos/Documento/${s}`;
 }
+const ICONE_SAIR = `<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>`;
 const ext = (url, txt) => `<a href="${$(url)}" rel="noopener" target="_blank">${txt}</a>`;
 
 // Mandato escolhido no topo. O atual fica em dados/; um mandato antigo ficaria em dados/<id>/.
@@ -207,17 +208,18 @@ function fotoLocal(v) { return `fotos/${v.slug}.jpg`; }
 function cartao(slugV, g, itens, fonte, parcial) {
   const n = itens.length;
   let det = EXPLICA[g];
-  if (parcial && g === "outros") return `<div class="numero"><b>—</b><span>${$(R.grupos[g])}</span><small>Ainda não baixados para este vereador.</small><small>${ext(fonte, "Ver na Câmara")}</small></div>`;
   if (parcial && g === "lei") det += " Sem as emendas (dados parciais).";
   if (parcial && g === "cobranca") det += " Sem os pedidos de informação (dados parciais).";
   if (g === "outros" && n) {
     const t = {}; itens.forEach((d) => { t[d[2]] = (t[d[2]] || 0) + 1; });
     det = "Os tipos mais comuns: " + Object.entries(t).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, c]) => `${k} (${num(c)})`).join(", ") + ".";
   }
-  return `<div class="numero">
-    <a href="#/v/${slugV}/${g}" style="text-decoration:none;color:inherit"><b>${num(n)}</b><span>${$(R.grupos[g])}</span></a>
-    <small>${$(det)}</small>
-    <small>${ext(fonte, "Conferir na Câmara")}</small></div>`;
+  const camara = `<a class="parte-camara" href="${$(fonte)}" rel="noopener" target="_blank">${ICONE_SAIR} Conferir no site da Câmara</a>`;
+  if (parcial && g === "outros") return `<div class="numero dividido"><div class="parte-site"><b>—</b><span>${$(R.grupos[g])}</span><small>Ainda não baixados para este vereador.</small></div>${camara}</div>`;
+  return `<div class="numero dividido">
+    <a class="parte-site" href="#/v/${slugV}/${g}"><b>${num(n)}</b><span>${$(R.grupos[g])}</span>
+    <small>${$(det)}</small><em class="ver-aqui">Ver ${n === 1 ? "o documento" : "os documentos"} aqui ›</em></a>
+    ${camara}</div>`;
 }
 
 const ABAS = [["gastos", "Gastos"], ["propostas", "Propostas"], ["presenca", "Presença"], ["votos", "Votos"]];
@@ -236,7 +238,7 @@ async function telaVereador(slug, aba, mes) {
     const total = Object.values(f.grupos).reduce((a, l) => a + l.length, 0);
     propostas = `<p>${num(total)} documentos com o nome de ${$(f.apelido)} desde ${data(R.inicio_mandato)}. Toque num grupo para ler um por um.</p>
       ${f.propostas_parcial ? `<div class="aviso"><b>Dados parciais.</b> A página completa de propostas deste vereador é muito grande e o sistema da Câmara não conseguiu abri-la. Por isso usamos a exportação oficial da pesquisa da Câmara, que traz indicações, moções, requerimentos e projetos, mas <b>não traz emendas, pedidos de informação nem os outros documentos</b>. Esses números podem estar abaixo do real e não devem ser comparados com os de outros vereadores nesses grupos. Vamos tentar de novo nas próximas atualizações.</div>` : ""}
-      <div class="numeros">${Object.keys(R.grupos).map((g) => cartao(slug, g, f.grupos[g], f.fonte_propostas, f.propostas_parcial)).join("")}</div>
+      <div class="numeros dois">${Object.keys(R.grupos).map((g) => cartao(slug, g, f.grupos[g], f.fonte_propostas, f.propostas_parcial)).join("")}</div>
       <p class="suave">Quando um documento tem mais de um autor, ele conta para cada um deles. A separação em grupos segue <a href="#/sobre#grupos">uma regra única</a>, igual para todos.</p>`;
   }
 
