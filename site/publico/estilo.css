@@ -294,3 +294,12 @@ details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding:
 .foto-icone.pequena svg { width: 26px; height: 26px; }
 .lista-pref { grid-template-columns: 1fr !important; }
 .tabela-pagos td:last-child { white-space: nowrap; text-align: right; }
+.tabela-orc td:nth-child(2), .tabela-orc td:nth-child(3) { white-space: nowrap; text-align: right; }
+.barra-orc { display: block; height: 6px; margin-top: 6px; border-radius: 3px; background: var(--laranja); }
+@media (max-width: 600px) {
+  .tabela-orc thead { display: none; }
+  .tabela-orc tr { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid var(--linha); }
+  .tabela-orc td { border-bottom: 0; }
+  .tabela-orc td:first-child { grid-column: 1 / -1; padding-bottom: 0; font-weight: 600; }
+  .tabela-orc td:nth-child(2) { text-align: left; }
+}

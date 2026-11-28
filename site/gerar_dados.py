@@ -405,9 +405,23 @@ def gerar_prefeito(sessoes, mapa, vereadores, checar, verif):
     fontes_e = json.load(open(os.path.join(pasta_e, "fontes.json"), encoding="utf-8")) if os.path.exists(os.path.join(pasta_e, "fontes.json")) else {}
     for ano, f in sorted(fontes_e.items()):
         a = os.path.join(pasta_e, f"loa{ano}.txt")
-        m = re.search(r"\d\d\s*[–-]\s*Gabinete do Prefeito\s+R\$\s*([\d.]+,\d\d)", open(a, encoding="utf-8").read()) if os.path.exists(a) else None
+        txt = open(a, encoding="utf-8").read() if os.path.exists(a) else ""
+        m = re.search(r"\d\d\s*[–-]\s*Gabinete do Prefeito\s+R\$\s*([\d.]+,\d\d)", txt)
         if m:
             orcamento.append({"ano": int(ano), "valor": numero_br(m.group(1)), "lei": f["lei"], "pdf": f["pdf"]})
+        # quadro "POR ÓRGÃOS DA ADMINISTRAÇÃO": orçamento de cada secretaria e órgão
+        ini = txt.find("POR ÓRGÃOS DA ADMINISTRAÇÃO")
+        fim = txt.find("TOTAL GERAL", ini)
+        if ini >= 0 and fim > ini:
+            orgaos = [{"codigo": c, "nome": re.sub(r"\s+", " ", n).strip(), "valor": numero_br(v)}
+                      for c, n, v in re.findall(r"^\s*(\d\d)\s*[–-]\s*(.+?)\s*R\$\s*([\d.]+,\d\d)\s*$", txt[ini:fim], re.M)]
+            tg = re.search(r"TOTAL GERAL\s+R\$\s*([\d.]+,\d\d)", txt[fim:])
+            total = numero_br(tg.group(1)) if tg else 0
+            ok = abs(sum(o["valor"] for o in orgaos) - total) < 0.01
+            checar(ok, f"LOA {ano}: a soma do orçamento dos {len(orgaos)} órgãos e secretarias é igual ao total geral da lei")
+            if orcamento and orcamento[-1]["ano"] == int(ano):
+                orcamento[-1]["orgaos"] = sorted(orgaos, key=lambda o: -o["valor"])
+                orcamento[-1]["total"] = total
     checar(bool(orcamento), "Prefeito: orçamento do Gabinete do Prefeito lido na lei do orçamento")
     # despesas da Prefeitura informadas ao TCE-SP (resumo mensal)
     pasta_t = os.path.join(DADOS, "prefeitura")
