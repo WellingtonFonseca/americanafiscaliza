@@ -646,7 +646,7 @@ async function telaPrefeito(aba, mes) {
     <div class="tabela-rolar"><table class="tabela-orc"><thead><tr><th>Secretaria ou órgão</th><th>Previsto</th><th>Parte</th></tr></thead><tbody>
     ${o.orgaos.map((g) => { const pct = (g.valor / o.total) * 100; return `<tr><td>${$(g.nome)}<i class="barra-orc" style="width:${Math.max(1, Math.round((g.valor / o.orgaos[0].valor) * 100))}%"></i></td><td>${reais(g.valor)}</td><td>${pct < 0.1 ? "menos de 0,1" : pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% do total</td></tr>`; }).join("")}
     </tbody></table></div>
-    <p class="suave">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</p>` : ""}
+    <div class="aviso">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</div>` : ""}
     <h2>Mensal</h2>
     <div class="aviso info">Despesas de <b>toda a Prefeitura</b> (sem o DAE, a Guarda e os outros órgãos), como a própria Prefeitura informou ao Tribunal de Contas do Estado (TCE-SP). O sistema do TCE não separa o que é do Gabinete do Prefeito.</div>
     ${seletorTce(mes)}
