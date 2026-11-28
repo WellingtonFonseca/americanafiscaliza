@@ -584,7 +584,7 @@ function secaoTce(k) {
   const t = P.tce[k];
   if (!t) return `<div class="aviso">Sem dados desse mês no TCE-SP.</div>`;
   const pf = t.pessoas_fisicas || {};
-  return `<div class="numeros dois">
+  return `<div class="numeros um">
       <div class="numero"><b>${reais(t.totais.pago)}</b><span>pago pela Prefeitura em ${nomeMesNum(k)}</span><small>${ext(t.fonte, "Conferir no TCE-SP")}</small></div>
       <div class="numero"><b>${reais(t.totais.empenhado)}</b><span>empenhado (dinheiro reservado para gastar)</span></div>
       <div class="numero"><b>${reais(t.totais.liquidado)}</b><span>liquidado (serviço ou compra entregue)</span></div>

@@ -304,3 +304,4 @@ details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding:
   .tabela-orc td:nth-child(2) { text-align: left; }
 }
 .destaque b.inline { display: inline; font-size: inherit; color: #ffd2bd; }
+.numeros.um { grid-template-columns: 1fr; }
