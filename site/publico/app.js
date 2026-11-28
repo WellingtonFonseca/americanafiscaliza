@@ -662,7 +662,7 @@ async function telaPrefeito(aba, mes) {
 
     <section class="painel" data-painel="gastos"${aba === "gastos" ? "" : " hidden"}>
     <h2>Anual</h2>
-    <div class="numeros dois">
+    <div class="numeros um">
       ${s ? `<div class="numero"><b>${reais(s.prefeito)}</b><span>salário mensal do prefeito (subsídio fixado em lei)</span><small>${ext(s.pdf, $(s.lei))}</small></div>
       <div class="numero"><b>${reais(s.vice)}</b><span>salário mensal do vice-prefeito</span></div>
       <div class="numero"><b>${reais(s.secretarios)}</b><span>salário mensal de cada secretário municipal</span></div>` : ""}
