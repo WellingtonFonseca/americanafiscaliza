@@ -303,3 +303,4 @@ details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding:
   .tabela-orc td:first-child { grid-column: 1 / -1; padding-bottom: 0; font-weight: 600; }
   .tabela-orc td:nth-child(2) { text-align: left; }
 }
+.destaque b.inline { display: inline; font-size: inherit; color: #ffd2bd; }

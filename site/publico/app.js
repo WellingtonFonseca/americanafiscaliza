@@ -117,19 +117,36 @@ function telaInicio() {
   const partidos = [...new Set(R.vereadores.map((v) => v.partido))].sort();
   const pt = R.pago_total;
   const milhoes = (x) => (x / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " milhões";
+  // salário do prefeito: estimativa pelo subsídio fixado em lei × meses da folha (a folha da Prefeitura não é acessível)
+  const sub = P && P.cadastro && P.cadastro.subsidio;
+  const nMeses = (R.meses_folha || []).length;
+  const prefEst = sub && nMeses ? Math.round(sub.prefeito * nMeses * 100) / 100 : 0;
   const contador = pt && pt.de ? `<div class="destaque">
       <span class="etiqueta">Folha oficial</span>
-      <b>R$ ${milhoes(pt.vereadores + pt.equipes)}</b>
-      <span>pagos aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
+      <b>R$ ${milhoes(pt.vereadores + pt.equipes + prefEst)}</b>
+      <span>pagos ${prefEst ? "ao prefeito, " : ""}aos vereadores e às equipes dos gabinetes de ${nomeMes(pt.de)} a ${nomeMes(pt.ate)}</span>
       <ul class="arvore">
+        ${prefEst ? `<li><span>Prefeito *</span><strong>${reais(prefEst)}</strong></li>` : ""}
         <li><span>Vereadores</span><strong>${reais(pt.vereadores)}</strong></li>
         <li><span>Equipes dos gabinetes</span><strong>${reais(pt.equipes)}</strong></li>
       </ul>
-      <small>Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
+      <small>Vereadores e equipes: soma dos salários brutos na folha oficial da Câmara, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
+      ${prefEst ? `<small>* Prefeito: <b class="inline">estimativa</b>, ${reais(sub.prefeito)} por mês (salário fixado em lei) × ${nMeses} meses. A folha da Prefeitura não pode ser consultada de fora do Brasil. ${ext(sub.pdf, "Ver a lei")} · <a href="#/prefeito?aba=gastos">Ver o prefeito</a></small>` : ""}
+    </div>` : "";
+  const orc = P && (P.orcamento_gabinete || []).slice(-1)[0];
+  const cartaoOrc = orc && orc.orgaos ? `<div class="destaque destaque-orc">
+      <span class="etiqueta">Orçamento ${orc.ano}</span>
+      <b>R$ ${(orc.total / 1e9).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} bilhão</b>
+      <span>previstos na lei do orçamento para as secretarias e órgãos do município em ${orc.ano}</span>
+      <ul class="arvore">
+        ${orc.orgaos.slice(0, 5).map((g) => `<li><span>${$(g.nome)}</span><strong>${reais(g.valor)}</strong></li>`).join("")}
+      </ul>
+      <small>Valor previsto, não o que já foi gasto. ${ext(orc.pdf, "Ver a lei")} · <a href="#/prefeito?aba=gastos">Ver as ${orc.orgaos.length} secretarias e órgãos</a></small>
     </div>` : "";
   return `
     <h1 class="so-leitor">O que o prefeito e cada vereador de Americana fazem</h1>
     ${contador}
+    ${cartaoOrc}
     <div class="entradas">
       <a href="#/busca"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></span></a>
       <a href="#/repetidos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg></span><span><b>O problema que não some</b><span>Ruas onde o mesmo pedido voltou várias vezes desde 2025.</span></span></a>
