@@ -128,17 +128,17 @@ function telaInicio() {
       <small>Soma dos salários brutos na folha oficial, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
     </div>` : "";
   return `
-    <h1 class="so-leitor">O que cada vereador de Americana faz</h1>
+    <h1 class="so-leitor">O que o prefeito e cada vereador de Americana fazem</h1>
     ${contador}
     <div class="entradas">
       <a href="#/busca"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span><b>O que pediram pelo seu bairro?</b><span>Digite o bairro ou a rua e veja os pedidos de melhoria, quem pediu e o que se repete.</span></span></a>
       <a href="#/repetidos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg></span><span><b>O problema que não some</b><span>Ruas onde o mesmo pedido voltou várias vezes desde 2025.</span></span></a>
       <a href="#/comparar"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><span><b>Homenagem ou trabalho?</b><span>As propostas de cada vereador lado a lado: pedidos de bairro, cobranças, homenagens e leis.</span></span></a>
       <a href="#/gastos"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6.5V8m0 8v1.5"/></svg></span><span><b>Quanto custa cada gabinete?</b><span>Salário, equipe com nomes, emendas e o que o gabinete usou.</span></span></a>
-      <a href="#/prefeito"><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg></span><span><b>O prefeito na Câmara</b><span>Projetos que o prefeito mandou, o que ele vetou e como os vereadores votaram.</span></span></a>
     </div>
     ${avisoSessoes()}
     ${R.vereadores.some((v) => v.propostas_parcial || !v.propostas_baixadas) ? `<div class="aviso">Para ${R.vereadores.filter((v) => v.propostas_parcial || !v.propostas_baixadas).length} vereadores as propostas ainda estão parciais (o sistema da Câmara não abriu a página completa deles). Isso está marcado na ficha de cada um.</div>` : ""}
+    ${cartaoPrefeitoLista()}
     <h2>Vereadores</h2>
     <div class="filtros">
       <input id="f-nome" type="search" placeholder="Procurar pelo nome" aria-label="Procurar vereador pelo nome">
@@ -507,15 +507,85 @@ function telaGastos() {
       <p class="comp-mais"><a href="#/v/${v.slug}?aba=gastos">Ver nomes da equipe, destino das emendas e outros meses</a></p>
     </div>`;
   }).join("");
-  return `<h1>Gastos de cada vereador</h1>
+  return `<h1>Gastos do prefeito e de cada vereador</h1>
     <div class="aviso info">Quanto cada vereador recebe, quanto custa a equipe do gabinete, quanto indicou em emendas do orçamento e o que o gabinete usou. Toque num quadro para ver os detalhes e escolher outros meses. A barrinha compara com o maior valor de cada quadro.</div>
     <div class="aviso">Salário e equipe são de <b>${mes}</b>, último mês fechado da folha. Emenda é o valor <b>previsto</b> no orçamento, não o que já foi gasto. Cópias e combustível são o total do ano no relatório da Câmara, que vem em quantidades, não em reais.</div>
+    ${cartaoPrefeitoGastos()}
     ${cartoes}
     <p class="suave">Fontes: folha de pagamento no ${i ? ext(i.fonte, "Portal da Transparência") : "Portal da Transparência"}; emendas na ${e ? ext(e.documento, "lei do orçamento aprovada") : "lei do orçamento"}; cópias e combustível nos relatórios ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "Gastos com Gabinete")}.</p>`;
 }
 
 // ------------------------------------------------------------------ prefeito
+// O prefeito aparece junto com os vereadores (lista, ficha em abas, gastos), com os dados que valem para ele.
 const SIT_PREF = { aprovado: ["Aprovados", "sim"], tramitando: ["Ainda em votação", "neutro"], retirado: ["Retirados pelo prefeito", ""], rejeitado: ["Rejeitados ou arquivados", "nao"] };
+const ABAS_PREF = [["gastos", "Gastos"], ["propostas", "Projetos"], ["vetos", "Vetos"], ["votos", "Votos"]];
+const ICONE_PREF = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg>`;
+let P = null;
+async function carregarPrefeito() {
+  if (P) return P;
+  try { P = await carregar("prefeito.json"); } catch (e) { P = null; }
+  return P;
+}
+const nomePref = () => (P && P.cadastro && P.cadastro.nome) || "Prefeito";
+const mesesTce = () => Object.keys((P && P.tce) || {}).sort();
+
+function cartaoPrefeitoLista() {
+  if (!P) return "";
+  const s = (P.cadastro || {}).subsidio;
+  return `<h2>Prefeito</h2>
+    <ul class="lista-ver lista-pref"><li><a href="#/prefeito">
+      <span class="foto-icone">${ICONE_PREF}</span>
+      <span class="corpo">
+        <span class="linha-nome"><span class="nome">${$(nomePref())}</span> <span class="partido">Prefeito</span></span>
+        <span class="principal"><b>${num(P.projetos.length)}</b> projetos enviados à Câmara</span>
+        <span class="extra">${num(P.vetos.length)} vetos${s ? ` · Salário fixado em lei: ${reais(s.prefeito)}` : ""}</span>
+      </span>
+      <svg class="seta" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a></li></ul>`;
+}
+
+function cartaoPrefeitoGastos() {
+  if (!P) return "";
+  const s = (P.cadastro || {}).subsidio, o = (P.orcamento_gabinete || []).slice(-1)[0];
+  const ult = mesesTce().slice(-1)[0], t = ult ? P.tce[ult] : null;
+  return `<div class="comp">
+      <div class="comp-cab"><span class="foto-icone pequena">${ICONE_PREF}</span>
+        <div><a class="comp-nome" href="#/prefeito">${$(nomePref())}</a><span class="comp-partido">Prefeito</span></div></div>
+      <div class="comp-grade comp-dinheiro">
+        <a class="comp-num" href="#/prefeito?aba=gastos"><b>${s ? reais(s.prefeito) : "—"}</b><span>Salário mensal fixado em lei (subsídio)</span></a>
+        <a class="comp-num" href="#/prefeito?aba=gastos"><b>${o ? reais(o.valor) : "—"}</b><span>Orçamento do Gabinete do Prefeito em ${o ? o.ano : ""}</span></a>
+        <a class="comp-num" href="#/prefeito?aba=gastos"><b>${t ? reais(t.totais.pago) : "—"}</b><span>Pago por toda a Prefeitura em ${t ? nomeMesNum(ult) : ""}</span></a>
+      </div>
+      <p class="comp-mais"><a href="#/prefeito?aba=gastos">Ver quem mais recebeu e outros meses</a></p>
+    </div>`;
+}
+
+const MESES_NUM = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+const nomeMesNum = (k) => `${MESES_NUM[Number(k.slice(5)) - 1]}/${k.slice(0, 4)}`;
+
+function secaoTce(k) {
+  const t = P.tce[k];
+  if (!t) return `<div class="aviso">Sem dados desse mês no TCE-SP.</div>`;
+  const pf = t.pessoas_fisicas || {};
+  return `<div class="numeros dois">
+      <div class="numero"><b>${reais(t.totais.pago)}</b><span>pago pela Prefeitura em ${nomeMesNum(k)}</span><small>${ext(t.fonte, "Conferir no TCE-SP")}</small></div>
+      <div class="numero"><b>${reais(t.totais.empenhado)}</b><span>empenhado (dinheiro reservado para gastar)</span></div>
+      <div class="numero"><b>${reais(t.totais.liquidado)}</b><span>liquidado (serviço ou compra entregue)</span></div>
+    </div>
+    <h3>Quem mais recebeu da Prefeitura em ${nomeMesNum(k)}</h3>
+    <table class="tabela-pagos"><thead><tr><th>Empresa ou órgão (CNPJ)</th><th>Pago</th></tr></thead><tbody>
+    ${t.maiores_pagos.map((x) => `<tr><td>${$(x.nome)}<div class="meta">CNPJ ${$(x.cnpj)}</div></td><td>${reais(x.valor)}</td></tr>`).join("")}
+    </tbody></table>
+    <p class="suave">${num(t.recebedores_cnpj)} empresas e órgãos receberam pagamentos no mês; aqui estão os ${t.maiores_pagos.length} maiores. ${pf.pagamentos ? `Pagamentos a pessoas físicas (${num(pf.pagamentos)} lançamentos, ${reais(pf.valor)}) entram só no total.` : ""} A folha de salários aparece como pagamentos à própria Prefeitura, ao INSS e ao instituto de previdência.</p>`;
+}
+
+function seletorTce(mes) {
+  const ms = mesesTce();
+  if (!ms.length) return `<div class="aviso">As despesas da Prefeitura ainda não foram coletadas no TCE-SP.</div>`;
+  const k = ms.includes(mes) ? mes : ms[ms.length - 1];
+  return `<label class="seletor">Mês <select id="mes-tce">${ms.slice().reverse().map((m) => `<option value="${m}"${m === k ? " selected" : ""}>${nomeMesNum(m)}</option>`).join("")}</select></label>
+    <div id="painel-tce">${secaoTce(k)}</div>`;
+}
 
 function itemProjetoPref(p) {
   const [, cls] = SIT_PREF[p.grupo] || ["", ""];
@@ -524,9 +594,11 @@ function itemProjetoPref(p) {
     <div class="meta">Chegou à Câmara em ${data(p.data)}</div></li>`;
 }
 
-async function telaPrefeito() {
-  let P;
-  try { P = await carregar("prefeito.json"); } catch (e) { return `<h1>Prefeito</h1><p>Os dados do prefeito ainda não foram coletados.</p>`; }
+async function telaPrefeito(aba, mes) {
+  await carregarPrefeito();
+  if (!P) return `<h1>Prefeito</h1><p>Os dados do prefeito ainda não foram coletados.</p>`;
+  if (!ABAS_PREF.some(([k]) => k === aba)) aba = "gastos";
+  const cad = P.cadastro || {}, s = cad.subsidio, o = (P.orcamento_gabinete || []).slice(-1)[0];
   const c = P.contagem || {};
   const total = P.projetos.length;
   const nomeVer = (sl) => { const v = vereador(sl); return v ? v.apelido : sl; };
@@ -547,22 +619,43 @@ async function telaPrefeito() {
     return `<tr><th><a href="#/v/${v.slug}?aba=votos">${$(v.apelido)}</a></th><td>${num(k["A favor"] || 0)}</td><td>${num(k["Contra"] || 0)}</td><td>${num(k["Ausente"] || 0)}</td><td>${num(k["Não vota"] || 0)}</td></tr>`;
   }).join("");
   const pv = P.periodo_votos;
-  return `<a class="voltar" href="#/">← Início</a>
-    <h1>O prefeito na Câmara</h1>
-    <div class="aviso info">O prefeito não é vereador: ele não vota nem tem presença nas sessões. O que dá para acompanhar com os dados oficiais da Câmara é <b>o que ele manda para a Câmara</b> (projetos de lei), <b>o que ele veta</b> dos projetos dos vereadores e <b>como os vereadores votam</b> nesses projetos e vetos. No sistema da Câmara o autor aparece como “${$(P.autor_siscam)}”.</div>
+  const grupoCartao = (g) => {
+    const [rot] = SIT_PREF[g];
+    return `<div class="numero"><b>${num(c[g] || 0)}</b><span>${rot}</span></div>`;
+  };
+  return `<a class="voltar" href="#/">← Prefeito e vereadores</a>
+    <div class="cabeca-ver"><span class="foto-icone grande">${ICONE_PREF}</span>
+      <div><h1>${$(nomePref())}</h1><p class="suave">${$(cad.cargo || "Prefeito")} · Mandato ${$(cad.mandato || "")}</p></div></div>
+    <div class="caixa suave">O prefeito não é vereador: ele não vota nem tem presença nas sessões. Aqui estão o salário e os gastos, os projetos que ele mandou para a Câmara, o que ele vetou e como os vereadores votaram nas matérias dele.${cad.fonte_nome ? `<br>Nome conforme ${ext(cad.fonte_nome, $(cad.fonte_nome_texto || "documento oficial"))}.` : ""}</div>
 
-    <h2>Projetos que o prefeito mandou</h2>
-    <div class="numeros">
-      <div class="numero"><b>${num(total)}</b><span>projetos enviados desde ${data(R.inicio_mandato)}</span><small>${ext(P.fonte_projetos, "Conferir na Câmara")}</small></div>
-      <div class="numero"><b>${num(c.aprovado || 0)}</b><span>já aprovados pela Câmara (em qualquer fase)</span></div>
-      <div class="numero"><b>${num(c.tramitando || 0)}</b><span>ainda em votação</span></div>
-      <div class="numero"><b>${num(c.retirado || 0)}</b><span>retirados pelo prefeito</span></div>
-      ${c.rejeitado ? `<div class="numero"><b>${num(c.rejeitado)}</b><span>rejeitados ou arquivados</span></div>` : ""}
+    <div class="abas" role="tablist">
+      ${ABAS_PREF.map(([k, t]) => `<button role="tab" data-aba="${k}" aria-selected="${k === aba}">${t}</button>`).join("")}
     </div>
-    <p class="suave">“Aprovado” aqui segue a situação que o sistema da Câmara mostra hoje para cada projeto. Um projeto aprovado em primeira discussão ainda precisa da segunda.</p>
-    <details><summary>Ver os ${num(total)} projetos</summary><ul class="itens">${P.projetos.map(itemProjetoPref).join("")}</ul></details>
 
-    <h2>Vetos do prefeito</h2>
+    <section class="painel" data-painel="gastos"${aba === "gastos" ? "" : " hidden"}>
+    <h2>Anual</h2>
+    <div class="numeros dois">
+      ${s ? `<div class="numero"><b>${reais(s.prefeito)}</b><span>salário mensal do prefeito (subsídio fixado em lei)</span><small>${ext(s.pdf, $(s.lei))}</small></div>
+      <div class="numero"><b>${reais(s.vice)}</b><span>salário mensal do vice-prefeito</span></div>
+      <div class="numero"><b>${reais(s.secretarios)}</b><span>salário mensal de cada secretário municipal</span></div>` : ""}
+      ${o ? `<div class="numero"><b>${reais(o.valor)}</b><span>orçamento do Gabinete do Prefeito em ${o.ano}</span><small>${ext(o.pdf, $(o.lei))}</small></div>` : ""}
+    </div>
+    ${s ? `<div class="aviso">${$(s.obs)}</div>` : ""}
+    <h2>Mensal</h2>
+    <div class="aviso info">Despesas de <b>toda a Prefeitura</b> (sem o DAE, a Guarda e os outros órgãos), como a própria Prefeitura informou ao Tribunal de Contas do Estado (TCE-SP). O sistema do TCE não separa o que é do Gabinete do Prefeito.</div>
+    ${seletorTce(mes)}
+    </section>
+
+    <section class="painel" data-painel="propostas"${aba === "propostas" ? "" : " hidden"}>
+    <h2>Projetos que o prefeito mandou para a Câmara</h2>
+    <p>${num(total)} projetos desde ${data(R.inicio_mandato)}. ${ext(P.fonte_projetos, "Conferir na Câmara")}</p>
+    <div class="numeros">${["aprovado", "tramitando", "retirado"].map(grupoCartao).join("")}${c.rejeitado ? grupoCartao("rejeitado") : ""}</div>
+    <p class="suave">“Aprovado” segue a situação que o sistema da Câmara mostra hoje para cada projeto. Um projeto aprovado em primeira discussão ainda precisa da segunda.</p>
+    <ul class="itens">${P.projetos.map(itemProjetoPref).join("")}</ul>
+    </section>
+
+    <section class="painel" data-painel="vetos"${aba === "vetos" ? "" : " hidden"}>
+    <h2>Vetos</h2>
     <p>Quando a Câmara aprova um projeto, o prefeito pode sancionar (virar lei) ou vetar, no todo ou em parte. O veto volta para a Câmara, que decide se mantém ou derruba.</p>
     <div class="numeros">
       <div class="numero"><b>${num(P.vetos.length)}</b><span>projetos de vereadores com veto desde ${data(R.inicio_mandato)}</span></div>
@@ -572,15 +665,16 @@ async function telaPrefeito() {
     </div>
     <ul class="itens">${vetos}</ul>
     <div class="aviso">Esta lista vem da pesquisa oficial da Câmara pela situação “Veto” de cada projeto. Um projeto vetado cuja situação depois mudou no sistema (por exemplo, para arquivado) pode não aparecer aqui.</div>
+    </section>
 
+    <section class="painel" data-painel="votos"${aba === "votos" ? "" : " hidden"}>
     <h2>Como os vereadores votam nas matérias do prefeito</h2>
     ${pv ? `<p>${num(P.votacoes.length)} votações de projetos e vetos do prefeito nas sessões já coletadas (de ${data(pv[0])} a ${data(pv[1])}). Votar “a favor” de um veto quer dizer manter o veto.</p>` : ""}
     ${avisoSessoes()}
     <div class="tabela-rolar"><table class="tabela-votos"><thead><tr><th>Vereador</th><th>A favor</th><th>Contra</th><th>Ausente</th><th>Não vota</th></tr></thead><tbody>${linhasVer}</tbody></table></div>
     <p class="suave">“Não vota” costuma aparecer para quem preside a sessão, que pelo regimento só vota em alguns casos. “Ausente” é ausente no momento daquela votação.</p>
-    <details><summary>Ver as ${num(P.votacoes.length)} votações</summary><ul class="itens">${votacoes}</ul></details>
-
-    <p class="suave">Fonte: ${ext("https://americana.siscam.com.br/", "sistema oficial da Câmara (SISCAM)")}, pela pesquisa de documentos e pelas páginas de cada sessão. Salário e gastos do gabinete do prefeito ficam no Portal da Transparência da Prefeitura e ainda não estão neste site.</p>`;
+    <ul class="itens">${votacoes}</ul>
+    </section>`;
 }
 
 // ------------------------------------------------------------------ sessões e sobre
@@ -611,7 +705,8 @@ async function telaSobre() {
       <li><b>Emendas impositivas:</b> o “Anexo Especial de Emendas Individuais Impositivas” da lei do orçamento aprovada (para 2026, o Autógrafo nº 125/2025), no SISCAM. Mostramos o valor previsto, não o que já foi gasto.</li>
       <li><b>Salário e equipe do gabinete:</b> a folha de pagamento do ${ext("https://transparencia-cmamericana.smarapd.com.br/#/dinamico/restoapagar/pagamentosaservidores", "Portal da Transparência da Câmara")} (último mês fechado). Usamos só as linhas de vereadores e de quem está lotado em gabinete de vereador. O “Gabinete da Presidência” é da Mesa Diretora e não entra na conta de nenhum vereador.</li>
       <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
-      <li><b>Prefeito:</b> a pesquisa oficial de documentos do SISCAM, filtrada pelo autor “Poder Executivo de Americana” (projetos enviados) e pela situação “Veto” (projetos de vereadores vetados). Os votos vêm das mesmas páginas de sessão.</li>
+      <li><b>Prefeito:</b> a pesquisa oficial de documentos do SISCAM, filtrada pelo autor “Poder Executivo de Americana” (projetos enviados) e pela situação “Veto” (projetos de vereadores vetados). Os votos vêm das mesmas páginas de sessão. O nome vem de um projeto assinado pelo Gabinete do Prefeito; o salário, da lei que fixou os subsídios (Projeto de Lei nº 27/2024); o orçamento do gabinete, da lei do orçamento.</li>
+      <li><b>Despesas da Prefeitura:</b> a ${ext("https://transparencia.tce.sp.gov.br/apis", "API aberta do Tribunal de Contas do Estado (TCE-SP)")}, com o que a própria Prefeitura informa ao sistema Audesp, mês a mês. O Portal da Transparência da Prefeitura não aceita acesso automático de fora do Brasil, por isso usamos o TCE.</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>
     <p>Um robô identificado como “AmericanaFiscaliza” baixa poucas páginas por vez, com pausa entre elas, para não pesar no sistema da Câmara. Se a Câmara pedir, ele para.</p>
@@ -651,7 +746,7 @@ async function rota() {
   const partes = caminho.split("/").filter(Boolean);
   document.querySelectorAll(".topo nav a").forEach((a) => {
     const alvo = a.getAttribute("href").replace(/^#\/?/, "");
-    a.classList.toggle("ativo", alvo === (partes[0] || "") || (alvo === "" && partes[0] === "v"));
+    a.classList.toggle("ativo", alvo === (partes[0] || "") || (alvo === "" && (partes[0] === "v" || partes[0] === "prefeito")));
   });
   try {
     if (!R) {
@@ -666,11 +761,12 @@ async function rota() {
         if (MANDATO !== MANDATOS[0].id) R = await carregar("resumo.json");
       }
     }
+    await carregarPrefeito();
     let html;
     if (partes[0] === "v" && partes[2]) html = await telaGrupo(partes[1], partes[2]);
     else if (partes[0] === "v") html = await telaVereador(partes[1], new URLSearchParams(qs || "").get("aba"), new URLSearchParams(qs || "").get("mes"));
     else if (partes[0] === "busca") html = await telaBusca(new URLSearchParams(qs || "").get("q"));
-    else if (partes[0] === "prefeito") html = await telaPrefeito();
+    else if (partes[0] === "prefeito") html = await telaPrefeito(new URLSearchParams(qs || "").get("aba"), new URLSearchParams(qs || "").get("mes"));
     else if (partes[0] === "sessoes") html = telaSessoes();
     else if (partes[0] === "gastos") html = telaGastos();
     else if (partes[0] === "comparar") html = telaComparar();
@@ -681,7 +777,7 @@ async function rota() {
     document.querySelectorAll(".abas button").forEach((t) => t.onclick = () => {
       document.querySelectorAll(".abas button").forEach((x) => x.setAttribute("aria-selected", x === t));
       document.querySelectorAll(".painel").forEach((p) => { p.hidden = p.dataset.painel !== t.dataset.aba; });
-      history.replaceState(null, "", `#/v/${partes[1]}?aba=${t.dataset.aba}`);
+      history.replaceState(null, "", partes[0] === "prefeito" ? `#/prefeito?aba=${t.dataset.aba}` : `#/v/${partes[1]}?aba=${t.dataset.aba}`);
     });
     if (document.getElementById("lista-ver")) {
       ["f-nome", "f-partido", "f-ordem"].forEach((id) => document.getElementById(id).addEventListener("input", desenharLista));
@@ -692,6 +788,11 @@ async function rota() {
       const f = await carregar(`vereador-${partes[1]}.json`);
       document.getElementById("painel-mes").innerHTML = secaoMes(f, sel.value);
       history.replaceState(null, "", `#/v/${partes[1]}?aba=gastos&mes=${sel.value}`);
+    };
+    const selT = document.getElementById("mes-tce");
+    if (selT) selT.onchange = () => {
+      document.getElementById("painel-tce").innerHTML = secaoTce(selT.value);
+      history.replaceState(null, "", `#/prefeito?aba=gastos&mes=${selT.value}`);
     };
     const b = document.getElementById("mais-votos");
     if (b) b.onclick = async () => { const f = await carregar(`vereador-${partes[1]}.json`); document.getElementById("votos").innerHTML = f.votos.slice().reverse().map(itemVoto).join(""); b.remove(); };

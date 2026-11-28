@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 1,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/1",
+ "coletado_em": "2026-11-28T03:42:16+00:00",
+ "registros": 5382,
+ "totais": {
+  "empenhado": 502993744.78,
+  "liquidado": 103999347.39,
+  "pago": 52846675.59,
+  "anulado": 8830722.53
+ },
+ "recebedores_cnpj": 83,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 22386636.02
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13717991.4
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 2557151.58
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2354194.63
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 1897409.42
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1479452.6
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 1171535.93
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 865571.01
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 855532.63
+  },
+  {
+   "nome": "DESENVOLVE SP   AGENCIA DE FOMENTO DO ESTADO DE SAP PAULO S A",
+   "cnpj": "10663610000129",
+   "valor": 656063.43
+  },
+  {
+   "nome": "ASSOCIACAO DE ASSISTENCIA AO MENOR AGUA VIVA",
+   "cnpj": "57519654000143",
+   "valor": 316708.0
+  },
+  {
+   "nome": "ASSOCIACAO FRATERNIDADE GUARDIOES DA IMACULADA",
+   "cnpj": "30111445000100",
+   "valor": 218946.0
+  },
+  {
+   "nome": "VILA DE SAO VICENTE DE PAULO DE AMERICANA   OBRA U",
+   "cnpj": "43263821000395",
+   "valor": 183436.0
+  },
+  {
+   "nome": "ASSOCIACAO DE PROMOCAO E ASSISTENCIA DE AMERICANA",
+   "cnpj": "44685907000107",
+   "valor": 174763.04
+  },
+  {
+   "nome": "ASSOCIACAO BENEFICIENTE RESIDENCIAL EVANG  BENAIAH",
+   "cnpj": "43266758000189",
+   "valor": 174040.0
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 55,
+  "valor": 525420.9
+ }
+}

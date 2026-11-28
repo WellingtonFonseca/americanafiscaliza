@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-28T03:27:03+00:00",
+ "gerado_em": "2026-11-28T03:44:48+00:00",
  "checagens": [
   {
    "ok": true,
@@ -160,6 +160,14 @@
   {
    "ok": true,
    "texto": "Prefeito: cada vereador tem um registro em cada uma das 19 votações de matérias do Executivo"
+  },
+  {
+   "ok": true,
+   "texto": "Prefeito: orçamento do Gabinete do Prefeito lido na lei do orçamento"
+  },
+  {
+   "ok": true,
+   "texto": "Prefeitura (TCE-SP): em cada um dos 22 meses, a soma dos maiores recebedores não passa do total pago"
   }
  ],
  "avisos": [

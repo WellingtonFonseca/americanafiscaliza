@@ -397,7 +397,30 @@ def gerar_prefeito(sessoes, mapa, vereadores, checar, verif):
     votacoes.reverse()
     checar(all(sum(c.values()) == len(votacoes) for c in conta.values()),
            f"Prefeito: cada vereador tem um registro em cada uma das {len(votacoes)} votações de matérias do Executivo")
+    cad_arq = os.path.join(pasta, "cadastro.json")
+    cadastro = json.load(open(cad_arq, encoding="utf-8")) if os.path.exists(cad_arq) else {}
+    # orçamento do Gabinete do Prefeito na LOA (mesmo texto já baixado para as emendas)
+    orcamento = []
+    pasta_e = os.path.join(DADOS, "emendas")
+    fontes_e = json.load(open(os.path.join(pasta_e, "fontes.json"), encoding="utf-8")) if os.path.exists(os.path.join(pasta_e, "fontes.json")) else {}
+    for ano, f in sorted(fontes_e.items()):
+        a = os.path.join(pasta_e, f"loa{ano}.txt")
+        m = re.search(r"\d\d\s*[–-]\s*Gabinete do Prefeito\s+R\$\s*([\d.]+,\d\d)", open(a, encoding="utf-8").read()) if os.path.exists(a) else None
+        if m:
+            orcamento.append({"ano": int(ano), "valor": numero_br(m.group(1)), "lei": f["lei"], "pdf": f["pdf"]})
+    checar(bool(orcamento), "Prefeito: orçamento do Gabinete do Prefeito lido na lei do orçamento")
+    # despesas da Prefeitura informadas ao TCE-SP (resumo mensal)
+    pasta_t = os.path.join(DADOS, "prefeitura")
+    tce = {}
+    if os.path.isdir(pasta_t):
+        for nome in sorted(os.listdir(pasta_t)):
+            if nome.startswith("tce-") and nome.endswith(".json"):
+                t = json.load(open(os.path.join(pasta_t, nome), encoding="utf-8"))
+                tce[f"{t['ano']}-{t['mes']:02d}"] = t
+    checar(all(t["totais"]["pago"] >= sum(x["valor"] for x in t["maiores_pagos"]) - 0.01 for t in tce.values()),
+           f"Prefeitura (TCE-SP): em cada um dos {len(tce)} meses, a soma dos maiores recebedores não passa do total pago")
     return {
+        "cadastro": cadastro, "orcamento_gabinete": orcamento, "tce": tce,
         "autor_siscam": EXECUTIVO, "coletado_em": estado.get("coletado_em", ""),
         "fonte_projetos": f"{SISCAM}/Documentos/Pesquisa?Pesquisa=Avancada&id=74&pagina=1&Modulo=DocumentosLista&DocumentosRelacionadosDetalhes=false&NoTexto=false&Documento=0&Numeracao=Documento&AnoInicial={INICIO_MANDATO[:4]}&Situacao=0&TipoAutor=Prefeito&AutoriaId=29&Iniciativa=Nenhum",
         "projetos": projetos, "contagem": dict(Counter(p["grupo"] for p in projetos)),

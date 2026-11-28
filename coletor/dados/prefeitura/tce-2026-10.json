@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 10,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/10",
+ "coletado_em": "2026-11-28T03:44:44+00:00",
+ "registros": 8461,
+ "totais": {
+  "empenhado": 86780506.34,
+  "liquidado": 96173049.21,
+  "pago": 106062649.77,
+  "anulado": 9214333.29
+ },
+ "recebedores_cnpj": 432,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 27303997.93
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 14180669.14
+  },
+  {
+   "nome": "CONSORCIO AEROPORTO AMERICANA",
+   "cnpj": "60626627000184",
+   "valor": 6028436.69
+  },
+  {
+   "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+   "cnpj": "00604122000197",
+   "valor": 5140247.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4282586.31
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 4143646.31
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3779222.51
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2563270.95
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2481492.64
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2155714.18
+  },
+  {
+   "nome": "CASAMAX COMERCIAL E SERVICOS LTDA",
+   "cnpj": "08183516000120",
+   "valor": 2113566.2
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2046741.19
+  },
+  {
+   "nome": "VARA DO TRABALHO DE SANTA BARBARA DOESTE",
+   "cnpj": "03773524000103",
+   "valor": 1638767.03
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 1615912.99
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 1562895.39
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 96,
+  "valor": 747827.63
+ }
+}

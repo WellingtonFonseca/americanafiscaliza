@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 8,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/8",
+ "coletado_em": "2026-11-28T03:44:18+00:00",
+ "registros": 8241,
+ "totais": {
+  "empenhado": 72764750.41,
+  "liquidado": 115547478.82,
+  "pago": 111448392.59,
+  "anulado": 2968228.47
+ },
+ "recebedores_cnpj": 426,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 27508294.91
+  },
+  {
+   "nome": "CASAMAX COMERCIAL E SERVICOS LTDA",
+   "cnpj": "08183516000120",
+   "valor": 14242240.75
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 14180669.14
+  },
+  {
+   "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+   "cnpj": "00604122000197",
+   "valor": 5154898.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4370406.69
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 3605112.02
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3507763.14
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2684242.94
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2518460.11
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2454880.57
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2180079.36
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1545645.82
+  },
+  {
+   "nome": "SOLUCOES MODERNA EDITORA E SERVICOS EDUCACIONAIS LTDA",
+   "cnpj": "08623848000189",
+   "valor": 1535696.24
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 1511681.49
+  },
+  {
+   "nome": "VARA DO TRABALHO DE SANTA BARBARA DOESTE",
+   "cnpj": "03773524000103",
+   "valor": 1286920.05
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 121,
+  "valor": 786901.34
+ }
+}

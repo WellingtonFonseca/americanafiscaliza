@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 4,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/4",
+ "coletado_em": "2026-11-28T03:40:36+00:00",
+ "registros": 8133,
+ "totais": {
+  "empenhado": 84816064.23,
+  "liquidado": 94940406.53,
+  "pago": 90819303.15,
+  "anulado": 2552138.92
+ },
+ "recebedores_cnpj": 399,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 24137913.19
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4097730.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 3975681.7
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 3959257.48
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3368949.21
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 2887567.93
+  },
+  {
+   "nome": "SOLRAC COMERCIO E SERVICOS EIRELI",
+   "cnpj": "17533828000108",
+   "valor": 2828248.6
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2093435.02
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2080045.59
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 1964710.56
+  },
+  {
+   "nome": "AMADO TECNOLOGIA LTDA",
+   "cnpj": "21580609000157",
+   "valor": 1709117.11
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 1673963.29
+  },
+  {
+   "nome": "SRE ENGENHARIA E CONSTRUCOES LTDA",
+   "cnpj": "03597937000184",
+   "valor": 1522084.24
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 1292508.28
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 129,
+  "valor": 607971.54
+ }
+}

@@ -286,3 +286,11 @@ th, td { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
 details > summary { cursor: pointer; font-weight: 600; font-size: 18px; padding: 10px 0; color: var(--azul); }
 .tabela-rolar { overflow-x: auto; }
 .tabela-votos td { text-align: center; }
+.foto-icone { width: 56px; height: 56px; border-radius: 50%; background: var(--marinho); color: #fff; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.foto-icone svg { width: 30px; height: 30px; }
+.foto-icone.grande { width: 84px; height: 84px; border: 3px solid var(--laranja-claro); }
+.foto-icone.grande svg { width: 44px; height: 44px; }
+.foto-icone.pequena { width: 48px; height: 48px; }
+.foto-icone.pequena svg { width: 26px; height: 26px; }
+.lista-pref { grid-template-columns: 1fr !important; }
+.tabela-pagos td:last-child { white-space: nowrap; text-align: right; }
