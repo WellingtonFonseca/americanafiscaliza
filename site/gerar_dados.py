@@ -6,7 +6,7 @@ Entradas (pasta do coletor):
   dados/proposituras_html/<id>.html  página de propostas de cada vereador (SISCAM)
   dados/html/<id>.html               páginas de sessão (SISCAM)
 Saídas em publico/dados/:
-  resumo.json, vereador-<slug>.json, pedidos.json, verificacao.json
+  resumo.json, vereador-<slug>.json, pedidos.json, verificacao.json, prefeito.json
 
 Nada aqui inventa número: tudo é contagem direta do que está nas páginas
 oficiais. As regras de grupo estão em CLASSIFICACAO_REGRAS e são as mesmas
@@ -310,6 +310,103 @@ def chave_nome(n):
     return re.sub(r"[^a-z ]", "", sem_acento(n)).strip()
 
 
+# ---------------------------------------------------------------- prefeito
+EXECUTIVO = "PODER EXECUTIVO DE AMERICANA"  # nome do autor no SISCAM
+# O que cada situação de veto quer dizer, em linguagem simples (a situação oficial aparece junto)
+VETO_EXPLICA = [
+    ("rejeitado", "A Câmara derrubou o veto"),
+    ("tramit", "O veto ainda não foi votado pela Câmara"),
+    ("parcial acatado", "A Câmara manteve o veto a uma parte do projeto"),
+    ("subst", "A Câmara manteve o veto ao texto substitutivo"),
+    ("acatado", "A Câmara manteve o veto"),
+]
+
+
+def grupo_situacao(sit):
+    s = sem_acento(sit)
+    if s.startswith("aprovado"):
+        return "aprovado"
+    if "retirad" in s:
+        return "retirado"
+    if "arquiv" in s or "rejeitad" in s:
+        return "rejeitado"
+    return "tramitando"
+
+
+def gerar_prefeito(sessoes, mapa, vereadores, checar, verif):
+    """prefeito.json: projetos que o Executivo mandou, vetos e votos dos vereadores neles."""
+    import csv
+    pasta = os.path.join(DADOS, "prefeito")
+    arq = os.path.join(pasta, "projetos-executivo.csv")
+    if not os.path.exists(arq):
+        return None
+    estado = json.load(open(os.path.join(pasta, "estado.json"))) if os.path.exists(os.path.join(pasta, "estado.json")) else {}
+    projetos = []
+    for r in csv.DictReader(open(arq, encoding="utf-8-sig"), delimiter=";"):
+        plural, cod = TIPO_CSV.get(r["Documento"], (r["Documento"], 0))
+        d = iso(r["Data"].strip())
+        if not (INICIO_MANDATO <= d <= FIM_MANDATO):
+            continue
+        projetos.append({"id": f"p{cod}-{r['Numero']}-{r['Ano']}", "ident": f"{r['Documento']} Nº {r['Numero']}/{r['Ano']}",
+                         "data": d, "assunto": re.sub(r"\s+", " ", r["Ementa"]).strip(),
+                         "situacao": r["Situação"].strip(), "grupo": grupo_situacao(r["Situação"])})
+    projetos.sort(key=lambda x: (x["data"], x["id"]), reverse=True)
+    checar(all(EXECUTIVO in r["Autoria"].upper()
+               for r in csv.DictReader(open(arq, encoding="utf-8-sig"), delimiter=";")),
+           f"Prefeito: os {len(projetos)} projetos da planilha do SISCAM são todos de autoria do {EXECUTIVO.title()}")
+
+    por_apelido = {chave_nome(v["apelido"]): v["slug"] for v in vereadores}
+    vetos, vistos = [], set()
+    for nome in sorted(os.listdir(pasta)):
+        if not (nome.startswith("vetos-") and nome.endswith(".csv")):
+            continue
+        for r in csv.DictReader(open(os.path.join(pasta, nome), encoding="utf-8-sig"), delimiter=";"):
+            plural, cod = TIPO_CSV.get(r["Documento"], (r["Documento"], 0))
+            pid = f"p{cod}-{r['Numero']}-{r['Ano']}"
+            d = iso(r["Data"].strip())
+            if pid in vistos or not (INICIO_MANDATO <= d <= FIM_MANDATO):
+                continue
+            vistos.add(pid)
+            autores = [a.strip() for a in r["Autoria"].split(",") if a.strip()]
+            sit = r["Situação"].strip()
+            explica = next((t for k, t in VETO_EXPLICA if k in sem_acento(sit)), "")
+            vetos.append({"id": pid, "ident": f"{r['Documento']} Nº {r['Numero']}/{r['Ano']}", "data": d,
+                          "assunto": re.sub(r"\s+", " ", r["Ementa"]).strip(), "situacao": sit, "explica": explica,
+                          "autores": [[a, por_apelido.get(chave_nome(a), "")] for a in autores]})
+    vetos.sort(key=lambda x: (x["data"], x["id"]), reverse=True)
+    soltos = sorted({a for x in vetos for a, sl in x["autores"] if not sl})
+    if soltos:
+        verif["avisos"].append(f"Prefeito: autores de projetos vetados que não são vereadores atuais: {', '.join(soltos)}.")
+    checar(all(x["explica"] for x in vetos), f"Prefeito: as {len(vetos)} situações de veto têm explicação")
+
+    # votações de matérias do Executivo nas sessões já coletadas
+    votacoes = []
+    conta = {v["slug"]: Counter() for v in vereadores}
+    for s in sessoes:
+        for vt in s["votacoes"]:
+            if EXECUTIVO not in vt["autoria"].upper():
+                continue
+            por_voto = Counter(vt["votos"].values())
+            votacoes.append({"data": s["data"], "materia": vt["materia"], "url": vt["url"], "fase": vt["fase"],
+                             "assunto": vt["assunto"], "resultado": vt["resultado"], "veto": vt["materia"].startswith("Veto"),
+                             "votos": dict(por_voto), "contra": sorted(n for n, x in vt["votos"].items() if x == "Contra"),
+                             "sessao_url": s["url"], "titulo_sessao": s["titulo"]})
+            for v in vereadores:
+                voto = next((x for n, x in vt["votos"].items() if mapa.get(n) == v["slug"]), "sem registro")
+                conta[v["slug"]][voto] += 1
+    votacoes.reverse()
+    checar(all(sum(c.values()) == len(votacoes) for c in conta.values()),
+           f"Prefeito: cada vereador tem um registro em cada uma das {len(votacoes)} votações de matérias do Executivo")
+    return {
+        "autor_siscam": EXECUTIVO, "coletado_em": estado.get("coletado_em", ""),
+        "fonte_projetos": f"{SISCAM}/Documentos/Pesquisa?Pesquisa=Avancada&id=74&pagina=1&Modulo=DocumentosLista&DocumentosRelacionadosDetalhes=false&NoTexto=false&Documento=0&Numeracao=Documento&AnoInicial={INICIO_MANDATO[:4]}&Situacao=0&TipoAutor=Prefeito&AutoriaId=29&Iniciativa=Nenhum",
+        "projetos": projetos, "contagem": dict(Counter(p["grupo"] for p in projetos)),
+        "vetos": vetos, "votacoes": votacoes,
+        "por_vereador": {sl: dict(c) for sl, c in conta.items()},
+        "periodo_votos": [sessoes[0]["data"], sessoes[-1]["data"]] if sessoes else None,
+    }
+
+
 def main():
     vereadores = json.load(open(os.path.join(DADOS, "vereadores.json"), encoding="utf-8"))
     pasta_s = os.path.join(DADOS, "html")
@@ -581,6 +678,9 @@ def main():
                         assunto_pedido(p["assunto"]), [slugs.index(a) for a in p["autores"]]])
     verif["avisos"].append(f"Em {nao_local} de {len(pedidos)} pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra.")
 
+    prefeito = gerar_prefeito(sessoes, mapa, vereadores, checar, verif)
+    if prefeito:
+        json.dump(prefeito, open(os.path.join(SAIDA, "prefeito.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     sessoes_lista = [s["id"] for s in sessoes]
     resumo = {
         "gerado_em": verif["gerado_em"], "inicio_mandato": INICIO_MANDATO, "fim_mandato": FIM_MANDATO,

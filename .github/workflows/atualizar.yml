@@ -39,6 +39,10 @@ jobs:
         if: github.event_name != 'push'
         run: python3 -I coletor/coletar_proposituras.py coletor/dados --renovar 2
 
+      - name: Coletar projetos e vetos do prefeito (8 planilhas, no máximo 1 vez a cada 6 dias)
+        if: github.event_name != 'push'
+        run: python3 -I coletor/coletar_prefeito.py coletor/dados
+
       - name: Coletar gastos de gabinete (1 PDF por vereador) e emendas da LOA (só se faltar)
         if: github.event_name != 'push'
         run: |
