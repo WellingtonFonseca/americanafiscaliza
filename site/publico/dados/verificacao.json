@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-28T04:00:01+00:00",
+ "gerado_em": "2026-11-28T04:15:42+00:00",
  "checagens": [
   {
    "ok": true,
@@ -176,6 +176,14 @@
   {
    "ok": true,
    "texto": "Prefeitura (TCE-SP): em cada um dos 22 meses, a soma dos maiores recebedores não passa do total pago"
+  },
+  {
+   "ok": true,
+   "texto": "Folha da Prefeitura: o prefeito aparece em todos os 5 meses importados"
+  },
+  {
+   "ok": true,
+   "texto": "Folha da Prefeitura: o vencimento do prefeito não passa do subsídio fixado em lei em nenhum mês"
   }
  ],
  "avisos": [
@@ -190,6 +198,8 @@
   "Folha: “JACIRA MANEO” (cargo vereador) foi ligado a Jacira Chávare só por uma parte do nome. Conferir.",
   "Folha de outubro/2026: linhas de gabinete que não ligamos a nenhum vereador: GABINETE DA PRESIDÊNCIA (Secretario gabin presidencia).",
   "Folha: não encontramos o pagamento de Levi Rossi como vereador em 21 de 22 meses (2025-02 a 2026-10). O site mostra “não encontrado”, sem adivinhar.",
-  "Em 1793 de 31483 pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra."
+  "Em 1793 de 31483 pedidos de bairro o programa não conseguiu ler a rua nem o bairro no texto; eles continuam aparecendo na busca por palavra.",
+  "Folha da Prefeitura 2026-06: vencimento do prefeito R$ 17508.01, diferente do subsídio fixado em lei.",
+  "Folha da Prefeitura 2026-07: vencimento do prefeito R$ 19895.47, diferente do subsídio fixado em lei."
  ]
 }

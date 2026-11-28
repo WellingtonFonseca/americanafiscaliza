@@ -117,10 +117,15 @@ function telaInicio() {
   const partidos = [...new Set(R.vereadores.map((v) => v.partido))].sort();
   const pt = R.pago_total;
   const milhoes = (x) => (x / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " milhões";
-  // salário do prefeito: estimativa pelo subsídio fixado em lei × meses da folha (a folha da Prefeitura não é acessível)
+  // salário do prefeito: valor real nos meses com a folha da Prefeitura importada; nos outros, estimativa pelo subsídio fixado em lei
   const sub = P && P.cadastro && P.cadastro.subsidio;
   const nMeses = (R.meses_folha || []).length;
-  const prefEst = sub && nMeses ? Math.round(sub.prefeito * nMeses * 100) / 100 : 0;
+  const fp = (P && P.folha) || {};
+  const reaisPref = (R.meses_folha || []).filter((k) => fp[k] && fp[k].prefeito);
+  const nEst = nMeses - reaisPref.length;
+  const somaReal = reaisPref.reduce((t, k) => t + fp[k].prefeito.bruto, 0);
+  const prefEst = sub && nMeses ? Math.round((somaReal + sub.prefeito * nEst) * 100) / 100 : 0;
+  const periodoReal = reaisPref.length ? (reaisPref.length === 1 ? nomeMesNum(reaisPref[0]) : `${nomeMesNum(reaisPref[0])} a ${nomeMesNum(reaisPref[reaisPref.length - 1])}`) : "";
   const contador = pt && pt.de ? `<div class="destaque">
       <span class="etiqueta">Folha oficial</span>
       <b>R$ ${milhoes(pt.vereadores + pt.equipes + prefEst)}</b>
@@ -131,7 +136,7 @@ function telaInicio() {
         <li><span>Equipes dos gabinetes</span><strong>${reais(pt.equipes)}</strong></li>
       </ul>
       <small>Vereadores e equipes: soma dos salários brutos na folha oficial da Câmara, mês a mês. ${ext(R.folha_info.fonte, "Portal da Transparência")} · <a href="#/gastos">Ver por vereador</a></small>
-      ${prefEst ? `<small>* Prefeito: <b class="inline">estimativa</b>, ${reais(sub.prefeito)} por mês (salário fixado em lei) × ${nMeses} meses. A folha da Prefeitura não pode ser consultada de fora do Brasil. ${ext(sub.pdf, "Ver a lei")} · <a href="#/prefeito?aba=gastos">Ver o prefeito</a></small>` : ""}
+      ${prefEst ? `<small>* Prefeito: ${reaisPref.length ? `valor real de ${periodoReal} (${reais(somaReal)}), da folha da Prefeitura. ` : ""}${nEst ? `${reaisPref.length ? "Nos outros" : "Nos"} ${nEst} meses é <b class="inline">estimativa</b>: ${reais(sub.prefeito)} por mês, o salário fixado em lei. ${ext(sub.pdf, "Ver a lei")} · ` : ""}<a href="#/prefeito?aba=gastos">Ver o prefeito</a></small>` : ""}
     </div>` : "";
   const orc = P && (P.orcamento_gabinete || []).slice(-1)[0];
   const cartaoOrc = orc && orc.orgaos ? `<div class="destaque destaque-orc">
@@ -544,6 +549,7 @@ async function carregarPrefeito() {
   return P;
 }
 const nomePref = () => (P && P.cadastro && P.cadastro.nome) || "Prefeito";
+const mesesFolhaPref = () => Object.keys((P && P.folha) || {}).sort();
 const mesesTce = () => Object.keys((P && P.tce) || {}).sort();
 
 function cartaoPrefeitoLista() {
@@ -565,11 +571,12 @@ function cartaoPrefeitoGastos() {
   if (!P) return "";
   const s = (P.cadastro || {}).subsidio, o = (P.orcamento_gabinete || []).slice(-1)[0];
   const ult = mesesTce().slice(-1)[0], t = ult ? P.tce[ult] : null;
+  const uf = mesesFolhaPref().slice(-1)[0], pf = uf ? P.folha[uf].prefeito : null;
   return `<div class="comp">
       <div class="comp-cab"><span class="foto-icone pequena">${ICONE_PREF}</span>
         <div><a class="comp-nome" href="#/prefeito">${$(nomePref())}</a><span class="comp-partido">Prefeito</span></div></div>
       <div class="comp-grade comp-dinheiro">
-        <a class="comp-num" href="#/prefeito?aba=gastos"><b>${s ? reais(s.prefeito) : "—"}</b><span>Salário mensal fixado em lei (subsídio)</span></a>
+        <a class="comp-num" href="#/prefeito?aba=gastos"><b>${pf ? reais(pf.bruto) : s ? reais(s.prefeito) : "—"}</b><span>${pf ? `Salário bruto do prefeito em ${nomeMesNum(uf)} (folha da Prefeitura)` : "Salário mensal fixado em lei (subsídio)"}</span></a>
         <a class="comp-num" href="#/prefeito?aba=gastos"><b>${o ? reais(o.valor) : "—"}</b><span>Orçamento do Gabinete do Prefeito em ${o ? o.ano : ""}</span></a>
         <a class="comp-num" href="#/prefeito?aba=gastos"><b>${t ? reais(t.totais.pago) : "—"}</b><span>Pago por toda a Prefeitura em ${t ? nomeMesNum(ult) : ""}</span></a>
       </div>
@@ -594,6 +601,38 @@ function secaoTce(k) {
     ${t.maiores_pagos.map((x) => `<tr><td>${$(x.nome)}<div class="meta">CNPJ ${$(x.cnpj)}</div></td><td>${reais(x.valor)}</td></tr>`).join("")}
     </tbody></table>
     <div class="aviso">${num(t.recebedores_cnpj)} empresas e órgãos receberam pagamentos no mês; aqui estão os ${t.maiores_pagos.length} maiores. ${pf.pagamentos ? `Pagamentos a pessoas físicas (${num(pf.pagamentos)} lançamentos, ${reais(pf.valor)}) entram só no total.` : ""} A folha de salários aparece como pagamentos à própria Prefeitura, ao INSS e ao instituto de previdência.</div>`;
+}
+
+function linhaFolhaPref(p, mostraCargo) {
+  const extra = [p.ferias_13 ? `férias e 13º ${reais(p.ferias_13)}` : "", p.licenca_premio ? `licença-prêmio ${reais(p.licenca_premio)}` : "", p.vantagens ? `vantagens ${reais(p.vantagens)}` : ""].filter(Boolean).join(" · ");
+  return `<tr><td>${$(p.nome)}<div class="meta">${mostraCargo ? $(p.cargo) + " · " : ""}${p.bruto ? `salário ${reais(p.vencimentos)}${extra ? " · " + extra : ""}` : "sem valor pago neste mês na planilha"}</div></td><td>${reais(p.bruto)}</td></tr>`;
+}
+
+function secaoFolhaPref(k) {
+  const f = P.folha[k];
+  if (!f) return `<div class="aviso">Ainda não temos a folha desse mês.</div>`;
+  const tab = (titulo, lista, cargo) => lista.length ? `<h3>${titulo}</h3>
+    <table class="tabela-pagos"><thead><tr><th>Nome</th><th>Bruto</th></tr></thead><tbody>${lista.map((p) => linhaFolhaPref(p, cargo)).join("")}</tbody></table>` : "";
+  const topo = [f.prefeito, f.vice].filter(Boolean);
+  const somaGab = f.gabinete.reduce((t, p) => t + p.bruto, 0);
+  return `<div class="numeros um">
+      ${f.prefeito ? `<div class="numero"><b>${reais(f.prefeito.bruto)}</b><span>salário bruto do prefeito em ${nomeMesNum(k)}</span><small>${ext(f.fonte, "Portal da Transparência da Prefeitura")}</small></div>` : ""}
+      <div class="numero"><b>${reais(somaGab)}</b><span>salários brutos das ${num(f.gabinete.length)} pessoas lotadas no Gabinete do Prefeito</span></div>
+      <div class="numero"><b>${reais(f.total_bruto)}</b><span>folha bruta de toda a Prefeitura (${num(f.total_servidores)} pessoas)</span></div>
+    </div>
+    ${tab("Prefeito e vice", topo, true)}
+    ${tab(`Secretários municipais (${num(f.secretarios.length)})`, f.secretarios, false)}
+    ${tab(`Equipe do Gabinete do Prefeito (${num(f.gabinete.length)})`, f.gabinete, true)}
+    <div class="aviso">Bruto = salário + férias e 13º + licença-prêmio + vantagens (como a cesta básica), antes dos descontos de previdência e imposto de renda. Valores da planilha “Remuneração dos Servidores” do Portal da Transparência da Prefeitura.</div>`;
+}
+
+function seletorFolhaPref(mes) {
+  const ms = mesesFolhaPref();
+  if (!ms.length) return `<div class="aviso">A folha da Prefeitura ainda não foi importada.</div>`;
+  const k = ms.includes(mes) ? mes : ms[ms.length - 1];
+  return `<label class="seletor">Mês <select id="mes-folha-pref">${ms.slice().reverse().map((m) => `<option value="${m}"${m === k ? " selected" : ""}>${nomeMesNum(m)}</option>`).join("")}</select></label>
+    <div id="painel-folha-pref">${secaoFolhaPref(k)}</div>
+    <div class="aviso info">Temos a folha da Prefeitura de ${ms.length === 1 ? nomeMesNum(ms[0]) : `${nomeMesNum(ms[0])} a ${nomeMesNum(ms[ms.length - 1])}`}. Os outros meses ainda vão ser incluídos.</div>`;
 }
 
 function seletorTce(mes) {
@@ -673,6 +712,7 @@ async function telaPrefeito(aba, mes) {
     <label class="seletor">Ano <select id="ano-orc">${P.orcamento_gabinete.filter((x) => x.orgaos).slice().reverse().map((x) => `<option value="${x.ano}">${x.ano}</option>`).join("")}</select></label>
     <div id="painel-orc">${tabelaOrc(o.ano)}</div>` : ""}
     <h2>Mensal</h2>
+    ${mesesFolhaPref().length ? `<h3>Salários do prefeito, dos secretários e do Gabinete</h3>${seletorFolhaPref(mes)}<h3>Despesas de toda a Prefeitura</h3>` : ""}
     <div class="aviso info">Despesas de <b>toda a Prefeitura</b> (sem o DAE, a Guarda e os outros órgãos), como a própria Prefeitura informou ao Tribunal de Contas do Estado (TCE-SP). O sistema do TCE não separa o que é do Gabinete do Prefeito.</div>
     ${seletorTce(mes)}
     </section>
@@ -738,6 +778,7 @@ async function telaSobre() {
       <li><b>Gastos do gabinete:</b> os relatórios “Gastos com Gabinete” publicados em PDF no ${ext("https://www.camara-americana.sp.gov.br/Download/Listar/46", "site da Câmara")}, um por vereador, em quantidades (não em reais).</li>
       <li><b>Prefeito:</b> a pesquisa oficial de documentos do SISCAM, filtrada pelo autor “Poder Executivo de Americana” (projetos enviados) e pela situação “Veto” (projetos de vereadores vetados). Os votos vêm das mesmas páginas de sessão. O nome vem de um projeto assinado pelo Gabinete do Prefeito; o salário, da lei que fixou os subsídios (Projeto de Lei nº 27/2024); o orçamento do gabinete, da lei do orçamento.</li>
       <li><b>Despesas da Prefeitura:</b> a ${ext("https://transparencia.tce.sp.gov.br/apis", "API aberta do Tribunal de Contas do Estado (TCE-SP)")}, com o que a própria Prefeitura informa ao sistema Audesp, mês a mês. O Portal da Transparência da Prefeitura não aceita acesso automático de fora do Brasil, por isso usamos o TCE.</li>
+      <li><b>Salários do prefeito, do vice, dos secretários e do Gabinete do Prefeito:</b> a planilha “Remuneração dos Servidores” do ${ext("https://transparencia.americana.sp.gov.br/transparencia_index.php?p=servidor_remuneracao", "Portal da Transparência da Prefeitura")}, baixada mês a mês de dentro do Brasil e importada sem mudar nenhum valor. Nos meses que ainda não temos, o salário do prefeito aparece como estimativa pelo valor fixado em lei, sempre marcado.</li>
       <li><b>Presença e votos:</b> a página de cada sessão no SISCAM, que traz a chamada nominal e o voto de cada vereador em cada votação.</li>
     </ul>
     <p>Um robô identificado como “AmericanaFiscaliza” baixa poucas páginas por vez, com pausa entre elas, para não pesar no sistema da Câmara. Se a Câmara pedir, ele para.</p>
@@ -822,6 +863,8 @@ async function rota() {
     };
     const selO = document.getElementById("ano-orc");
     if (selO) selO.onchange = () => { document.getElementById("painel-orc").innerHTML = tabelaOrc(selO.value); };
+    const selF = document.getElementById("mes-folha-pref");
+    if (selF) selF.onchange = () => { document.getElementById("painel-folha-pref").innerHTML = secaoFolhaPref(selF.value); };
     const selT = document.getElementById("mes-tce");
     if (selT) selT.onchange = () => {
       document.getElementById("painel-tce").innerHTML = secaoTce(selT.value);
