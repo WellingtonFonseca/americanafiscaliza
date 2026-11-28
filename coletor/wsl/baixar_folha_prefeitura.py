@@ -9,8 +9,8 @@ entre os pedidos, no máximo 24 planilhas por vez. Pula os meses que já estão
 na pasta. Para na hora se o portal responder 403 ou 429.
 
 Uso no WSL:  python3 baixar_folha_prefeitura.py
-Saída:       W:\\Desktop\\AmericanaFiscaliza\\planilhas\\remuneracao-AAAA-MM.xlsx
-             W:\\Desktop\\AmericanaFiscaliza\\planilhas.zip  (mandar no chat)
+Saída:       W:\\Desktop\\AmericanaFiscaliza\\folha-prefeitura\\remuneracao-AAAA-MM.xlsx
+             W:\\Desktop\\AmericanaFiscaliza\\folha-prefeitura-AAAA-MM-a-AAAA-MM.zip  (mandar no chat)
 """
 import os, re, sys, time, urllib.error, urllib.parse, urllib.request, zipfile
 from datetime import date
@@ -26,8 +26,15 @@ INICIO = (2025, 1)
 EMPRESA = "1"  # PREFEITURA DE AMERICANA
 
 DESTINO = sys.argv[1] if len(sys.argv) > 1 else "/mnt/w/Desktop/AmericanaFiscaliza"
-PASTA = os.path.join(DESTINO, "planilhas")
+PASTA = os.path.join(DESTINO, "folha-prefeitura")
 os.makedirs(PASTA, exist_ok=True)
+ANTIGA = os.path.join(DESTINO, "planilhas")  # nome usado na primeira versão do script
+if os.path.isdir(ANTIGA):
+    for n in os.listdir(ANTIGA):
+        if n.startswith("remuneracao-") and not os.path.exists(os.path.join(PASTA, n)):
+            os.replace(os.path.join(ANTIGA, n), os.path.join(PASTA, n))
+    if not os.listdir(ANTIGA):
+        os.rmdir(ANTIGA)
 abrir = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar())).open
 ultimo = 0.0
 
@@ -107,11 +114,17 @@ def main():
             continue
         open(arq(a, m), "wb").write(b)
         print(f"{m:02d}/{a}: ok ({len(b) // 1024} KB)")
-    zipado = os.path.join(DESTINO, "planilhas.zip")
+    nomes = sorted(n for n in os.listdir(PASTA) if n.startswith("remuneracao-") and n.endswith(".xlsx"))
+    if not nomes:
+        print("Nenhuma planilha na pasta; nada para mandar."); return
+    de, ate = nomes[0][12:19], nomes[-1][12:19]
+    for velho in os.listdir(DESTINO):  # tira zips antigos da folha, para não confundir
+        if velho.startswith("folha-prefeitura-") and velho.endswith(".zip") or velho == "planilhas.zip":
+            os.remove(os.path.join(DESTINO, velho))
+    zipado = os.path.join(DESTINO, f"folha-prefeitura-{de}-a-{ate}.zip")
     with zipfile.ZipFile(zipado, "w", zipfile.ZIP_DEFLATED) as z:
-        for n in sorted(os.listdir(PASTA)):
-            if n.endswith(".xlsx"):
-                z.write(os.path.join(PASTA, n), n)
+        for n in nomes:
+            z.write(os.path.join(PASTA, n), n)
     print(f"Pronto. Mande este arquivo no chat: {zipado}")
 
 

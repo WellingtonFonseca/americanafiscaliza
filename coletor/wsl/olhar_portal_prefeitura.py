@@ -8,7 +8,7 @@ Faz poucos pedidos (a página e até 6 arquivos de script dela), com pausa
 de 5 segundos entre eles, com robô identificado. Não baixa planilha nenhuma.
 
 Uso no WSL:  python3 olhar_portal_prefeitura.py
-Saída:       W:\\Desktop\\AmericanaFiscaliza\\diagnostico.zip  (mandar no chat)
+Saída:       W:\\Desktop\\AmericanaFiscaliza\\diagnostico-folha.zip  (mandar no chat)
 """
 import html.parser, os, re, sys, time, urllib.parse, urllib.request, zipfile
 from http.cookiejar import CookieJar
@@ -20,7 +20,7 @@ PAUSA = 5
 MAX_JS = 6
 
 DESTINO = sys.argv[1] if len(sys.argv) > 1 else "/mnt/w/Desktop/AmericanaFiscaliza"
-PASTA = os.path.join(DESTINO, "diagnostico")
+PASTA = os.path.join(DESTINO, "diagnosticos", "folha")
 os.makedirs(PASTA, exist_ok=True)
 abrir = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(CookieJar())).open
 
@@ -88,7 +88,7 @@ def main():
         except Exception as e:
             linhas.append(f"[falhou] {u}: {e}")
     open(os.path.join(PASTA, "resumo.txt"), "w", encoding="utf-8").write("\n".join(linhas))
-    zipado = os.path.join(DESTINO, "diagnostico.zip")
+    zipado = os.path.join(DESTINO, "diagnostico-folha.zip")
     with zipfile.ZipFile(zipado, "w", zipfile.ZIP_DEFLATED) as z:
         for n in os.listdir(PASTA):
             z.write(os.path.join(PASTA, n), n)
