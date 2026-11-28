@@ -604,6 +604,17 @@ function seletorTce(mes) {
     <div id="painel-tce">${secaoTce(k)}</div>`;
 }
 
+function tabelaOrc(ano) {
+  const o = (P.orcamento_gabinete || []).find((x) => String(x.ano) === String(ano));
+  if (!o || !o.orgaos) return `<div class="aviso">Sem orçamento desse ano.</div>`;
+  return `<div class="aviso info">Valor <b>previsto</b> na lei do orçamento de ${o.ano} para cada secretaria e órgão do município, não o que já foi gasto. Total: ${reais(o.total)}. ${ext(o.pdf, "Ver a lei (PDF)")}</div>
+    <div class="tabela-rolar"><table class="tabela-orc"><thead><tr><th>Secretaria ou órgão</th><th>Previsto</th><th>Parte</th></tr></thead><tbody>
+    ${o.orgaos.map((g) => { const pct = (g.valor / o.total) * 100; return `<tr><td>${$(g.nome)}<i class="barra-orc" style="width:${Math.max(1, Math.round((g.valor / o.orgaos[0].valor) * 100))}%"></i></td><td>${reais(g.valor)}</td><td>${pct < 0.1 ? "menos de 0,1" : pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% do total</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <div class="aviso">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</div>
+    ${Number(o.ano) < 2026 ? `<div class="aviso">O orçamento de ${o.ano} foi votado em 2024, pela Câmara do mandato anterior. As emendas dos vereadores nessa lei não são dos vereadores atuais e por isso não aparecem nas fichas deles.</div>` : ""}`;
+}
+
 function itemProjetoPref(p) {
   const [, cls] = SIT_PREF[p.grupo] || ["", ""];
   return `<li><span class="tag ${cls}">${$(p.situacao)}</span> ${ext(SISCAM_DOC(p.id), $(p.ident))}
@@ -658,12 +669,9 @@ async function telaPrefeito(aba, mes) {
       ${o ? `<div class="numero"><b>${reais(o.valor)}</b><span>orçamento do Gabinete do Prefeito em ${o.ano}</span><small>${ext(o.pdf, $(o.lei))}</small></div>` : ""}
     </div>
     ${s ? `<div class="aviso">${$(s.obs)}</div>` : ""}
-    ${o && o.orgaos ? `<h3>Orçamento de cada secretaria e órgão em ${o.ano}</h3>
-    <div class="aviso info">Valor <b>previsto</b> na lei do orçamento de ${o.ano} para cada secretaria e órgão do município, não o que já foi gasto. Total: ${reais(o.total)}. ${ext(o.pdf, "Ver a lei (PDF)")}</div>
-    <div class="tabela-rolar"><table class="tabela-orc"><thead><tr><th>Secretaria ou órgão</th><th>Previsto</th><th>Parte</th></tr></thead><tbody>
-    ${o.orgaos.map((g) => { const pct = (g.valor / o.total) * 100; return `<tr><td>${$(g.nome)}<i class="barra-orc" style="width:${Math.max(1, Math.round((g.valor / o.orgaos[0].valor) * 100))}%"></i></td><td>${reais(g.valor)}</td><td>${pct < 0.1 ? "menos de 0,1" : pct.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% do total</td></tr>`; }).join("")}
-    </tbody></table></div>
-    <div class="aviso">A Câmara Municipal, o DAE, a Guarda Municipal, a Fundação de Saúde e o Instituto de Previdência também aparecem porque estão na mesma lei, mas não são secretarias do prefeito.</div>` : ""}
+    ${o && o.orgaos ? `<h3>Orçamento de cada secretaria e órgão</h3>
+    <label class="seletor">Ano <select id="ano-orc">${P.orcamento_gabinete.filter((x) => x.orgaos).slice().reverse().map((x) => `<option value="${x.ano}">${x.ano}</option>`).join("")}</select></label>
+    <div id="painel-orc">${tabelaOrc(o.ano)}</div>` : ""}
     <h2>Mensal</h2>
     <div class="aviso info">Despesas de <b>toda a Prefeitura</b> (sem o DAE, a Guarda e os outros órgãos), como a própria Prefeitura informou ao Tribunal de Contas do Estado (TCE-SP). O sistema do TCE não separa o que é do Gabinete do Prefeito.</div>
     ${seletorTce(mes)}
@@ -812,6 +820,8 @@ async function rota() {
       document.getElementById("painel-mes").innerHTML = secaoMes(f, sel.value);
       history.replaceState(null, "", `#/v/${partes[1]}?aba=gastos&mes=${sel.value}`);
     };
+    const selO = document.getElementById("ano-orc");
+    if (selO) selO.onchange = () => { document.getElementById("painel-orc").innerHTML = tabelaOrc(selO.value); };
     const selT = document.getElementById("mes-tce");
     if (selT) selT.onchange = () => {
       document.getElementById("painel-tce").innerHTML = secaoTce(selT.value);
