@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 7,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/7",
+ "coletado_em": "2026-11-28T03:41:10+00:00",
+ "registros": 8082,
+ "totais": {
+  "empenhado": 85693479.46,
+  "liquidado": 92315281.72,
+  "pago": 102996172.26,
+  "anulado": 13909981.16
+ },
+ "recebedores_cnpj": 432,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 26011515.97
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 8862553.87
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 5284938.96
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 4748288.2
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4440380.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4288793.98
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2512204.27
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2244724.62
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2150833.58
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 2117182.89
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 1819896.33
+  },
+  {
+   "nome": "UTGR AMERICANA AMBIENTAL LTDA",
+   "cnpj": "33952459000144",
+   "valor": 1700973.72
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1615194.37
+  },
+  {
+   "nome": "SOLUCOES MODERNA EDITORA E SERVICOS EDUCACIONAIS LTDA",
+   "cnpj": "08623848000189",
+   "valor": 1468050.88
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 156,
+  "valor": 988069.81
+ }
+}

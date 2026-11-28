@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 4,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/4",
+ "coletado_em": "2026-11-28T03:43:00+00:00",
+ "registros": 8700,
+ "totais": {
+  "empenhado": 78248242.86,
+  "liquidado": 109068019.0,
+  "pago": 113190143.68,
+  "anulado": 1758850.81
+ },
+ "recebedores_cnpj": 455,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 26682518.16
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 14209469.14
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 10136417.77
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 7384009.14
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 6372453.89
+  },
+  {
+   "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+   "cnpj": "00604122000197",
+   "valor": 4512900.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4099493.95
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3384854.09
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2349956.95
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2337982.77
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2104859.89
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 2087466.0
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1868871.5
+  },
+  {
+   "nome": "AMADO TECNOLOGIA LTDA",
+   "cnpj": "21580609000157",
+   "valor": 1779124.01
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1479452.6
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 146,
+  "valor": 1155941.73
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 3,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/3",
+ "coletado_em": "2026-11-28T03:42:46+00:00",
+ "registros": 8947,
+ "totais": {
+  "empenhado": 76435871.23,
+  "liquidado": 103669128.12,
+  "pago": 91016221.45,
+  "anulado": 5633737.45
+ },
+ "recebedores_cnpj": 379,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 26776053.23
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 14209469.14
+  },
+  {
+   "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+   "cnpj": "00604122000197",
+   "valor": 4508000.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4228041.37
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 3032790.4
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2243948.91
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2100264.73
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2045029.59
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 1980168.59
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 1488792.06
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1479452.6
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 1445590.59
+  },
+  {
+   "nome": "UTGR AMERICANA AMBIENTAL LTDA",
+   "cnpj": "33952459000144",
+   "valor": 1298590.35
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1271352.5
+  },
+  {
+   "nome": "VARA DO TRABALHO DE SANTA BARBARA DOESTE",
+   "cnpj": "03773524000103",
+   "valor": 1191676.18
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 118,
+  "valor": 752885.87
+ }
+}

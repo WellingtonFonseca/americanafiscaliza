@@ -1,0 +1,96 @@
+{
+ "ano": 2026,
+ "mes": 9,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2026/9",
+ "coletado_em": "2026-11-28T03:44:30+00:00",
+ "registros": 8585,
+ "totais": {
+  "empenhado": 72266964.55,
+  "liquidado": 121331779.68,
+  "pago": 124835379.06,
+  "anulado": 3131782.49
+ },
+ "recebedores_cnpj": 421,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 28273645.69
+  },
+  {
+   "nome": "CASAMAX COMERCIAL E SERVICOS LTDA",
+   "cnpj": "08183516000120",
+   "valor": 17789380.76
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 14699953.62
+  },
+  {
+   "nome": "TRIVALE INSTITUICAO DE PAGAMENTO LTDA",
+   "cnpj": "00604122000197",
+   "valor": 5159406.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4334457.35
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3864660.36
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 3864124.42
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 3668834.52
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2479249.02
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 2366950.42
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 2349697.94
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2127257.62
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2059518.26
+  },
+  {
+   "nome": "VARA DO TRABALHO DE SANTA BARBARA DOESTE",
+   "cnpj": "03773524000103",
+   "valor": 1624563.58
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1545645.82
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 119,
+  "valor": 852043.38
+ }
+}

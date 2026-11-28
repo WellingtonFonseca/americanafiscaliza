@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 6,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/6",
+ "coletado_em": "2026-11-28T03:40:55+00:00",
+ "registros": 7429,
+ "totais": {
+  "empenhado": 56549909.38,
+  "liquidado": 89115610.06,
+  "pago": 93540495.8,
+  "anulado": 708708.48
+ },
+ "recebedores_cnpj": 397,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 25928879.27
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "DATEC CONSTRUCAO E INFRAESTRUTURA LTDA",
+   "cnpj": "50404987000188",
+   "valor": 6916883.12
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4443320.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4260335.47
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 3837928.14
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3211455.69
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2505274.71
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2224712.89
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2068419.64
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2034071.15
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 1630250.1
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1529231.09
+  },
+  {
+   "nome": "SRE ENGENHARIA E CONSTRUCOES LTDA",
+   "cnpj": "03597937000184",
+   "valor": 1367667.83
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 1067821.21
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 136,
+  "valor": 739809.34
+ }
+}

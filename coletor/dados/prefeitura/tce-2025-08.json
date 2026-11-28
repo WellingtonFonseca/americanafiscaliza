@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 8,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/8",
+ "coletado_em": "2026-11-28T03:41:24+00:00",
+ "registros": 7954,
+ "totais": {
+  "empenhado": 98210848.57,
+  "liquidado": 121526081.28,
+  "pago": 108310695.62,
+  "anulado": 8761391.71
+ },
+ "recebedores_cnpj": 381,
+ "maiores_pagos": [
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 30126061.36
+  },
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 25417329.53
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4482520.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4299207.85
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2943215.89
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2247273.59
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2209644.07
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2200042.09
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1400041.38
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 1073245.17
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 999254.69
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 854456.1
+  },
+  {
+   "nome": "DESENVOLVE SP   AGENCIA DE FOMENTO DO ESTADO DE SAP PAULO S A",
+   "cnpj": "10663610000129",
+   "valor": 672428.22
+  },
+  {
+   "nome": "DATEC CONSTRUCAO E INFRAESTRUTURA LTDA",
+   "cnpj": "50404987000188",
+   "valor": 588003.29
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 138,
+  "valor": 855911.6
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 11,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/11",
+ "coletado_em": "2026-11-28T03:41:59+00:00",
+ "registros": 8859,
+ "totais": {
+  "empenhado": 81715151.17,
+  "liquidado": 95918244.86,
+  "pago": 97460459.78,
+  "anulado": 10943582.24
+ },
+ "recebedores_cnpj": 402,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 35098809.18
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4503100.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4162399.81
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 3545061.08
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3134741.64
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2412531.37
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2307431.67
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2182343.37
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2090111.16
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA",
+   "cnpj": "69144434000161",
+   "valor": 1829582.04
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1479452.6
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 1237527.96
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 1106181.84
+  },
+  {
+   "nome": "ROMARELLO TERRAPLENAGEM E CONSTRUCOES LTDA",
+   "cnpj": "08743495000150",
+   "valor": 929508.7
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 108,
+  "valor": 510409.76
+ }
+}

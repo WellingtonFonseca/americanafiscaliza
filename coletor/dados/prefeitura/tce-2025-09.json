@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 9,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/9",
+ "coletado_em": "2026-11-28T03:41:29+00:00",
+ "registros": 8376,
+ "totais": {
+  "empenhado": 64720083.63,
+  "liquidado": 94130451.72,
+  "pago": 92695189.88,
+  "anulado": 770624.54
+ },
+ "recebedores_cnpj": 459,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 26704174.36
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4462920.0
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4412540.67
+  },
+  {
+   "nome": "M B  ENGENHARIA E MEIO AMBIENTE S C LTDA",
+   "cnpj": "00126468000127",
+   "valor": 3187543.11
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 2960492.02
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 2380136.84
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2299869.13
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2235530.35
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2052121.68
+  },
+  {
+   "nome": "OMEGA ALIMENTACAO E SERVICOS ESPECIALIZADOS S A",
+   "cnpj": "58981366000179",
+   "valor": 1886002.43
+  },
+  {
+   "nome": "INSTITUTO NACIONAL DE DESENVOLVIMENTO SOCIAL E HUMANO   INDSH",
+   "cnpj": "23453830000170",
+   "valor": 1761217.47
+  },
+  {
+   "nome": "ASSOCIACAO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE AMERICANA",
+   "cnpj": "43262708000123",
+   "valor": 1197998.69
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 994143.89
+  },
+  {
+   "nome": "UTGR AMERICANA AMBIENTAL LTDA",
+   "cnpj": "33952459000144",
+   "valor": 888477.07
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 149,
+  "valor": 695655.4
+ }
+}

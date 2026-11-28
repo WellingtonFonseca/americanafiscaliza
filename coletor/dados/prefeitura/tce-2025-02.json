@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 2,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/2",
+ "coletado_em": "2026-11-28T03:40:06+00:00",
+ "registros": 7009,
+ "totais": {
+  "empenhado": 74707159.99,
+  "liquidado": 84975282.66,
+  "pago": 69565335.61,
+  "anulado": 9870251.58
+ },
+ "recebedores_cnpj": 228,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 18194137.59
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13414080.71
+  },
+  {
+   "nome": "INSS INSTITUTO NACIONAL SEGURO SOCIAL",
+   "cnpj": "00394528000435",
+   "valor": 4593871.82
+  },
+  {
+   "nome": "TRIVALE ADMINISTRACAO",
+   "cnpj": "00604122000197",
+   "valor": 4032210.0
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 3861266.39
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2877246.05
+  },
+  {
+   "nome": "CONSORCIO INTERMUNICIPAL DE SAUDE NA REGIAO METROPOLITANA DE CAMPINAS   NORTE   CISMETRO",
+   "cnpj": "19947645000164",
+   "valor": 2426036.71
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 2279419.98
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 2029247.33
+  },
+  {
+   "nome": "SRE ENGENHARIA E CONSTRUCOES LTDA",
+   "cnpj": "03597937000184",
+   "valor": 1818721.3
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 1268126.11
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 997141.66
+  },
+  {
+   "nome": "DESENVOLVE SP   AGENCIA DE FOMENTO DO ESTADO DE SAP PAULO S A",
+   "cnpj": "10663610000129",
+   "valor": 692577.53
+  },
+  {
+   "nome": "FLASH SERVICOS LTDA",
+   "cnpj": "02926361000199",
+   "valor": 606568.43
+  },
+  {
+   "nome": "UTGR AMERICANA AMBIENTAL LTDA",
+   "cnpj": "33952459000144",
+   "valor": 432871.47
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 124,
+  "valor": 1556061.64
+ }
+}

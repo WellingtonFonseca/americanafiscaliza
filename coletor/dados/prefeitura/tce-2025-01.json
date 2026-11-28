@@ -1,0 +1,96 @@
+{
+ "ano": 2025,
+ "mes": 1,
+ "orgao": "PREFEITURA MUNICIPAL DE AMERICANA",
+ "fonte": "https://transparencia.tce.sp.gov.br/api/json/despesas/americana/2025/1",
+ "coletado_em": "2026-11-28T03:39:51+00:00",
+ "registros": 5906,
+ "totais": {
+  "empenhado": 546195678.59,
+  "liquidado": 89652771.0,
+  "pago": 48374166.2,
+  "anulado": 103967802.7
+ },
+ "recebedores_cnpj": 86,
+ "maiores_pagos": [
+  {
+   "nome": "PREFEITURA MUNICIPAL DE AMERICANA",
+   "cnpj": "45781176000166",
+   "valor": 20276875.0
+  },
+  {
+   "nome": "SANTA CASA DE MISERICORDIA DE CHAVANTES",
+   "cnpj": "73027690000146",
+   "valor": 13066582.8
+  },
+  {
+   "nome": "SAO PAULO TRIBUNAL DE JUSTICA",
+   "cnpj": "51174001000193",
+   "valor": 3848077.23
+  },
+  {
+   "nome": "MINISTERIO DA FAZENDA",
+   "cnpj": "00394460005887",
+   "valor": 2203208.73
+  },
+  {
+   "nome": "SANCETUR   SANTA CECILIA TURISMO LTDA   FILIAL",
+   "cnpj": "69144434000404",
+   "valor": 1235666.55
+  },
+  {
+   "nome": "INST DE PREVID SOCIAL DOS SERV MUNIC DE AMERICANA",
+   "cnpj": "12937005000124",
+   "valor": 1100716.12
+  },
+  {
+   "nome": "COMPANHIA PAULISTA DE FORCA E LUZ",
+   "cnpj": "33050196000188",
+   "valor": 943707.83
+  },
+  {
+   "nome": "CAIXA ECONOMICA FEDERAL",
+   "cnpj": "00360305000104",
+   "valor": 855453.02
+  },
+  {
+   "nome": "DESENVOLVE SP   AGENCIA DE FOMENTO DO ESTADO DE SAP PAULO S A",
+   "cnpj": "10663610000129",
+   "valor": 558014.76
+  },
+  {
+   "nome": "BANCO SANTANDER  BRASIL  S A",
+   "cnpj": "90400888000142",
+   "valor": 275040.81
+  },
+  {
+   "nome": "ASSOCIAÇÃO DE ASSISTÊNCIA AO MENOR ÁGUA VIVA",
+   "cnpj": "57519654000143",
+   "valor": 238816.0
+  },
+  {
+   "nome": "ASSOCIACAO DE PAIS E AMIGOS DOS EXCEPCIONAIS DE AMERICANA",
+   "cnpj": "43262708000123",
+   "valor": 161132.72
+  },
+  {
+   "nome": "ASSOCIACAO DE PROMOCAO E ASSISTENCIA DE AMERICANA",
+   "cnpj": "44685907000107",
+   "valor": 158469.81
+  },
+  {
+   "nome": "COASSEJE   CASA DE ORIENTACAO E ASSISTENCIA SOCIAL",
+   "cnpj": "43266378000144",
+   "valor": 143204.53
+  },
+  {
+   "nome": "VILA DE SAO VICENTE DE PAULO DE AMERICANA   OBRA U",
+   "cnpj": "43263821000395",
+   "valor": 130255.0
+  }
+ ],
+ "pessoas_fisicas": {
+  "pagamentos": 91,
+  "valor": 390777.8
+ }
+}
