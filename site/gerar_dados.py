@@ -625,7 +625,7 @@ def main():
     if os.path.exists(arq_e):
         for ano, info in sorted(json.load(open(arq_e, encoding="utf-8")).items()):
             txt = os.path.join(DADOS, "emendas", f"loa{ano}.txt")
-            if not os.path.exists(txt):
+            if not os.path.exists(txt) or not info.get("emendas", True):
                 continue
             lista = ler_emendas(open(txt, encoding="utf-8").read())
             emendas_info.append({"ano": ano, **info, "quantidade": len(lista)})

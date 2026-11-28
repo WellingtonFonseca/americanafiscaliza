@@ -12,6 +12,11 @@ import json, os, subprocess, sys, tempfile, urllib.request
 
 UA = "AmericanaFiscaliza/0.1 (robo civico; coleta leve de dados publicos, poucas paginas por semana)"
 LOAS = {
+    # LOA 2025 foi votada em 2024 pela legislatura anterior: serve só para o orçamento
+    # por secretaria; as emendas dela não são dos vereadores atuais ("emendas": False).
+    "2025": {"lei": "LOA 2025 (Projeto de Lei nº 105/2024, Autógrafo nº 89/2024)",
+             "documento": "https://americana.siscam.com.br/Documentos/Documento/407543",
+             "pdf": "https://americana.siscam.com.br/arquivo?Id=614060", "emendas": False},
     "2026": {"lei": "LOA 2026 (Projeto de Lei nº 137/2025, Autógrafo nº 125/2025)",
              "documento": "https://americana.siscam.com.br/Documentos/Documento/451399",
              "pdf": "https://americana.siscam.com.br/arquivo?Id=685126"},
