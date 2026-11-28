@@ -576,7 +576,7 @@ function secaoTce(k) {
     <table class="tabela-pagos"><thead><tr><th>Empresa ou órgão (CNPJ)</th><th>Pago</th></tr></thead><tbody>
     ${t.maiores_pagos.map((x) => `<tr><td>${$(x.nome)}<div class="meta">CNPJ ${$(x.cnpj)}</div></td><td>${reais(x.valor)}</td></tr>`).join("")}
     </tbody></table>
-    <p class="suave">${num(t.recebedores_cnpj)} empresas e órgãos receberam pagamentos no mês; aqui estão os ${t.maiores_pagos.length} maiores. ${pf.pagamentos ? `Pagamentos a pessoas físicas (${num(pf.pagamentos)} lançamentos, ${reais(pf.valor)}) entram só no total.` : ""} A folha de salários aparece como pagamentos à própria Prefeitura, ao INSS e ao instituto de previdência.</p>`;
+    <div class="aviso">${num(t.recebedores_cnpj)} empresas e órgãos receberam pagamentos no mês; aqui estão os ${t.maiores_pagos.length} maiores. ${pf.pagamentos ? `Pagamentos a pessoas físicas (${num(pf.pagamentos)} lançamentos, ${reais(pf.valor)}) entram só no total.` : ""} A folha de salários aparece como pagamentos à própria Prefeitura, ao INSS e ao instituto de previdência.</div>`;
 }
 
 function seletorTce(mes) {
